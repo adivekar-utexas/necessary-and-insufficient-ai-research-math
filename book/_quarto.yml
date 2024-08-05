@@ -1,0 +1,32 @@
+project:
+  type: book
+
+book:
+  title: "Necessary and Insufficient Mathematics for AI Researchers"
+  author: "Abhishek R. Divekar"
+  date: "8/5/2024"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    # - part: "Dice"
+    #   chapters: 
+    #     - "chapters/lol.qmd"
+    # - part: "Cards"
+    #   chapters:
+    #     - chapters/objects.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: litera
+  pdf:
+    documentclass: scrreprt
+
+execute:
+  freeze: auto  # re-render only when source changes
+
+jupyter: quarto-nim-air
+code-fold: true
