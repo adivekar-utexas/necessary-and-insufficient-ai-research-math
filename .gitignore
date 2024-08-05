@@ -1,0 +1,10 @@
+book/.env/
+book/_book/
+book/_freeze/
+book/.quarto/
+book/env/
+book/_site
+README_files/*
+README.html
+.DS_Store
+book/_environment
