@@ -1,0 +1,31 @@
+$$
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\begin{table}[ht]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabular}{lcccccccc}
+        \toprule
+        & \textbf{Teacher LM} & \textbf{Accuracy (↑)} & \textbf{Accuracy (↑)} & \textbf{Mauve (↑)} & \textbf{Mauve (↑)} & \textbf{Self-BLEU-5 (↓)} & \textbf{Self-BLEU-5 (↓)} & \textbf{Entity Entropy (↑)} & \textbf{Entity Entropy (↑)} \\
+        & & \textbf{AG} & \textbf{IMDb} & \textbf{AG} & \textbf{IMDb} & \textbf{AG} & \textbf{IMDb} & \textbf{AG} & \textbf{IMDb} \\
+        \midrule
+        \textbf{Gold} & - & 91.4 & 91.4 & - & - & 17.1 & 27.9 & 6.6 & 7.5 \\
+        \midrule
+        \multicolumn{10}{l}{\textbf{Retrieval-based approaches}} \\
+        \textbf{Regen} & BERT & 82.7 & - & 68.1 & - & 56.5 & - & - & - \\
+        \textbf{SynthesizRR} & LLama 2 13B & 84.6 & 84.8 & \textbf{92.6} & 72.6 & 34.2 & 62.9 & \textbf{8.1} & - \\
+        \midrule
+        \multicolumn{10}{l}{\textbf{Non-retrieval approaches}} \\
+        \textbf{SunGen} & GPT2-XL & - & 84.9 & - & 68.7 & - & \textbf{15.4} & - & 4.9 \\
+        \textbf{S3} & GPT3.5 & - & \textbf{87.1} & - & 62 & - & 62.2 & - & 5.7 \\
+        \textbf{AttrPrompt} & GPT3.5-Turbo & 79.8 & - & 52.8 & - & 39.8 & - & 6 & - \\
+        \textbf{(Ours) CorrSynth - Intra} & Phi-3 mini & 84.8 & 87.1 & 82.3 & 77.4 & 13.1 & 24.9 & 7.4 & \textbf{6.5} \\
+        \textbf{(Ours) CorrSynth - Hybrid} & Phi-3 mini & \textbf{85.1} & 86.8 & 77.5 & 71 & \textbf{12.1} & 19.2 & 7.4 & 6.4 \\
+        \bottomrule
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Performance comparison of various approaches}
+    \label{tab:performance_comparison}
+\end{table}
+$$

@@ -1,0 +1,85 @@
+# A Note about Notation
+
+A big gap in the communication between the different fields of statistics, optimization and deep learning is the fact that they do not use the same notation. One of the main goals of teaching these subjects is to build intuition on what different symbols imply, so that they can be understood when encountered "in the wild". Once a second-year PhD student has read several papers in their field and gotten used to the idea that $f$ is a model like linear regression, it takes a lot of mental re-wiring to pick up an optimization text, where $f$ denotes the loss function of the model. In this book, we will use a consistent notation across all topics. We hope this will help readers make connections between results in different fields, which is helpful in their own work.
+
+Most book authors recognize that their text will be read piecemeal, not end-to-end, but still include all notation into one big "Notations" section. Readers, meanwhile, hardly ever read this, as they expect it to be available inline. Thus, while we do include a Notations section (you're reading it), we will reiterate notation frequently, often multiple times in the same section. This acts as a guardrail to prevent notation-based misunderstanding, a serious issue for learners of mathematical subjects. 
+
+Notation which is easy to remember faciliates speedy reading. Recall, our end-goal is to enable a learner to reason about complex machine learning models like Gradient-boosted decision trees or Deep Neural Networks. Each new term we introduce will be a piece of the overall puzzle, and intuitive notation will ensure that it is piece you learn to recognize instantly. This also has an effect when reading other texts in probability, statistics, optimization, linear algebra or subfields of machine learning. Because of our goal, will cater to the notation widely used in Machine Learning research, rather than in statistics, optimization, or linear algebra research. 
+
+Another consideration is whether symbols will be used in typographical notes, or on a blackboard or pen and paper. I would bet that more than a few professors, after delicately crafting notes for a course, have had to go back and redo their notation simply because it became illegible to their students when they wrote it by hand. We will try to avoid this issue by using symbols which look different, in particular avoiding using italicized and boldface symbols to denote different things. We will, however, freely use modifiers like hat ($\hat{}$), tilde ($\tilde{}$) and bar ($\bar{}$) to specify different versions of the quantity we are talking about.
+
+Our goals for notation are thus around consistency, repetition, intuition, and ease of hand-writing, in that order of priority. The choices we make are subjective, but we hope they are understandable to readers from a wide variety of backgrounds with the objective of working in AI. 
+
+# Terminology and duplication
+Since machine learning is a field which has borrowed its history from a variety of fields, including statistics, classical AI, language processing, computer vision, physics and more, the terminology is often duplicated and we have multiple terms for the same quantity. A canonical example of this is the term "empirical risk" which means the same thing as "training loss", but depending on your background, you may prefer one term to another. 
+
+In section headings, we will list all terms separated by "i.e.". For example, we would write "Training loss i.e. empirical risk". In the section body, we will make a best effort to be consistent and use only one term. 
+
+However, it helps to be aware of equivalent terms, when reading texts other than this one. We have included a long list of equivalencies in the table below. 
+
+
+
+# Notation used in this text
+
+## Scalars, Vectors, and Matrices
+In the Linear Algebra chapters, we will introduce the concepts of scalars (i.e. real or complex numbers) and one-dimensional and two-dimensional tensor structures like vectors and matrices. We will rarely deal with tensors with more than 2 dimensions. 
+
+We use the notation below. We will also try to specify the dimensions of a new quantity explicitly, unless it is clear from the preceding discussion.
+
+### Scalars
+We will use lowercase Greek alphabets $\alpha$, $\beta$, $\gamma$, $\delta$, $\epsilon$, etc. to denote scalar values i.e. real numbers i.e. points on $\mathbb{R}$. 
+
+
+### Vectors
+For non-random vectors, we will use lowercase Latin alphabets to denote vectors: $\mathbf{a}$, $\mathbf{b}$. In most cases, we will use $d$ to denote the dimension of vectors which are used to represent vectors, e.g. numeric features which are input to a machine learning model. 
+
+Individual elements of vectors will be indexed as $a = \[ \alpha_1, \dots, \alpha_d \]^T$. 
+
+### Matrices
+For non-random matrices, we will use capital $A$ and $B$ to denote matrices. To be consistent with the vector notation, the number of rows will be denoted by $n$ and number of columns by $d$.
+
+Individual elements of matrices will be indexed as $A = \[ \alpha_{(1, 1)}, \dots, \alpha_{(n, d)} \]$. 
+
+
+
+
+## General functions
+When we are talking about functions which do not have a specific meaning in optimization or statistics, we will use $f$ and $g$. We will avoid $h$ as it is used to denote the hypothesis function, as mentioned below.
+
+## Sample space and outcomes
+To be consistent with common notation, we will use $\Omega$ to denote the sample space of a probability experiment and $\omega$ to denote outcomes. Note that $\omega$ is not Latin "w", it is the lowecase Greek alphabet "omega", where $\Omega$ is the uppercase. However, when writing by hand it should be fine to write "w".
+
+## Random scalars, vectors and matrices
+In this book we will often deal with random variables which are scalars, vectors or matrices. We will use capital letters $X$, $Y$, $Z$, $U$, $V$ for all these kinds of quantities, with a callout on whether it is a random scalar, random vector or random matrix and its dimensions. Just "random variable" means it is a random scalar i.e. $X: \Omega -> \mathbb{R}$. 
+
+As before, we will use $X = (X_1, \dots, X_d)^T$ to index elements of the random vector, where each $X_i$ is a scalar-values random variable. Similarly, $X = \[ X_{(1, 1)}, \dots, X_{(n, d)} \]$. will be used to index random matrices, where each $X_{(i, j)}$ is a scalar-values random variable. 
+
+We will use lowercase $x$, $y$, $z$, $u$, $v$ to denote **realizations** of the random scalar/vector/matrix, on running the probability experiment. 
+
+
+## Random sample
+In statistics, a random sample is a set of "n" random variables selected from a population distribution $D$. We will use $X = \{X_1, \dots, X_n\}$ to denote it. It is technically a random vector. Do denote its realization, we will use $x = \{ x_1, \dots, x_n \}$.
+
+
+## Loss function or "risk"
+Most AI literature uses the word "loss" to denote the empirical risk on the realized dataset. We will use function $l_{\theta}(X, Y)$ to denote a typical loss function. Note that this is a parameterized function, as it denotes the loss over the train, validation or test set, for a specific set of model parameters $\theta$. 
+
+A loss or risk is always a minimization quantity, and we want it to be as low as possible. One of the basic objectives of optimization which we will study is to 
+
+## Parameters i.e. "weights"
+As mentioned, we use lowercase Greek alphabets to denote scalars. One exception is $\theta$, which we use to denote parameters or "weights" of a model. $\theta$ might be a scalar or a vector depending on context. For Linear Regression and Neural Networks, we assume it is a p-dimensional vector. Depending on the model formulation, we may have $p \neq d$, where d is the dimension of each input data vector $x$. For a neural network, for example, there may be many layers of weights, and we assume these are 
+
+Our basic objective is to calculate these parameters from data, thus we say $\theta$ are "learned" parameters or "weights". They are saved down to your computer disk as arrays of numbers.
+- When we are discussing the **optimal** i.e. best parameters, we will use $\theta^{*}$. The best parameters are typically those which 
+- If we are talking about our **estimate** of the parameters, which is computed from some data, we will use $\hat{\theta}$.
+- If we are instead talking about our current selection of parameters, we will use plain $\theta$. This is often used in an iterator form, e.g. we will write $\theta \in \Theta$ on a summarion or expectation. 
+
+We will use capital $\Theta$ to denote the space of such parameters
+
+
+## Hypothesis functions i.e. ML algorithms
+We will often use $h_{\theta}$ to denote our "hypothesis", i.e. the function which uses learned parameters $\theta$, and input example $x$ to make a prediction $\hat{y}$. $h$ itself is basically an algorithm, i.e. a deterministic set of steps which are executed to compute the prediction from the input. This lives in Python/R code files which are executed by your processor. 
+
+For example, the steps to compute a neural network output can be captured succinctly as $\hat{y} = h_{\theta}(x)$. This avoid having to delve into the details like the number of layers, when it is not necessary.
+
+Sometimes, there is a structure and a space from which these come from, and we will denote such a "hypothesis space" by $\math$

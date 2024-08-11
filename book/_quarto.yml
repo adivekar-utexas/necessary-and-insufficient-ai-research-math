@@ -3,14 +3,18 @@ project:
 
 book:
   title: "Necessary and Insufficient Mathematics for AI Researchers"
+  search:
+    location: navbar
+    type: overlay
   author: "Abhishek R. Divekar"
   date: "8/5/2024"
   chapters:
     - index.qmd
     - intro.qmd
-    # - part: "Dice"
-    #   chapters: 
-    #     - "chapters/lol.qmd"
+    
+    - part: "Optimization Basics"
+      chapters: 
+        - "chapters/27 - Convex Optimization - Essentials/02 Convex Functions/01 Zeroth-order Convexity condition.qmd"
     # - part: "Cards"
     #   chapters:
     #     - chapters/objects.qmd
@@ -22,6 +26,12 @@ bibliography: references.bib
 format:
   html:
     theme: litera
+    toc: true
+    grid: 
+      sidebar-width: 200px
+      body-width: 900px
+      margin-width: 200px
+      gutter-width: 1.5rem
   pdf:
     documentclass: scrreprt
 
@@ -30,3 +40,7 @@ execute:
 
 jupyter: quarto-nim-air
 code-fold: true
+
+comments:
+  hypothesis:
+    theme: classic
