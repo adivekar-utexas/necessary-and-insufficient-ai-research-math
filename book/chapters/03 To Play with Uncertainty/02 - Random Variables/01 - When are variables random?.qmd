@@ -1,0 +1,31 @@
+## When are variables random?
+
+To understand a random variable helps to understand first what is a variable.
+
+A variable is something which represents a value that changes according to something else.
+
+If you have done even a single course in programming, you will understand that variables are key to how we express programs.
+
+They take different values at different points in time and are essential to the computation of what we want.
+
+In probability, random variables are used for similar purposes.
+
+They also take different values.
+
+The first difference is that in a program, the value is typically deterministic from the inputs and it changes as per computations.
+
+Whereas in a random variable, the value of a variable is determined completely by the random experiment we are running.
+
+When we run a random experiment and we get a certain realized value of the outcome, it causes a random variable to crystallize into a particular realized value of the random variable.
+
+The second difference is that in a random variable, the value of a variable is determined completely by the random experiment we are running.
+
+Whereas in a random variable, the value of a variable is determined completely by the random experiment we are running.
+
+Whereas in a random variable, the value of a variable is determined completely by the random experiment we are running.
+
+This is very similar to how in a program if you are given a particular input, you get a particular value of the variable as an output.
+
+The only difference is, the only point is that the input is determined by the random experiment we are running.
+
+The only difference is the only point is that the input is not given by a user or by the programmer Rather it is given it is selected randomly based on a random experiment Based on running the random experiment Thank you.

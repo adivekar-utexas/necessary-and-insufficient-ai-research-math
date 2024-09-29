@@ -1,0 +1,84 @@
+## Coding complex operations
+
+### Iterating over all possible combinations:
+
+### Iterating all adjacent items in a list:
+
+Suppose you have a list like (1, 2, 3, 4, ...)
+You want to run a combination over all adjacent items. To start off easy, let's consider all adjacent pairs.
+
+#### Iterating over all adjacent pairs
+
+In the list above you want to iterate over all adjacent pairs: (1, 2), (2, 3), (3, 4), ..., and sum up some function of each pair.
+
+Mathematically, this is represented by the operation:
+$$
+\underset{i < j}{\sum} f(x_i, x_j)
+$$
+
+We can similarly do a product:
+$$
+\underset{i < j}{\prod} f(x_i, x_j)
+$$
+
+Firstly, how many items are we adding/multiplying? The answer is (n-1): for n=2, there is one adjacent pair, for n=3 there are two adjacent pairs, etc.
+
+A very simple way to iterate over all adjacent pairs in Python is by using zip:
+
+```python
+for first_item, second_item in zip(arr[:-1], arr[1:]):
+    print(first_item, second_item)
+```
+
+Which can also be written as:
+```python
+for first_item, second_item in zip(arr[None:-1], arr[1:None]):  ## Note: 0 does NOT work in place of None.
+    print(first_item, second_item)
+```
+
+#### Iterating over all adjacent triplets and quadruplets:
+
+We can represent this as:
+
+$$
+\underset{i < j < k}{\sum} f(x_i, x_j, x_k)
+$$
+
+And the product:
+$$
+\underset{i < j < k}{\prod} f(x_i, x_j, x_k)
+$$
+
+There are (n-2) such triplets, and we can easily extend our code to triplets:
+
+```python
+for first_item, second_item, third_item in zip(arr[None:-2], arr[1:-1], arr[2:None]):
+    print(first_item, second_item, third_item)
+```
+
+Quadruplets:
+
+```python
+for first_item, second_item, third_item, fourth_item in zip(arr[None:-3], arr[1:-2], arr[2:-1], arr[3:None]):
+    print(first_item, second_item, third_item, fourth_item)
+```
+
+#### Iterating over all adjacent n-tuples:
+In a more general case, if you want to grab "k" adjacent items from a list to form a k-tuple, there are (n-k+1) such adjacent k-tuples. 
+
+You can access them via zip:
+
+```python
+from typing import *
+def iterate_adjacent(arr, *, k: int) -> Generator:
+    assert len(arr) >= k
+    slices = [None for _ in range(k)]
+    for i in range(0, k):
+        if i == 0:
+            slices[i] = arr[None:-(k-1)]
+        elif i == k-1:
+            slices[i] = arr[(k-1):None]
+        else:
+            slices[i] = arr[i:-(k-1-i)]
+    return zip(*slices)
+```

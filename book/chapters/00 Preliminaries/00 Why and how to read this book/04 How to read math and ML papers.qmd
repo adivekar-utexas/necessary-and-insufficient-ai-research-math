@@ -1,0 +1,19 @@
+## How to read math and ML papers
+
+### The Stoplight approach
+
+### Tools
+I spent a long time searching for tools to read ML research papers as fast as possible.
+
+I've found these tools (used in combination) to be very sticky:
+
+1. An iPad: most research reading software is optimised for iPads. I have nothing against Android (and used an Android phone until recently), but it is not the right tool here. Buy an iPad and have a smooth experience. I have a refurbished one from Amazon.com: it feels like new, was 1/6th the price (Rs. 14,000) and I'm not worried about it getting damaged, so I actually use it. Buy cheap, use until it breaks, then buy again. 
+
+2. Zotero: for storing and annotating PDFs using highlighter/pencil. Great interconnectivity with Arxiv and other data sources. It's open-source, and the newest desktop app feels very slick. The cloud offers 200 MB ~= 100 research papers for free. Beyond that, it's not too expensive ($20/year for 6GB ~= 3000 papers). You can also setup WebDav to be totally free, but WebDav does not sync with iPad, and Rs. 133/month is honestly just super cheap for something I use ~100 hours/month (seek to optimize cost per usage).
+
+3. LiquidText: separate workspace is awesome for making detailed notes on mathematical papers, which otherwise is really cumbersome on Zotero. I use the offline version (one-time purchase of ~$25) since I use Zotero to sync PDFs. I only use this for heavily mathematical papers. 
+
+4. Planning tools: to plan my paper-reading, I use Google sheets (simple & flexible is best). I use Habitica to stay on track and give me a little dopamine boost when I finish a paper. 
+
+
+That's it. There are plenty of fancy tools, but simpler is easier. Reading papers for the first time is mentally taxing, so you want something which has low learning curve.

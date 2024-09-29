@@ -12,9 +12,9 @@ book:
     - index.qmd
     - intro.qmd
     
-    - part: "Optimization Basics"
-      chapters: 
-        - "chapters/27 - Convex Optimization - Essentials/02 Convex Functions/01 Zeroth-order Convexity condition.qmd"
+    # - part: "Optimization Basics"
+    #   chapters: 
+    #     - "chapters/27 - Convex Optimization - Essentials/02 Convex Functions/01 Zeroth-order Convexity condition.qmd"
     # - part: "Cards"
     #   chapters:
     #     - chapters/objects.qmd

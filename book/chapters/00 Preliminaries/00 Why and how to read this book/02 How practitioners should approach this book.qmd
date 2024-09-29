@@ -1,0 +1,110 @@
+# How practitioners should approach this book
+
+It might surprise the reader to learn that I, the author, didn't seriously start studying mathematics until I was 24 years old. I was working as a software engineer and wanted to work in machine learning. This led to a lot of consternation, since I didn't have the required math experience. But five years since I made the shift, I have gained a significant amount of mathematical knowledge, enough to write this introductory book. I felt like it was crucial to write a book when I was still close to the time when I first learned each topic, as I could recollect the "aha" moments much better and weave them into my explanations. I have also benefitted by having more experienced writers provide feedback on this book.
+
+In retrospect, I feel it's easier to learn concepts as an adult, because having seen the real world, you are able to understand more nuanced points. The difficulty as someone in the workforce is that you lack ***time***. You may have a demanding workload, or children to take care of or maybe you lack of energy, stemming from a chronic problem.
+
+For this reason, the aim of this book is to help build mathematical intuition as fast as possible. We will focus on examples which help make sense of the notation and terminology. It's important you understand the terms, and to an extent memorize what they mean, because otherwise you will be stuck looking up things all the time, breaking your flow of concentration when learning new material. 
+
+But we build intuition by intertwining two approaches: (a) introducing concepts from different angles and (b) exposition of the ***why***, in addition to the ***what***, for each topic. The purpose of this is to make ideas stick in your head so you can recall them later.
+
+We also do not add a huge list of problems like other textbooks, as these are mostly ignored. We do, however, include a few problems with solutions (three or four per section). It is ***vitally important*** that you solve these few problems, since they will help build intuition much faster than a whole page of text, and they stick in your mind for much longer.
+
+## "But I'm not good at math!"
+
+The worst problem is that you've perhaps convinced yourself - maybe after not touching mathematics for many years - that you're "not good at math", and thus any efforts you put in will be in vain.
+
+
+In response to this, I would like to tell you the story of my long-term girlfriend, who has chronic depression. When we first met, she worked as a temp at the French consulate. She worked there because she loved French (the language) but had greater aspirations than shredding paper. She was also convinced that her ship had sailed on advanced mathematics, and avoided it for a long time, even when she started working as a data analyst for a small ML startup. Four years into our relationship, she is now about to start a Masters in Artificial Intelligence from the Rochester Insitute of Technology. Her story has been one of constant anxiety and self-doubt, but the bravery to listen to the advice of others, and pursue her goals.
+
+After being admitted to RIT, she had to do a remedial undergraduate course on mathematics, covering probability, linear algebra, numerical analysis and calculus. This worried her immensely; due to visa appointments, she had only three weeks to complete the course, which consisted of material she had not touched for 8 years. It seemed impossible. However, I gave her my notes to read, and we had nightly discussions on the material. To my immense pride, she was able to clear the course with a 97%! It was three weeks of dedicated effort, eight hours a day...but it was only three weeks. I wonder how she will do within a year or two.
+
+What would I like you to take away from this story?
+
+One: in my girlfriend, I saw an intelligent mind and a curious heart, who needed a little guidance. If I met you, reader, I know I would see the same.
+Two: The amount of time you take to learn something, is not a reflection of your intelligence. the right resources, and the right teacher, makes a fantastic difference. I hope this book can provide you with mathematical intuition, and occasionally make you laugh.
+
+The second point is extremely important. I will stress it again: the amount of time you take is not a reflection of how smart you are. Do not measure your progress in terms of time invested: "Oh I spent five hours on it and only completed one problem!". Some problems are just like that. I personally take a very long time to learn mathematical concepts - sometimes multiple weeks on a single concept - despite dedicated efforts of 3-4 hours per day.
+
+Once, I stumbled upon this quote, which gave me a great amount of solace:
+> 
+
+Learning is slow for everyone; it's a lesson that life has taught me again and again and *again*. You will be constantly disappointed by how much you can learn in a week. ***But***, you will be stunned by how much further you have come in three months.
+
+Keep your three-month goals in mind, and keep pushing.
+
+## Melting Clocks
+
+![](images/paste-2.png){fig-align="center" width="50%"}
+
+In my house, I have a print of Salvator Dali's "The Persistence Of Memory", which I acquired from the MoMa in New York. I adore this painting, because it is a solemn reminder that the knowledge stored in my mind is constantly melting away, atrophied by time. Mathematics is not an exception. But, I feel confident in the muscle memory I have build up inside my brain, so that I can quickly get back up to speed on complex topics.
+
+I write this book with the expectation that parts will be re-read, and you will need to quickly reference different pieces (possibly in a great hurry).
+
+You will learn in this book that math is a language, not a science. It's basically an agreement that things mean something. And just like some writers wield words like a rapier, while others fumble with them clumsily, so do mathematicians.
+
+Mathematicians are not entirely to blame. At the university level in the US, mathematicians are not lecturers, they are ***researchers***. 70% of their job performance is measured by their ability to create new mathematics, while teaching is maybe 20% of their job. You can see why some do not focus on developing their skill, instead aiming to create passable coursework.
+
+This book is a compendium of my own notes, which I have personally used and re-written extensively (because this is how I learn things: by re-writing them).
+
+Learning is slow for everyone. A colleague of mine has a PhD in ML Theory from MIT, and is excellent at math. We are the same age, but I was initially intimidated by him. When we collaborated on a paper, however, I saw that he took a very long time to code up concepts, while I could get them running at immense scale and flexibility. I realized he had dedicated his time to math, and I to coding. When he had to code and I had to do math, we were both slow, but improving.
+
+
+
+And over time, I realized that the most senior people and respected are not the ones who have the fastest thinking.
+
+It's just those who have been around the longest and know all the tricks.
+
+Ask yourself in five years, who do you want to be?
+
+Do you want to be someone with enough mathematical knowledge to work as a researcher in artificial intelligence at a web company?
+
+This book, like I do, if so, then keep reading this book and solve the exercises.
+
+It's very important because it helps build an intuition which is otherwise really not present from simple reading.
+
+The interaction is very important.
+
+As you continue to do this, I would, as a recommendation, if you get some time early in the morning, dedicate at least two hours or three hours per day or one day of the weekend towards your mathematical knowledge.
+
+Think of it really in terms of a five year plan to get a very good at a wide variety of mathematical subjects.
+
+Learning is, the experience I've had is that learning is both easier than you expect and a lot slower than you expect because it takes time for new concepts to fit into your mind.
+
+But keep at it and soon you'll find there's a social aspect to becoming a better thinker.
+
+People will come to you and you'll be able to give explanations or reasoning in a much more systematic way and this leads to them believing you are smarter.
+
+The social aspect should not be ignored because don't you want to be considered an expert in a variety of subjects?
+
+Expertise in one domain, this is mathematical, lends itself to expertise in other domains as well.
+
+You won't be considered an expert such that people ask you for your advice and guidance.
+
+If so, keep reading.
+
+And if not for expertise, over time you might realize that there is a wonder in mathematics because it is a language in which we express not a different world but our own world.
+
+The starting point of most mathematics is the real world because mathematicians, despite what people think, are human and not some sort of computing machine.
+
+They also have children, they also deal with stupid wait times at the bank.
+
+The only difference is that in their day job they work on abstracting parts of the world in such a way that it can be manipulated.
+
+Translating the real world into the mathematical world is translating from analog to digital.
+
+The second, the latter is much more flexible and can be manipulated much more easily.
+
+Sometimes the manipulations are enough that there is no longer a real world analogy of it.
+
+But it also allows us to make, and this leads to the problem sometimes, but it also leads us to the realization that we, but it also allows us to make connections and hop between concepts which otherwise is not possible from simply a real world perspective.
+
+For example, the connection between covariance and eigenvalues is one which would never have been discovered from a real world look at things.
+
+It can only have been discovered mathematically.
+
+But that leap still exists and we are able to come out the other end of this tunnel with tools that apply both to covariance and we are able to borrow tools from eigenvalues to apply to covariance and perform very intricate analysis.
+
+So this is, I hope, the real reason to learn mathematics.
+
+To gain an idea of how of the language with which people, statisticians, physicians, mathematicians, scientists model and describe the real world in a way that can be communicated and that remains true throughout the universe.

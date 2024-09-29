@@ -1,0 +1,696 @@
+# The Algebraic Eigenvalue problem i.e. finding eigenvalues & corresponding eigenvectors of a matrix
+
+Recall that the span of a (single) vector $\mathbf{x}$ is the set of all vectors along the same line traced by $\mathbf{x}$. These vectors might be in the same direction of $\mathbf{x}$ or in the opposite direction, but as they all lie in $\text{span}\{\mathbf{x}\}$, they can all be expressed as a linear combination of $\mathbf{x}$ (which in this case is just a scalar multiple of $\mathbf{x}$), i.e.
+
+$$
+\text{span}\{\mathbf{x}\} = \{\alpha \mathbf{x} \mid \alpha \in \mathbb{C} \}.
+$$
+
+If $\mathbf{x}$ is a 2-D vector in $\mathbb{R}^2$, we visualize its span as follows:
+
+![Span of x](dummy_file_name_1.png)
+
+Each vector on the span can be represented by $\alpha \mathbf{x}, \alpha \in \mathbb{C}$.
+
+Now, a linear transformation $A \in \mathbb{C}^{m \times n}$ is an operation that maps every vector $\mathbf{x} \in \mathbb{C}^n$ to another vector in $\mathbb{C}^m$. Assuming it is non-singular, this means for any point at $\mathbf{x}$, there is a unique non-zero point where it is mapped. The image of the vector is mapped completely by the linear transformation. Now, the definition of a linear transformation states that it is an operation which preserves scaling and addition of input vectors, i.e., $A(\alpha \mathbf{x}) = \alpha A\mathbf{x}$ and $A(\mathbf{x} + \mathbf{y}) = A\mathbf{x} + A\mathbf{y}$. The consequence of this property is that any vector on the span of $\mathbf{x}$ will remain on the span of $A\mathbf{x}$ after a linear transformation, i.e., for all vectors $\mathbf{x}$ (on the span of $\mathbf{x}$), we have:
+
+$$
+A(\alpha \mathbf{x}) = \alpha (A\mathbf{x})
+$$
+
+We can represent this visually for $\mathbf{x} \in \mathbb{C}^2$ as follows:
+
+![Visual Representation](dummy_file_name_2.png)
+
+Here, $A$ is square.
+
+Thus, we can see that all vectors on the span of a particular vector $\mathbf{x}$ (lying along the direction of $\mathbf{x}$) behave similarly under a linear transformation. Now, we consider vectors to have their tail fixed at the origin; a linear transformation might cause a change in the direction of vectors in a particular span (rather than moving it in space & rotation).
+
+Now, under a linear transformation, a vector might also be scaled (stretched or squished). How much a vector is stretched or squished depends on the direction of $\mathbf{x}$ as well as the matrix $A$. Concretely, the ratio by which a vector is scaled can be given by $\|A\mathbf{x}\| / \|\mathbf{x}\|$. The important point to note here is that
+
+$$
+\frac{\|A (\alpha \mathbf{x})\|}{\|\alpha \mathbf{x}\|} = \frac{\alpha \|A\mathbf{x}\|}{\alpha \|\mathbf{x}\|} = \frac{\|A\mathbf{x}\|}{\|\mathbf{x}\|}
+$$
+
+i.e., all vectors on the same span are scaled by the same amount under a linear transformation.
+
+
+We can represent this visually as follows:
+
+![Visual Representation](dummy_file_name_3.png)
+
+Note: vectors along different directions are scaled differently, depending on the value of $\frac{\|A\mathbf{x}\|}{\|\mathbf{x}\|}$.
+
+Now, under a linear transformation, most vectors undergo a change in direction as well as some scaling. However, it is possible that there exist some vectors $\mathbf{x}$ which only get scaled (by $\lambda \in \mathbb{C}$), and whose direction does not get "knocked off" their own span by a linear transformation. Such a vector is called an **eigenvector** of that linear transformation.
+
+Note that since all vectors on the span of $\mathbf{x}$ are rotated & scaled the same amount, we can just as well consider the eigenvector to be the unit vector $\mathbf{x}$ in the direction of $\mathbf{x}$, where $A\mathbf{x} = \lambda \mathbf{x}$. The scaling factor of any vector in $\text{span}\{\mathbf{x}\}$ is a constant $\lambda \in \mathbb{C}$, called the **eigenvalue** associated with that eigenvector. Together, the tuple $(\lambda, \mathbf{x})$ is called an **eigenpair** of the matrix $A$, where $A\mathbf{x} = \lambda \mathbf{x}$.
+
+> **Note:** It only makes sense to talk about a vector being "scaled while still retaining direction" if the linear transformation maps the vector from $\mathbb{C}^n$ to $\mathbb{C}^n$, i.e., $A \in \mathbb{C}^{n \times n}$ is square. In all discussions about "eigenstuff," $A$ will be $m \times m$.
+
+Let's consider an example: Suppose we have a linear transformation $A \in \mathbb{C}^{2 \times 2}$ which is similar to a shear operation. A shear causes all axes to be "pushed" in the direction of a particular axis. Here, we will consider a shear along the x-axis, which is given by:
+
+$$
+A = \begin{pmatrix} 3 & 2 \\ 0 & 2 \end{pmatrix}
+$$
+
+(As we transpose, we can trace where the basis vectors are mapped by $A$ by just reading off the columns of $A$.)
+
+Here, $e_0 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ is mapped to $\begin{pmatrix} 3 \\ 0 \end{pmatrix} = A e_0$ 
+
+and $e_1 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$ is mapped to $\begin{pmatrix} 2 \\ 2 \end{pmatrix} = A e_1$.
+
+![Transformation Example](dummy_file_name_4.png)
+
+We notice here that $e_0 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ is an eigenvector; after the transformation, it gets stretched to $\begin{pmatrix} 3 \\ 0 \end{pmatrix}$. Thus, we get the eigenpair $(\lambda_1 = 3, \mathbf{x}_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix})$ for $A = \begin{pmatrix} 3 & 2 \\ 0 & 2 \end{pmatrix}$.
+
+However, we notice that we have another vector $\begin{pmatrix} -1 \\ 1 \end{pmatrix}$, which also only gets scaled by the transformation and stays on its own span. Here, $A(\begin{pmatrix} -1 \\ 1 \end{pmatrix}) = \begin{pmatrix} 3 & 2 \\ 0 & 2 \end{pmatrix} \begin{pmatrix} -1 \\ 1 \end{pmatrix} = \begin{pmatrix} -1 \\ 2 \end{pmatrix}$. 
+
+Thus, we get the corresponding eigenvalue as 2, and hence we get the second eigenpair $(\lambda_2 = 2, \mathbf{x}_2 = \begin{pmatrix} -1 \\ 1 \end{pmatrix})$ for $A$.
+
+
+### Min & max number of eigenvalues of a matrix $A$:
+
+Now, let's instead consider the matrix 
+
+$$
+A = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} = 2I
+$$
+
+We notice that for every vector $\mathbf{x} \in \mathbb{C}^2$, this matrix has the effect of scaling $\mathbf{x}$ by twice the length & not rotating it at all. (Thus, $A = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$ has an infinite number of eigenvectors, each of which happens to have an eigenvalue $\lambda = 2$).
+
+Thus, in general, there is no maximum number of eigenvectors. However, as we will show later, an $n \times n$ matrix $A \in \mathbb{C}^{n \times n}$ can have at most $k \leq n$ linearly independent eigenvectors (Note: This does not imply $\text{rank}(A) = k$). However, as each vector in the direction of an eigenvector is another valid eigenvector, we will always have an infinite number of eigenvectors, even though they might be linearly dependent if they lie along the same direction. Thus, when stating an eigenpair, we usually give a convenient eigenvector, i.e., one which is easy to calculate. We can always renormalize this.
+
+- Unlike eigenvectors, there are a limited number of eigenvalues. Concretely, a matrix $A \in \mathbb{C}^{n \times n}$ will have exactly $n$ eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$ (It is important to note that eigenvalues might not be unique. In the example above $A = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$, even if we considered two linearly independent eigenvectors $e_0 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ and $e_1 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$, they both have the same eigenvalue associated with them, i.e., $\lambda_1 = \lambda_2 = 2$). 
+
+Thus, we often talk about the number of **unique** eigenvalues of a matrix $A$. Obviously, the number of unique eigenvalues is $\leq n$, so we have at most $n$ eigenvalues.
+
+**Definition 9.2.1.2:** The spectrum of a matrix $A \in \mathbb{C}^{n \times n}$, denoted by $\Lambda(A)$, is the set of all eigenvalues of the matrix $A$, i.e., 
+
+$$
+\Lambda(A) = \{ \lambda_0, \lambda_1, \dots \}
+$$
+
+(you can denote this set with a capital lambda)
+
+**Definition 9.2.1.3:** The spectral radius of matrix $A$, denoted by $\rho(A)$, is the largest absolute value of an eigenvector, i.e., 
+
+$$
+\rho(A) = \max |\lambda_i|
+$$ 
+
+where $\lambda_i \in \Lambda(A)$.
+
+The spectral radius derives from the fact that if you plotted all eigenvalues in the complex plane, the spectral radius would be the radius of the smallest circle encompassing all the eigenvalues.
+
+![Spectral Radius](dummy_file_name_6.png)
+
+Generally, it is convenient to order the spectrum such that $\lambda_0$ is the largest eigenvalue (by absolute value) and $\lambda_n$ is the smallest.
+
+**Note:** Since every matrix must have at least one linearly independent column, we must have $\text{rank}(A) > 0$, and also we must have at least one eigenvector & associated eigenvalue.
+
+**Theorem 9.2.1.1:** T.F.T. for $A \in \mathbb{C}^{m \times m}$: $\lambda = 0$ is an eigenvalue (i.e., $0 \in \Lambda(A)$) **if and only if** $A$ is singular.
+
+**Ans:** Forward direction proof: Assume $\lambda = 0$ is an eigenvalue.
+
+- Plug $\lambda = 0$ into $A\mathbf{x} = \lambda \mathbf{x}$, i.e., $A\mathbf{x} = 0 \cdot \mathbf{x} = 0$.
+- Thus, there exists a vector $\mathbf{x} \neq 0$ for which $A$ maps $\mathbf{x}$ to 0. Therefore, $\mathbf{x}$ is in the null space of $A$, i.e., the null space of $A$ does not have dimension 0. Thus, $A$ is singular. (There are several equivalences when $A$ is singular.)
+
+- Backward direction proof: Assume $A$ is singular.
+- Then, $\exists \mathbf{x} \neq 0$ such that $A\mathbf{x} = 0$, i.e., $A\mathbf{x} = 0 \cdot \mathbf{x}$. Thus, $\lambda = 0$ is an eigenvalue.
+
+**Theorem 9.2.1.5:** T.F.T. for $A \in \mathbb{C}^{m \times m}$: If $(\lambda_1, \mathbf{x})$ and $(\lambda_2, \mathbf{y})$ are eigenpairs and $\lambda_1 \neq \lambda_2$, then $\mathbf{x}$ and $\mathbf{y}$ are linearly independent.
+
+**Ans:** Proof by contradiction:
+
+- Assume $\mathbf{x}$ and $\mathbf{y}$ are eigenvectors. They are non-zero. If they are linearly dependent, then $\exists \alpha \neq 0$ such that $\mathbf{y} = \alpha \mathbf{x}$.
+
+- This means: $A\mathbf{y} = A(\alpha \mathbf{x})$.
+
+- But by definition: $A(\alpha \mathbf{x}) = \lambda_2 \mathbf{y} = \lambda_2 \alpha \mathbf{x}$.
+
+- However, we know $A\mathbf{x} = \lambda_1 \mathbf{x}$.
+
+- Thus, $(\lambda_2 \alpha - \lambda_1)\mathbf{x} = 0$.
+
+- Since $\lambda_1 \neq \lambda_2$, this can only be true when $\alpha = 0$, which is a contradiction since $\mathbf{x}$ is an eigenvector (and hence non-zero).
+
+Thus, $\mathbf{x}$ and $\mathbf{y}$ must be linearly independent.
+
+
+We can generalize the result from the previous theorem as:
+
+**Theorem 9.2.1.6:** Let $A \in \mathbb{C}^{n \times n}$ and let the eigenpairs of the matrix be $(\lambda_i, \mathbf{x}_i)$ for $1 \leq i \leq k$, where $k \leq \text{dim}(\mathbb{C}^n) = n$.
+
+**T.F.T.** If $\lambda_i \neq \lambda_j$, then the eigenvectors $\mathbf{x}_i$ and $\mathbf{x}_j$ are linearly independent (where $i \neq j$).
+
+In other words: If we are given a set of unique eigenvalues of a matrix $A$, then any set of corresponding eigenvectors is linearly independent.
+
+**Note:** If more than one eigenvector corresponds to the same eigenvalue, the set of eigenvectors can have any among these; also, recall (if two eigenvectors have the same eigenvalues, they need not be linearly dependent, e.g., $A = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$, we can choose eigenpairs as $(\lambda_1 = 2, \mathbf{x}_1 = e_0)$ and $(\lambda_2 = 2, \mathbf{x}_2 = e_1)$).
+
+**Ans:** We can prove this by induction, i.e., starting with a set $S$ with one vector and then for each new vector, prove that it is linearly independent of all the existing vectors in the set.
+
+**Proof by induction over k:**
+
+- **Base case:** $k = 1$
+  - This is trivial as a set with a single vector is always linearly independent.
+
+- **Inductive Step:**
+  - By the induction hypothesis, we assume it applies for $k = k-1$. We must prove it holds for $k \geq k'$.
+  - i.e., a new vector is linearly independent of all the existing ones, i.e., given set $S = \{\mathbf{x}_0, \mathbf{x}_1, \dots, \mathbf{x}_{k-1}\}$ has linearly independent vectors, T.F.T. $\{\mathbf{x}_0, \mathbf{x}_1, \dots, \mathbf{x}_k\}$ has linearly independent vectors.
+
+
+We will prove this by contradiction:
+
+Assume $\mathbf{x}_k$ is linearly dependent, i.e., we can express it as a linear combination of $\mathbf{x}_0, \mathbf{x}_1, \dots, \mathbf{x}_{k-1}$:
+
+$$
+\mathbf{x}_k = \beta_0 \mathbf{x}_0 + \beta_1 \mathbf{x}_1 + \dots + \beta_{k-1} \mathbf{x}_{k-1}
+$$
+
+where at least one $\beta_j \neq 0$.
+
+Now, since $\mathbf{x}_k$ is an eigenvector of $A$:
+
+$$
+A\mathbf{x}_k = \lambda_k \mathbf{x}_k
+$$
+
+$$
+A(\beta_0 \mathbf{x}_0 + \beta_1 \mathbf{x}_1 + \dots + \beta_{k-1} \mathbf{x}_{k-1}) = \lambda_k (\beta_0 \mathbf{x}_0 + \beta_1 \mathbf{x}_1 + \dots + \beta_{k-1} \mathbf{x}_{k-1})
+$$
+
+$$
+\beta_0 A\mathbf{x}_0 + \beta_1 A\mathbf{x}_1 + \dots + \beta_{k-1} A\mathbf{x}_{k-1} = \beta_0 \lambda_k \mathbf{x}_0 + \beta_1 \lambda_k \mathbf{x}_1 + \dots + \beta_{k-1} \lambda_k \mathbf{x}_{k-1}
+$$
+
+$$
+\beta_0 \lambda_0 \mathbf{x}_0 + \beta_1 \lambda_1 \mathbf{x}_1 + \dots + \beta_{k-1} \lambda_{k-1} \mathbf{x}_{k-1} = \beta_0 \lambda_k \mathbf{x}_0 + \beta_1 \lambda_k \mathbf{x}_1 + \dots + \beta_{k-1} \lambda_k \mathbf{x}_{k-1}
+$$
+
+Since at least one $\beta_j \neq 0$, we must have:
+
+$$
+(\lambda_j - \lambda_k) \mathbf{x}_j = 0
+$$
+
+As $\mathbf{x}_j \neq 0$ and $\lambda_j \neq \lambda_k$, we must have $\beta_j = 0$ for this to be true. But this is a contradiction since $\mathbf{x}_j$ is an eigenvalue.
+
+Thus, $\mathbf{x}_0, \mathbf{x}_1, \dots, \mathbf{x}_k$ must be linearly independent.
+
+By the principle of mathematical induction, the result holds for all $1 \leq k \leq m$.
+
+What the above proof implies is that (if you have $k \leq m$ unique eigenvalues of a matrix $A$, the matrix has at least $k$ linearly independent eigenvectors.)
+
+
+### The subspace of an eigenvalue (i.e., eigenspace)
+
+Let $A \in \mathbb{C}^{n \times n}$.
+
+Recall that for any eigenvector $\mathbf{x}$, we must have some eigenvalue $\lambda \in \mathbb{C}$ for which $A\mathbf{x} = \lambda \mathbf{x}$.
+
+Let's convert both sides into matrix-vector multiplication, as follows:
+
+$$
+A\mathbf{x} = \lambda I\mathbf{x}
+$$
+
+Rearranging:
+
+$$
+(A - \lambda I)\mathbf{x} = 0
+$$
+
+What this means is that $(\lambda I - A)$ maps $\mathbf{x}$ to the zero vector, meaning $\mathbf{x}$ is in the null space of $(\lambda I - A)$. Since $\lambda$ is an eigenvalue of $A$, the matrix $(\lambda I - A)$ is singular. As a result, it has linearly dependent columns, and $\text{dim}(\mathcal{N}((\lambda I - A))) > 0$, i.e., the null space is non-trivial if it contains more than just the zero vector. 
+
+Now, this holds for every eigenvector $\mathbf{x}$ which is associated with an eigenvalue $\lambda$. They are all in the null space $\mathcal{N}(\lambda I - A)$. Some of these eigenvectors might not be in the same direction (i.e., linearly independent). Together, the eigenvectors associated with a particular eigenvalue $\lambda$ span a subspace called the **eigenspace** of $\lambda$, denoted $E_\lambda(A)$.
+
+Note that every unique eigenvalue $\lambda_1, \lambda_2, \dots$ has its own unique eigenspace.
+
+
+**Theorem 9.2.3.1:**
+
+Let $\lambda$ be some eigenvalue of $A \in \mathbb{C}^{n \times n}$ (may be singular) and $E_\lambda(A) = \{ \mathbf{x} \in \mathbb{C}^n \mid A\mathbf{x} = \lambda \mathbf{x} \} \cup \{0\}$ be the set of all eigenvectors associated with $\lambda$, plus the zero vector. 
+
+Then, T.F.T. $E_\lambda(A)$ is a subspace called the eigenspace of $\lambda$.
+
+**Proof:**
+
+Recall: A set $S \subseteq \mathbb{C}^n$ is a subspace if and only if for all $x, y \in \mathbb{C}^m$ the following holds:
+1. The subspace is closed under scalar multiplication, i.e., $x \in S$ implies $\alpha x \in S$ where $\alpha \in \mathbb{C}$.
+   - To show that this holds for $S = E_\lambda(A)$, consider $x \in E_\lambda(A)$. This means that $A\mathbf{x} = \lambda \mathbf{x}$, and hence $\alpha x \in E_\lambda(A)$ since $A(\alpha \mathbf{x}) = \alpha A\mathbf{x} = \alpha \lambda \mathbf{x} = \lambda (\alpha \mathbf{x})$.
+   - Thus, all scalars are multiples of $x$ if any eigenvalue is valid, meaning $\alpha x \in E_\lambda(A)$.
+   
+2. The subspace is closed under vector addition: if $x, y \in S$, then $x+y \in S$.
+   - To show this holds for $S = E_\lambda(A)$, consider $x, y \in E_\lambda(A)$.
+   - Then, $A(x+y) = A\mathbf{x} + A\mathbf{y} = \lambda \mathbf{x} + \lambda \mathbf{y} = \lambda (\mathbf{x} + \mathbf{y})$.
+   - Thus, $x+y$ is also a valid eigenvector and will therefore belong to $E_\lambda(A)$ (since by definition, $E_\lambda(A)$ is the span of all possible eigenvectors of $A$ with eigenvalue $\lambda$).
+   
+Thus, $E_\lambda(A)$ is a subspace, and as a result, it can be fully defined by a finite set of basis vectors. The number of such basis vectors is the dimension of $E_\lambda(A)$, called the **geometric multiplicity** of eigenvalue $\lambda$.
+
+
+### Eigenvectors and Matrix Singularity:
+
+Let's consider cases where $A$ is singular vs. non-singular. 
+
+As we know, $(\lambda I - A)$ is always singular as matrix $A$ must have at least one eigenvector $\mathbf{x}$, which satisfies $(\lambda I - A)\mathbf{x} = 0$, i.e., $\mathbf{x} \in \mathcal{N}((\lambda I - A))$. Thus, $(\lambda I - A)$ has a non-trivial null space if $\lambda$ is an eigenvalue.
+
+1. **Case a: $A$ is non-singular.**
+
+   - In this case, there is no vector $\mathbf{x} \neq 0$ for which $A\mathbf{x} = 0$. Thus, $\lambda = 0$. This also shows that $\lambda \neq 0$ (This is also shown by Theorem 9.2.1.1).
+
+2. **Case b: $A$ is singular.**
+
+   - By Theorem 9.2.1.1, we see that this implies that $\lambda = 0$ must be an eigenvalue.
+   - Thus, any eigenvector $\mathbf{x}$ associated with the eigenvalue $\lambda = 0$ must lie in $\mathcal{N}(\lambda I - A) = \mathcal{N}(A) = \mathcal{N}(I)$.
+   - Thus, the eigenspace of $\lambda = 0$ is the null space of $A$ when $A$ is singular (This technically holds for non-singular $A$ as well, however, in that case, we have $\mathcal{N}(A) = \{0\}$ and thus we have only non-zero eigenvalues).
+
+**Note:** Another way to look at $(\lambda I - A)$ is that the eigenvalues $\lambda_1, \lambda_2, \dots$ are all the values for which $(\lambda I - A)$ is singular.
+
+
+### The Rank Theorem and its relation to eigenvectors
+
+Recall that the rank of a matrix $A \in \mathbb{C}^{m \times n}$ (need not be square) is the number of linearly independent columns of $A$, or equivalently, the dimension (number of basis vectors) of the column space of $A$:
+
+$$
+\text{rank}(A) = \dim(\mathcal{C}(A)) \leq n.
+$$
+
+The nullity of $A$ is defined as the dimension (number of basis vectors) of the null space of $A$:
+
+$$
+\text{nullity}(A) = \dim(\mathcal{N}(A)) \leq n.
+$$
+
+The Rank Theorem states that if a matrix $A \in \mathbb{C}^{n \times n}$ (square) has $n$ columns, then:
+
+$$
+\text{rank}(A) + \text{nullity}(A) = n.
+$$
+
+(We have seen the Rank Theorem before when discussing the four fundamental spaces of a matrix.)
+
+Now, as we have seen on the previous page, the null space of $A \in \mathbb{C}^{n \times n}$ is the eigenspace of $\lambda = 0$ (which is $\{0\}$ if $A$ is non-singular). Thus, we can re-formulate the Rank Theorem as:
+
+$$
+\text{(Geometric multiplicity of } \lambda = 0) + \text{rank}(A) = n,
+$$
+
+i.e., if $n_1 = \text{(No. of linearly independent eigenvectors associated with } \lambda = 0)$ and $n_2 = \text{(No. of linearly independent columns of } A)$, then $n_1 + n_2 = n$.
+
+
+### Theorem 9.2.3.2:
+
+Let $D \in \mathbb{C}^{m \times m}$ be a diagonal matrix. Show that the diagonal elements of $D$ are its eigenvalues, and the corresponding standard basis vectors $\mathbf{e}_0, \dots, \mathbf{e}_{m-1}$ are the associated eigenvectors.
+
+**Ans:**
+
+Let 
+
+$$
+D = \begin{pmatrix}
+s_0 & 0 & \dots & 0 \\
+0 & s_1 & \dots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & s_{m-1}
+\end{pmatrix}
+$$
+
+Now, we know that a diagonal matrix is singular if and only if one or more of its diagonal elements is zero. Thus, $(\lambda I - D)$ is singular at exactly the points where $(\lambda - s_0) = 0$, $(\lambda - s_1) = 0$, etc.
+
+Thus, we have the eigenvalues of $D$ as:
+
+$$
+\Lambda(D) = \{ s_0, s_1, \dots, s_{m-1} \}
+$$
+
+Again, these eigenvalues might be unique, repeated, zero, etc.
+
+Now, $D\mathbf{e}_j$ extracts the column having $s_j$ and all zeros, i.e., $D\mathbf{e}_j = s_j \mathbf{e}_j$.
+
+Thus, $\mathbf{e}_j$ is an eigenvector of $D$, associated with eigenvalue $s_j$.
+
+
+### Theorem 9.2.3.3:
+
+Let $U \in \mathbb{C}^{m \times m}$ be an upper-triangular matrix. List all eigenvalues of $U$, and a convenient eigenvector.
+
+**Ans:**
+
+Let 
+
+$$
+U = \begin{pmatrix}
+r_{00} & r_{01} & \dots & r_{0,m-1} \\
+0 & r_{11} & \dots & r_{1,m-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & r_{m-1,m-1}
+\end{pmatrix}
+$$
+
+Thus,
+
+$$
+(\lambda I - U) = \begin{pmatrix}
+\lambda - r_{00} & -r_{01} & \dots & -r_{0,m-1} \\
+0 & \lambda - r_{11} & \dots & -r_{1,m-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & \lambda - r_{m-1,m-1}
+\end{pmatrix}
+$$
+
+Now, $(\lambda I - U)$ is upper-triangular and hence is singular if one or more diagonal elements is zero. Thus, $(\lambda I - U)$ is singular when $(\lambda - r_{ii}) = 0$, i.e., the eigenvalues of $U$ are $\Lambda(U) = \{r_{ii} \mid 0 \leq i \leq m-1\}$.
+
+Now, to get the eigenvectors, we first partition $U$ as:
+
+$$
+U = \begin{pmatrix}
+U_{00} & u_{01} & u_{02} \\
+0 & r_{11} & u_{12} \\
+0 & 0 & U_{22}
+\end{pmatrix}
+$$
+
+such that $r_{11} = \lambda$ (some eigenvalue).
+
+We now want some vector $\mathbf{x} \neq 0$ such that $(\lambda I - U)\mathbf{x} = 0$. If we partition $\mathbf{x}$ as:
+
+$$
+\mathbf{x} = \begin{pmatrix} \mathbf{x}_0 \\ \mathbf{x}_1 \\ \mathbf{x}_2 \end{pmatrix}
+$$
+
+we get:
+
+$$
+(\lambda I - U) \mathbf{x} = \begin{pmatrix} (\lambda I - U_{00})\mathbf{x}_0 - u_{01}\mathbf{x}_1 - u_{02}\mathbf{x}_2 \\ 0 \\ (\lambda I - U_{22})\mathbf{x}_2 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
+$$
+
+Consider $\mathbf{x}_0 = 0$ and $\mathbf{x}_1 = 1$. Then:
+
+$$
+(\lambda I - U_{00}) \mathbf{x}_0 - u_{01} \mathbf{x}_1 = 0
+$$
+
+$$
+(\lambda I - U_{00}) \mathbf{x}_2 = u_{02} \mathbf{x}_1
+$$
+
+
+Thus, if $\lambda_i$ is an eigenvalue, $\mathbf{x}$ must satisfy the above linear equation. If $(\lambda_i I - U_{00})$ is non-singular, then there is only one unique solution for $\mathbf{x}_0$, namely $\mathbf{x}_0 = (\lambda_i I - U_{00})^{-1} u_{01}$. To achieve this, we must partition $U$ so that $r_{11}$ is the first diagonal element that is equal to our eigenvalue $\lambda_i$ (Recall that eigenvalues can be repeated). 
+
+The corresponding eigenvector then becomes:
+
+$$
+\mathbf{x} = \begin{pmatrix} (\lambda_i I - U_{00})^{-1} u_{01} \\ 1 \\ 0 \end{pmatrix}
+$$
+
+We now see that for both diagonal and upper-triangular matrices, the eigenvalues can directly be read off the diagonal. For upper-triangular matrices, getting the eigenvectors involves solving the linear system $(\lambda I - U_{00}) \mathbf{x}_0 = u_{01}$ to get eigenvector $\mathbf{x} = \begin{pmatrix} \mathbf{x}_0 \\ 1 \\ 0 \end{pmatrix}$.
+
+
+### The Characteristic Polynomial
+
+Recall that if $\lambda$ is an eigenvalue of $A \in \mathbb{C}^{m \times m}$, then $(\lambda I - A)$ must be singular. This is equivalent to the fact that $\det(\lambda I - A) = 0$, i.e., $(\lambda I - A)$ maps any vector $\mathbf{x}$ to a lower dimension than $\mathbb{C}^n$.
+
+Consider the case where $A \in \mathbb{C}^{2 \times 2}$. In that case,
+
+$$
+(\lambda I - A) = \begin{pmatrix}
+(\lambda - a_{00}) & -a_{01} \\
+-a_{10} & (\lambda - a_{11})
+\end{pmatrix}
+$$
+
+The determinant of this matrix must be zero for $\lambda$ to be an eigenvalue, thus:
+
+$$
+(\lambda - a_{00})(\lambda - a_{11}) - (-a_{10})(-a_{01}) = 0
+$$
+
+$$
+\lambda^2 - (a_{00} + a_{11})\lambda + (a_{00}a_{11} - a_{10}a_{01}) = 0
+$$
+
+This polynomial of degree two is known as the **characteristic polynomial** of the $2 \times 2$ matrix $A$. We can generalize this to $m \times m$ matrices as follows:
+
+**Definition 9.2.2.2:**
+
+The characteristic polynomial of $A \in \mathbb{C}^{m \times m}$ is given by the polynomial (in $\lambda$) obtained when trying to calculate the determinant of the matrix $(\lambda I - A)$, i.e.,
+
+$$
+p_A(\lambda) = \det(\lambda I - A)
+$$
+
+**Theorem 9.2.2.3:**
+
+For $A \in \mathbb{C}^{m \times m}$, $p_A(\lambda) = \det(\lambda I - A)$ is a polynomial of degree $m$, meaning we can represent it by:
+
+$$
+p_A(\lambda) = \lambda^m + c_1 \lambda^{m-1} + \dots + c_{m-1}\lambda + c_m
+$$
+
+(We state this theorem without proof.)
+
+
+This insight allows us to make an important claim: The eigenvalues of $A$ (and only the eigenvalues of $A$) can be found as the roots of the characteristic polynomial $p_A(\lambda)$ by solving $p_A(\lambda) = 0$.
+
+We prove this as follows:
+
+### Theorem 9.2.2.4:
+
+For $A \in \mathbb{C}^{m \times m}$, a constant $\lambda$ is an eigenvalue of $A$ if and only if $p_A(\lambda) = 0$.
+
+i.e., roots of $p_A(\lambda) = \lambda^m + c_1 \lambda^{m-1} + \dots + c_m = 0$ are eigenvalues of $A$.
+
+**Proof:** We know that for singular matrices, the null space is non-trivial (contains more than just the zero vector), and the determinant is zero.
+
+- Consider $(\lambda I - A)$. As we know, any vector in the null space of $(\lambda I - A)$ is an eigenvector associated with $\lambda$. Thus, $(\lambda I - A)\mathbf{x} = 0$ implies $\det(\lambda I - A) = 0$, i.e., $p_A(\lambda) = 0$.
+
+Thus, the two are equivalent statements, and hence the "if and only if" condition holds.
+
+---
+
+The above theorem is important because it casts eigenvalues as the roots of an $m$-degree polynomial, and as a result, we can use our knowledge of polynomials to uncover interesting results about eigenvalues of a matrix $A \in \mathbb{C}^{m \times m}$. In particular, we can see that:
+
+1. **Any matrix $A$ must have at least one eigenvalue and associated eigenvector** (because a polynomial of degree $m$ has at least one root).
+
+2. **Any matrix $A \in \mathbb{C}^{m \times m}$ has at most $m$ unique eigenvalues, and hence at most $m$ linearly independent eigenvectors** (This is because a polynomial of degree $m$ has at most $m$ unique roots).
+
+
+### Algebraic Multiplicity of Eigenvalues
+
+**Definition 9.2.2.5:**
+
+As we know, we can express an $m$-degree polynomial using a product of its roots. We can do the same for the characteristic polynomial, 
+
+$$
+p_A(\lambda) = \lambda^m + c_{m-1}\lambda^{m-1} + \dots + c_1\lambda + c_0,
+$$
+
+i.e., 
+
+$$
+p_A(\lambda) = (\lambda - \lambda_0)^{m_0}(\lambda - \lambda_1)^{m_1}\dots(\lambda - \lambda_r)^{m_r},
+$$
+
+where $m_j$ is called the **algebraic multiplicity** of that root (i.e., of that eigenvalue $\lambda_j$). Here, each $\lambda_j$ is unique.
+
+Note that it is possible for $m_j$ to vary between zero and $m$, i.e., $0 \leq m_j \leq m$, and $m_0 + m_1 + \dots + m_r = m$.
+
+Thus, if $m_j > 2$ for any eigenvalue $\lambda_j$, we see that there will be less than $m$ unique eigenvalues, since $\lambda_j$ is repeated $m_j$ times when counting the roots. If we count all roots $\lambda_0, \lambda_1, \dots, \lambda_r$ separately, regardless of whether some roots repeat, we say that we are "counting with multiplicity."
+
+### Lemma 9.2.2.6:
+
+For $A \in \mathbb{C}^{m \times m}$, $A$ has exactly $m$ eigenvalues (when counting with multiplicity).
+
+**Proof:**
+
+This is a direct consequence of the fact that an $m$-degree polynomial has exactly $m$ roots (multiplicity counted).
+
+
+### Eigenvalues may be complex-valued, i.e., $\mathbb{C}$.
+
+This is another property of roots of an $m$-degree polynomial. However, as we will see, there are some special considerations here.
+
+Let's illustrate this with an example: consider 
+
+$$
+A = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}
+$$
+
+This is a rotation matrix corresponding to a 90-degree counterclockwise rotation of every real 2-D vector $\mathbf{x} \in \mathbb{R}^2$.
+
+Initially, it might seem like this matrix has no eigenvectors because every single real vector gets rotated. However, if we solve using the characteristic polynomial:
+
+$$
+\det(\lambda I - A) = \det\begin{pmatrix} \lambda & 1 \\ -1 & \lambda \end{pmatrix} = \lambda^2 + 1 = 0
+$$
+
+$$
+\Rightarrow \lambda = \pm i
+$$
+
+In this case, the eigenvalues will lie in the complex space $\mathbb{C}^2$.
+
+This serves as an example of an interesting result for complex eigenvalues:
+
+### Corollary 9.2.2.7:
+
+If $A \in \mathbb{R}^{m \times m}$ (i.e., $A$ is square and real-valued), then some of its eigenvalues may be complex-valued. However, for any such complex-valued eigenvalue $\lambda$, its conjugate $\overline{\lambda}$ is also an eigenvalue. That is, complex eigenvalues come in conjugate pairs.
+
+**Proof:** It can be shown that if $A$ is real-valued, its characteristic polynomial has real-valued coefficients. A property of such polynomials is that their complex roots come in conjugate pairs.
+
+
+### Corollary 9.2.2.8:
+
+If $A \in \mathbb{R}^{m \times m}$ and $m$ is odd, at least one eigenvalue is real-valued. (This follows directly from 9.2.2.7)
+
+### We cannot use the characteristic polynomial of $A \in \mathbb{C}^{m \times m}$ to find the eigenvalues of $A$ when $m > 5$.
+
+It could seem like a straightforward way to find eigenvalues & eigenvectors of a matrix $A \in \mathbb{C}^{m \times m}$ would be:
+
+1. Form the characteristic polynomial $p_A(\lambda)$.
+2. Solve for its roots $\lambda_0, \lambda_1, \dots$, which are the eigenvalues.
+3. Find linearly independent eigenvectors associated with each $\lambda_i$ by calculating the basis vectors of the null space of $(\lambda_i I - A)$.
+
+However, we run into an issue in the first step:
+
+This is because something called **Galois Theory** tells us that there is no closed-form expression for calculating the roots of a polynomial with degree $m > 5$. In fact, it can be shown that for any polynomial
+
+$$
+p_m(\lambda) = \lambda^m + \alpha_{m-1}\lambda^{m-1} + \dots + \alpha_1\lambda + \alpha_0,
+$$
+
+we can construct a matrix 
+
+$$
+A = \begin{pmatrix}
+-\alpha_{m-1} & -\alpha_{m-2} & \dots & -\alpha_1 & -\alpha_0 \\
+1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & 0 & 1 & 0
+\end{pmatrix}
+$$
+
+such that $p_A(\lambda) = p_m(\lambda)$, i.e., its characteristic polynomial is our original polynomial. Thus, if we had a way to find the eigenvalues of this matrix, we would have found the roots of $p_m(\lambda)$, which would violate Galois Theory.
+
+
+Additionally, it is difficult to find the exact basis vectors of a null space in the presence of round-off error. Thus, we must use some other method to find eigenvalues & eigenvectors.
+
+### Eigenvalues of Hermitian Matrices:
+
+Recall, $A$ is Hermitian if $A^H = A$.
+
+**Theorem 9.2.1.2:** If $A \in \mathbb{C}^{m \times m}$ is Hermitian, then all its eigenvalues are real-valued.
+
+**Proof:**
+
+If $(\lambda, \mathbf{x})$ is an eigenpair of $A$, then: 
+
+$$
+A\mathbf{x} = \lambda \mathbf{x}
+\\
+\mathbf{x}^H A \mathbf{x} = \lambda \mathbf{x}^H \mathbf{x}
+$$
+
+But,
+
+$$
+\mathbf{x}^H A \mathbf{x} = \mathbf{x}^H A^H \mathbf{x} = (\lambda \mathbf{x})^H \mathbf{x} = \overline{\lambda} \mathbf{x}^H \mathbf{x}
+$$
+
+So,
+
+$$
+\overline{\lambda} \mathbf{x}^H \mathbf{x} = \lambda \mathbf{x}^H \mathbf{x}
+$$
+
+Since $\mathbf{x} \neq 0$ (as $\mathbf{x}$ is an eigenvector), then $\|\mathbf{x}\|_2^2 > 0$, so:
+
+$$
+\lambda = \overline{\lambda}
+$$
+
+where $\lambda$ is real-valued.
+
+---
+
+**Theorem 9.2.1.3:** If $A \in \mathbb{C}^{m \times m}$ is Hermitian Positive Definite (HPD), then all eigenvalues of $A$ are positive & real-valued.
+
+**Proof:**
+
+If $(\lambda, \mathbf{x})$ is an eigenpair of $A$, then:
+
+$$
+A \mathbf{x} = \lambda \mathbf{x}
+
+\\
+
+\mathbf{x}^H A \mathbf{x} = \lambda \mathbf{x}^H \mathbf{x}
+$$
+
+But,
+
+$$
+\mathbf{x}^H A \mathbf{x} > 0 \quad (\text{since } A \text{ is HPD})
+$$
+
+So: $\lambda \|\mathbf{x}\|_2^2 > 0$
+
+Since $\|\mathbf{x}\|_2^2 > 0$ (as $\mathbf{x}$ is an eigenvector), it follows that: $\lambda > 0$
+
+Thus, $\lambda$ is positive and real-valued.
+
+
+### Theorem 9.2.1.4:
+
+Let $A \in \mathbb{C}^{m \times m}$ be Hermitian and $(\lambda, \mathbf{x})$, $(\mu, \mathbf{y})$ be two of its eigenpairs where $\lambda \neq \mu$. Then $\mathbf{y}^H \mathbf{x} = 0$, i.e., distinct eigenvalues of a Hermitian matrix have orthogonal eigenvectors.
+
+**Proof:**
+
+$$A \mathbf{x} = \lambda \mathbf{x} \quad \text{and} \quad A \mathbf{y} = \mu \mathbf{y}$
+
+$$\mathbf{y}^H A \mathbf{x} = \lambda \mathbf{y}^H \mathbf{x} \quad \text{and} \quad \mathbf{x}^H A \mathbf{y} = \mu \mathbf{x}^H \mathbf{y}$
+
+Since 
+
+$$\mathbf{y}^H A \mathbf{x} = \mathbf{x}^H A^H \mathbf{y} = \overline{\mathbf{x}^H A \mathbf{y}} = \overline{\mu \mathbf{x}^H \mathbf{y}} = \mu \mathbf{x}^H \mathbf{y}$
+
+Thus,
+
+$$\lambda \mathbf{y}^H \mathbf{x} = \mu \mathbf{y}^H \mathbf{x}$
+
+Since $\lambda \neq \mu$ and $\mathbf{x} \neq 0$, we must have:
+
+$$\mathbf{y}^H \mathbf{x} = 0$
+
+Thus, $\mathbf{y}^H \mathbf{x} = 0$.
+
+### Definition 9.3.1.1:
+
+If $A \in \mathbb{C}^{m \times m}$, $\mathbf{x} \neq 0$, $\mathbf{x} \in \mathbb{C}^m$, then the **Rayleigh quotient** is:
+
+$$
+\mathcal{R}(\mathbf{x}) = \frac{\mathbf{x}^H A \mathbf{x}}{\mathbf{x}^H \mathbf{x}}
+$$
+
+---
+
+### Theorem 9.3.1.1:
+
+If $\mathbf{x} \in \mathbb{C}^m$ is an eigenvector of $A$, then the Rayleigh quotient (using $\mathbf{x}$) gives the associated eigenvalue $\lambda$.
+
+**Proof:**
+
+Let $A \mathbf{x} = \lambda \mathbf{x}$. Multiplying both sides by $\mathbf{x}^H$:
+
+$$
+\mathbf{x}^H A \mathbf{x} = \lambda \mathbf{x}^H \mathbf{x}
+$$
+
+Thus,
+
+$$
+\frac{\mathbf{x}^H A \mathbf{x}}{\mathbf{x}^H \mathbf{x}} = \lambda
+$$
+
+The Rayleigh quotient gives the eigenvalue $\lambda$ associated with the eigenvector $\mathbf{x}$.

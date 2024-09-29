@@ -1,0 +1,56 @@
+# Countability, Infinites and Cantor
+In this section, we discuss how Georg Cantor restructured the basics of mathematics.
+
+Georg Cantor was a 19th-century mathematician who overturned our notion of set theory.
+
+You may be familiar with basic set theory: unions, intersections, differences (structures commonly represented by Venn Diagrams). However, you may have struggled with the notions of countable vs uncountable infinities. This post will discuss these topics.
+
+Cantor explained how infinity can have different sizes (particularly, countable vs uncountable) by way of a simple “Diagonalization” proof.
+
+This is an proof by contradiction, meaning we assume X is True, then show that the consequences of this assumption implies that both Y and not-Y are True. Thus the only possibility is that X is False.
+
+Cantor’s Diagonalization argument is as follows:
+
+1. Assume that all infinite are the same “size”. Concretely, assume all sets of “infinite” size have the exact same number of elements.
+2. Under this assumption, we can construct a 1:1 mapping from the set of Natural numbers {1, 2, 3, …} to real numbers between [0, 1).
+3. An important point is that this mapping must be 1:1 (a bijection), i.e. every natural number corresponds to exactly one number from [0, 1), and vice verca, every real number in [0, 1) is also associated with exactly one natural number. If we assume that these two infinite sets are the same “size”, this should not be a problem.
+4. Suppose we create such a mapping (literally any mapping works). It is basically a list of real numbers, each whose “index” in the list is the corresponding Natural number. Just as an example, here is a possible mapping/bijection:
+    1. 0.1234567890000000000…
+    2. 0.9876543210123456789…
+    3. 0.1111111111111111111…
+    4. 0.2222222222222222222…
+    5. 0.2172940157035229312…
+5. Now, pick the digits along the diagonal: for the real number with index 1, pick the first digit; for the real number with index 2, pick the second digit, and so on.
+6. Combining these diagonal-digits and adding a zero at the front, we get a real number between [0, 1) with infinite digits. For the mapping above, it is 0.18129….
+7. Now, we add 1 to every digit of this number (wrapping 9 to 0). In the case above, we get 0.29230….
+
+8. This new number CANNOT be in the list! The argument for this is subtle:
+    - The new number is clearly not the same as the first number, since their first digits differ.
+    - The new number is clearly not the same as the second number, since their second digits differ.
+    - The new number is clearly not the same as the third number, since their third digits differ.
+    Continuing this, it becomes clear that the new number cannot be the same as any number on the list.
+9. So, this new number is not on the list. But how can this be true? We had said that our mapping is 1:1 (bijection), meaning every real number is on the list somewhere. This is a contradiction.
+10. The only possible conclusion is that our mapping from Natural Numbers -> Reals between [0, 1) is not a 1:1 mapping; there are real numbers for which there is no corresponding natural number in this list. Thus, the mapping is strictly injective, i.e. the domain (Natural Numbers) is strictly smaller than the range (Reals between [0,1)).
+
+Thus, although both sets are infinitely large, the cardinality of the set of Natural numbers is strictly smaller than that of the set of Reals between [0,1).
+
+This distinction is core to the difference between countably-infinite and uncountably-infinite sets. Particularly, since Natural numbers are often called counting numbers, we say an infinite set S is countably infinite if there exists a perfect bijection between S and the set of Natural numbers.
+If such a bijection can be shown not to exist, then S is called uncountably infinite.
+
+Sets which are either (a) finite or, (b) countably infinite, are called “countable” sets.
+An important property is that any infinite subset of a countably infinite set, is also countably infinite. Several sets can be shown to be countably infinite using this property.
+
+More generally, a subset of a countable set is always countable. There are 3 cases here:
+(a) Set = finite, Subset = finite. Both are countable.
+(b) Set = countably infinite, Subset = finite. Both are countable.
+(c) Set = countably infinite, Subset = countably infinite. Both are countable.
+
+Some examples to solidify these concepts:
+
+- An example of a countably infinite set is the set of all Natural numbers divided by 5. Thus, the set S = {0.2, 0.4, 0.6, 0.8, …} is countably infinite.
+- Another countably infinite set is the set of all rational numbers (i.e. numbers which can be expressed as a ratio), though the proof for this is less obvious.
+- The set S = reals between [-100, 100] is uncountably infinite (which can be proved by simply scaling the range [0, 1) and reusing the Diagonalization argument).
+
+As a rule of thumb, sets which are “discrete but infinite” are typically countably infinite.
+
+And sets which are “a continuous range between A and B” are almost always uncountably infinite.

@@ -1,0 +1,33 @@
+## The purpose of this book
+
+Several textbooks have been written on machine learning and AI: some exceptional, and most at least adequate. The space includes texts on practical machine learning, statistical learning theory, deep learning, reinforcement learning, language processing, computer vision, and more. This book is "everything else": we seek to introduce mathematical concepts. It aims to be a guide, referred to by confused students and overworked practitioners.
+
+Why? Well, a common aspect in textbooks is a few sections at the back that briefly revisit the math required to understand the material: typically covering linear algebra, vector calculus, probability and statistics, to some degree. These summaries never present the material at sufficient depth to grasp the concepts. Authors will hand-wave this: "It is meant to be a refresher", they say. But the question is: Why? Nobody who knows the introduced concepts bothers reading these sections; if confused, they revisit the original sources (notes or dedicated material) where they first understood the topic. The practical purpose of these sections, then, is to safeguard from the criticism that the author's book is not accessible to newer readers.
+
+This book addresses this gap:
+
+-   For students of machine learning, this book offers a way to develop a fully-fleshed out mathematical background. We touch on topics in analysis, calculus, linear algebra, probability, statistics and machine learning, all from a mathematical perspective. You will also learn to "translate" math into code, an extremely practical skill.
+
+-   Authors of texts in machine learning subfields, or associated fields like statistics or operational research, can simply link to sections of this book. The beauty of version control means that each unique section in this book enjoys a versioned DOI tag, so from the point of view of an author, linking to one section in this book is as good as linking to a published paper. Authors consequently have to do less work covering background concepts in their texts or course material.
+
+The integration of a ChatGPT-like experience into this book's website means that we are able to offer a unique experience for students to learn interactively. We expect other textbooks will follow suit.
+
+## The structure of this book
+
+Most math textbooks aim to introduce concepts as early as possible, and build up from there. Of the face of it, this is a good idea: since topic A depends on topic B, we should cover A rigorously and then proceed to B.
+
+This approach frequently breaks down: to write a textbook on rigorous probability, you must first introduce complex measure theory in the first chapters, and then proceed to easy-to-understand concepts like a "what is a random variable". This creates much dissatisfaction for a learner, as they must power through fifty pages of borel sigma-fields and Lebesgue integration, in order to learn something which can be intuitively explained in just a few paragraphs. Some authors try to hide this gap by saying their textbook is "graduate-level", which means "you should have already studied the easy stuff before at least once".
+
+We looked at this practice, and decided it was nonsense. Mathmatics is rarely learned for fun; often, someone sits down to learn a topic only when they really need to. Thus, mathematical education natually progresses in fits and spurts (and often with a great deal of impatience). A book should accommodate the learner, not the other way around.
+
+![](images/paste-1.png){fig-align="center" width="600"}
+
+As such, we try to introduce concepts **as late** as possible, only when the reader urgently needs them. As an example, we introduce vector calculus just before the section on Optimization (chapter 5), even though we could have introduced it as early as Chapter 2. In doing so, it might initially feel like some sense of continuity is lost; if you scan the index, you can't easily figure out which topics fall under the same subject.
+
+However, a common theme in our work is that learning mathematics for ML does not proceed linearly. We instead advance in a winding manner: imagine yourself climbing a spiralling staircase, surrounded on the outer edge by marble pillars ("linear algebra", "probability", etc). The staircase (this book) act as a bridge between subjects. Along the way, we will pause to observe a few diagrams etched onto the staircase (topics within each subject), and then continue our ascent.
+
+Mechanically, we will establish precedence between topics by listing "prerequisite subsections" at the top of each subsection. We additionally order chapters in a rough "recommended reading" order, so that nothing is lost if they are read chronologically.
+
+With this approach, a learner needn't sift through dozens of pages of unnecessary material in order to understand what they urgently need to learn. By following the chain of prerequisites, it should be possible to determine any necessary background for a particular topic. This approach is similar to that used by Wikipedia, but our focus is on simplicity, instead of comprehensively connecting topics.
+
+The only place where we break this pattern is the very first chapter, which establishes many grounding concepts that learners will need. We strongly recommend reading this first and completely.

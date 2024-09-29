@@ -1,0 +1,49 @@
+## Inferring Moments from Data
+
+In the section of this book which covers statistics, we will go into exquisite detail about how we estimate quantities like the mean, variance, covariance, etc. from $n$ real data points, i.e. a sample.
+
+However, it is a bit tricky to progress forward with our study of probability, without explaining the terms "empirical mean" and "empirical variance". Other authors explain them without describing how they are different from the expected value and variance of random variables. This causes significant confusion among students.
+
+In this section, we are going to give a very brief introduction to why these quantities are called "empirical" and not just "mean" and "variance". If you are still confused after readine the following explanation, we strongly recommend reading the first few pages of Chapter XX from the statistics section, where the details are fleshed out.
+
+------------------------------------------------------------------------
+
+***Probability*** is a purely mathematical field. Concepts like random variables, distributions, and moments exist in an abstract world of numbers and equations. They don’t have a direct representation in the real world. And that's actually an advantage — any result we prove within the framework of probability is valid, so long as we do not go outside the axioms.
+
+***Statistics***, on the other hand, deals directly with the real world. Its purpose is to take messy, imperfect data from reality and attempt to describe it using the clean, abstract structures of probability. To do this, we often make ***assumptions*** about the real world — such as the fact that men or womens heights are perfectly a Normal distribution. Some of these assumptions are known to be untrue but are computationally convenient, while others we'll never be sure about. But assumptions are necessary if we are to bridge the gap from practical data to abstraction. In return, we get practical tools — tools that have advanced fields like medicine, machine learning, and countless other areas that benefit humanity.
+
+At its core, statistics begins with the notion of a **random sample**: a set of $n$ independent and identically distributed (i.i.d.) random variables which are each distributed according from some unknown distribution $D$. We often [assume]{.underline} the form of $D$, to simplify our analysis and connect it to probabilistic theory.
+
+Once we have our random sample, we can calculate various functions based on the data. For instance, we can compute the mean, variance, median, or mean absolute deviation of the sample. Each of these functions gives us a numeric quantity derived from the original sample. These derived values are what we call **statistics** — functions that create a numeric summary of the datapoints in the random sample.
+
+Note that a statistic is also a random variable: when we run the random experiment, each random variable in the sample crystallizes to some realized value in $\mathbb{R}$, and then we calculate the realized value of the statistic. Some statistics, like the empirical mean and empirical variance, are particularly important because they help us determine the true value of quantities, such as the expected value and variance of the distribution $D$. These quantities are of significant interest. For instance, if you are in highschool and applying to Stanford, you might be particularly interested in knowing the true mean SAT scores of students admitted to Stanford in the same year you are applying.
+
+However, our random sample provides only a limited snapshot of the true world using $n$ datapoints. This has the risk that it may not be representative of the whole world. So, any statistic calculated from the random sample will at best be the **estimate** of the underlying quantity. There will always be some level of error. But, in the real world, we do not know the distribution $D$, so it's the best approximation we can achieve given the $n$ datapoints. These statistics are hence called **estimators**. For example, when we calculate the mean from a sample, it’s known as the **empirical mean** or **sample mean**. Similarly, we speak of the **empirical variance / sample variance** or **empirical covariance / sample covariance**.
+
+Estimates are imperfect, but they are very often *actionable*: you may not know that the true average SAT score of Stanford admittees, but if you somehow manage to interview n=30 admitted students and calculate the sample mean to be 1580/1600 and sample standard deviation as 20, you can know whether your own score was close enough that you should get your hopes up.
+
+Do not forget that the empirical mean, empirical variance etc. are still random variables, not realized values! The "realization of the empirical mean" is the actual number you calculate by running the random experiment and obtaining a realized sample. The term "empirical" simply indicates that these values are derived from a finite, imperfect sample; thus, any realization of the empirical quantity comes with some degree of error from the true value.
+
+These estimators (and other statistical concepts) are the only way to connect real-world data to abstract probability structures. While imperfect, some estimators do possess useful properties, allowing us to make strict claims about how close they are to the actual value. Much of statistics focuses on studying these properties - how reliable, robust and accurate different estimators are under various conditions or assumptions. Understanding this helps us gauge the quality of our estimates and their effectiveness in representing real-world phenomena.
+
+We'll much dive deeper into this subject in the chapters to come. For now, consider these formulate: the sample mean, sample variance and sample standard deviation, which estimate the true mean, variance and std. dev by using an i.i.d. sample of $n$ given data points:
+
+-   Estimator for the sample mean:
+
+    $$
+    \bar{X}_n = \sum_{i=1}^{n} X_i \hspace{1em} \in \mathbb{R}
+    $$
+
+-   Estimator for the sample variance[^03-inferring-moments-from-data-1]
+
+    $$
+    \bar{\sigma}^2_n = \frac{\sum_{i=1}^{n} (X_i - \bar{X}_n)^2}{n-1} \hspace{1em} \ge 0
+    $$
+
+[^03-inferring-moments-from-data-1]: Note that we use $n-1$ and not $n$ in the variance definition. Earlier, people used to just use $n$, but Bessel discovered that using the $n-1$ version provides us with some nice statistical properties (specifically, unbiasedness), so it is recommended to use the $n-1$ version when estimating the variance and standard deviation. Some textbooks teach the version using $n$, which is incorrect unless you know the population mean ([which in practice is never the case](https://en.wikipedia.org/wiki/Bessel%27s_correction)).
+
+-   Estimator for the sample standard deviation:
+
+    $$
+    \bar{\sigma}_n = \sqrt{\bar{\sigma}^2_n} \hspace{1em} \ge 0
+    $$

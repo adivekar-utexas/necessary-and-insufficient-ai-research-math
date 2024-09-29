@@ -1,0 +1,4 @@
+
+1. PageRank
+2. Principal Component Analysis
+3. It shall be a useful tool later to study stability analysis in optimization.
