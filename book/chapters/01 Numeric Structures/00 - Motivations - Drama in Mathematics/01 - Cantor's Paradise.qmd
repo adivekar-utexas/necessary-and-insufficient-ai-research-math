@@ -1,0 +1,11 @@
+Georg Cantor was a 19th-century mathematician who overturned our notion of Set theory.
+
+Set theory, along with boolean logic, the most fundamental block of mathematics. 
+
+![Source: this highly-recommended Veritaserum video (https://www.youtube.com/watch?v=HeQX2HjkcNo)](images/cantor_argument.png){fig-alt="Argument among mathematicians over Cantor's work on Set Theory." fig-align="center"}
+
+For a long time, mathematicians. 
+
+At the end of this chapter, you will learn to answer questions like: "What is a univariate scalar-valued function".
+
+You will learn what notations like $f: \mathbb{R}^d \rightarrow \mathbb{R}$ means.

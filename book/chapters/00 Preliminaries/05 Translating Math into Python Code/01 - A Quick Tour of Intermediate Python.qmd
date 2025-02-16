@@ -1,0 +1,7 @@
+## A Quick Tour of Intermediate Python
+
+We do not teach introductory Python, since there are already plenty of tutorials available on how to write basic Python code. 
+
+Instead, we introduce some intermediate Python concepts and tricks which make writing mathematical machine learning code a lot easier. We expect that a reader will pick up basic concepts such as variables, loops, functions and classes before reading this section.
+
+We expect that someone who understands python will be 

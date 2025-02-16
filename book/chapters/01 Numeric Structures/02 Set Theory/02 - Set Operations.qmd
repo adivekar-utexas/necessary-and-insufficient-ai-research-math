@@ -1,0 +1,9 @@
+
+1. Union
+2. Intersection
+3. Difference
+4. Complement.
+5. Power set.
+6. Index set.
+
+

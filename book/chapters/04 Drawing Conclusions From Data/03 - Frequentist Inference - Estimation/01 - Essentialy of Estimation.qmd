@@ -1,0 +1,95 @@
+# Computational & Statistical Learning Theory
+
+Roughly speaking, **"learning"** is the process of converting experience (things you have seen) into expertise or knowledge.
+
+In Machine Learning, we seek to automate the learning process. As we shall see, this is not without challenges, and the field of **statistical learning** is dedicated to solving this problem.
+
+## Setting up the problem:
+
+Let's consider a **supervised binary classification** problem. Suppose you go to a tropical island for a few months (on sabbatical). There, you encounter a new kind of fruit (to you) called a **dragon fruit**.
+
+You've never seen this kind of fruit before, but your tour guide offers one to you, and you find it delicious. The next day, you visit the local market to purchase more, but something's wrong.
+
+Among the dragon fruits, you see **varying sizes and colors**, from **green to dark magenta**. You'd like to be able to tell which ones are **tasty** and which are **not**.
+
+Buying fruits at random is not going to work, since you would like to eat a few dragon fruits **every day**, and **buying at random** means consuming half **tasteless fruit**—which means you've wasted half your money on non-tasty fruit.
+
+A smarter way to go about it would be to **purchase, say, 10 dragon fruits**, **note various properties** of each fruit (**size, color, etc.**), and then **have a bite** to determine whether each fruit is **tasty** or **not**. 
+
+In doing so, you will eventually **learn** which properties of a dragon fruit correspond to being tasty. For example, you might learn that **small, light magenta fruits** are tasty, but **large, light magenta fruits** are not, and that **green fruits are not tasty, regardless of size**.
+
+After this **learning exercise** on just **m = 10 fruits**, you would be able to use your newfound expertise to determine (hopefully **with high accuracy**) which fruit from the market is **tasty** and which is **not**. This would have saved you **a lot of money**, as compared to **randomly guessing** which fruit is tasty.
+
+A **machine learner** solves **exactly** the problem as in the situation above (at least, in the **supervised binary classification setting**). 
+
+Given a **training set** of examples, it produces a **hypothesis** (also called a **predictor** or, in this case, a **classifier**). This hypothesis can then be used to **predict on new, unseen examples**.
+
+## The Statistical Learning Framework
+
+Here, we will formally (i.e., mathematically) set up the framework in which **statistical learning** will take place.
+
+### 1) The Input Domain $X$
+
+The **input domain** $X$ (also called the **"Domain set"** or the **"Instance space"**) is defined by $X(\text{in})$. This is the set of all possible objects we want to label, e.g., the set of all dragon fruits. Each item in this set (called a **domain point**) is **unique** and has some properties. 
+
+Typically, we represent these properties by a **vector of features**, and as a result, the **domain set** becomes **all unique points in the feature space**.
+
+For example, suppose that our **dragon fruit instances** have two features:
+
+- **Color** $\in \{\text{Green, Pink, Magenta}\}$
+- **Softness** $\in \{\text{Soft, Firm}\}$
+
+In that case, our **domain set** would be all $3 \times 2 = 6$ possibilities of dragon fruits:
+
+$$
+X = \{ (\text{Green, Soft}), (\text{Green, Firm}), (\text{Pink, Soft}), (\text{Pink, Firm}),
+(\text{Magenta, Soft}), (\text{Magenta, Firm}) \}
+$$
+
+We see that $X$ here is a **discrete space**.
+
+However, we might also have **one or more continuous features** in $X$, which would map each domain point to a **point in a continuous space**.
+
+In this case, the domain set $X$ is **infinite**.
+
+
+## (Mathematical Formulation)
+
+### 2) The Target Range $Y$
+
+The **target range** (also called the **"Label set"** or **"Output set"**), denoted by $Y$ (sometimes $\mathcal{Y}$), is the set of values we want our learner to predict. 
+
+For a **binary classification problem**, such as our **dragon fruit example**, we could have:
+
+$$
+Y = \{0,1\} \quad \text{or} \quad Y = \{\text{Not tasty, Tasty}\}
+$$
+
+For a **regression problem**, $Y$ might be **continuous**.
+
+---
+
+### 3) The Concept $f^*$ and its Concept Class $\mathcal{C}$
+
+In order for anyone to **learn**, we must assume that there is **some correlation between $X$ and $Y$**. 
+
+For example, if **all green dragon fruits are not tasty**, then there is an underlying pattern.
+
+Formally, in **statistical learning**, we assume that the **relationship between $X$ and $Y$ is completely dictated by some function** $f^*$:
+
+$$
+f^*: X \to Y
+$$
+
+This is the **"perfect" function** for our problem, also called the **concept we are trying to learn**. 
+
+$f^*$ is a function which, given any $x \in X$ from the domain set, will return the **"correct"** $y^* = f^*(x) \in Y$ from the target range.
+
+If we could **freely use** $f^*$ for any domain point we encountered, then we **would not need to learn anything**.
+
+However, in most cases, $f^*$ is **unknown**.
+
+For example, we may **never know exactly** (without any doubt) **which properties of a dragon fruit make it tasty or not**. 
+
+There might be **hundreds of properties** that go into this decision, some of which might be **continuous**.
+

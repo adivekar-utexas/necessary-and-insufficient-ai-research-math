@@ -1,0 +1,2 @@
+Frankly, the entire field of Optimization is based on Linear algebra and Statistics.
+If nothing else, learn it so that you can learn it later.

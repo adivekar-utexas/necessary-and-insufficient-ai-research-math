@@ -1,0 +1,29 @@
+# Convexity of functions
+
+## Zero-th order convexity condition (applies to all $f: \mathbb{R}^d \to \mathbb{R}$)
+
+(Note: "$\mathbf{x}$" here is the design/decision vector)
+
+Convex function
+
+:   A multivariate scalar-valued function $f: \mathbb{R}^d \to \mathbb{R}$ is said to be "convex" if:
+
+    1.  Its domain $\text{dom}(f) = C \subseteq \mathbb{R}^d$ is a convex set.
+
+        **and:**
+
+    2.  For any pair of points $x_1, x_2 \in C$, the chord which connects $f(x_1)$ and $f(x_2)$ lies on or above the function, i.e., $\forall \lambda \in [0,1]$, a point on the line segment connecting $x_1$ and $x_2$, then $f(z) \leq$ corresponding point on chord connecting $f(x_1)$ and $f(x_2)$.
+
+Visually:
+
+<center>\includegraphics[width=0.5\textwidth]{convex_function}</center>
+
+Mathematically, $z$ is a point on the line segment connecting $x_1$ and $x_2$ in $\mathbb{R}^d$ space. Let $\lambda \in [0,1]$ be the fraction of this line segment (from $x_1$ to $x_2$). Then, $$
+z = \lambda x_1 + (1 - \lambda) x_2, \quad f(z) \in \mathbb{R} \text{ is the value of the objective function at } z.
+$$ Suppose we define $\beta \in \mathbb{R}$ to be the point on the chord connecting $f(x_1)$ and $f(x_2)$, which is the same fraction $\lambda$ along this chord as we had along the line segment connecting $x_1$ and $x_2$, i.e., $$
+\beta = \lambda f(x_1) + (1 - \lambda) f(x_2).
+$$ Then, the objective function $f: \mathbb{R}^d \to \mathbb{R}$ is convex if: $$
+f(z) \leq \beta
+$$ i.e., $$
+f(\lambda x_1 + (1 - \lambda) x_2) \leq \lambda f(x_1) + (1 - \lambda) f(x_2) \quad \forall \lambda \in [0,1] \text{ and } \forall x_1, x_2, f \text{ is strictly convex}.
+$$

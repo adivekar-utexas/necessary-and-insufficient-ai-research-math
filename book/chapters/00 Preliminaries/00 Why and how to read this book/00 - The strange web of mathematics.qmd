@@ -1,0 +1,43 @@
+## Why study math?
+
+It's often difficult to explain why learning mathematics is important, especially when we have so many tools that minimize our need for it. We have tax consultants and tax software that can handle complex calculations for us. Advanced systems like ChatGPT can perform basic reasoning with well-defined inputs, and Google Search had been around for nearly three decades since the time we started writing this book. If you are already employed as a programmer, there's nearly always a pre-built library that does what you need...for all other cases, there are manuals.
+
+So, why spend time on mathematics when there’s a readymade solution for almost every need? There are arguments to be made about the beauty of mathematics. And while this does exist, it is highly subjective and unlikely to be appreciated by students cramming for their next test, or a programmer trying to meet an urgent deadline.
+
+Instead, we will draw from our personal experience: the writers of this book are machine learning practitioners at top tech companies. Between us, we have worked on dozens of machine learning projects and delivered an estimated 800 million dolloras of impact for our employers. 
+
+We thus take the view that mathematics is a tool - a wonderful tool - and your depth of understanding mathematics has meaningful impact on your career prospects in machine learning:
+1. **Opportunities to innovate**: someone - a real person - invented the popular approach or tool that everyone uses. That person knew enough mathematics to create something profound (or at least, recognize when they discovered something profound, and do the legwork to explore it thoroughly). You might be that person someday, but you will need to a strong mathematical muscle to get to that point.
+2. **Impressiveness**: similar to the ability to play a musical piece perfectly, a tight grip on mathematics is considered objectively impressive, and gives the impression that you are intelligent. On the other hand, someone who reaches for a calculator for 15 x 9 is not considered the brightest. If you have worked professionally for any amount of time, you will know that how you are percieved is important, and the best opportunities are given to workers who are percieved as intelligent and resourceful. This point should be tempered with some common courtesy; if you are condescending towards others just because you have spent more time studying mathematics, they will think you are unbearable and lose respect for you. But for most, being considered intelligent is a good thing. 
+3. **Intellectual self-defense**: Science is about scrutiny: when you put an idea out there, you are taking a bold step and welcoming criticism about the idea from peers. The best ideas are the ones which can stand up to intense scrutiny. However, critics like to throw curve-balls: a very common scenario in peer-review is that someone looked at your idea, made a connection to another concept, and asked (in the form of criticism) whether you had studied your idea from that angle. A deeper mathematical foundation means you will understand the connections of your idea to existing ones. This lets you anticipate and address the more straightforward questions proactively. Very complex and involved criticism is rare in peer-review, because the critic eventually realizes this is itself is a new idea, and is thus unwilling to share it lest they lose the opportunity to work on it themselves.
+4. **Developing highly valuable skills**: Learning mathematics is time-consuming. People are lazy and impatient, and are willing to pay someone else a lot of money to do complex work on their behalf. This is clearly true if you work as a consultant doing statistical or machine learning work. But this is also true at a macro level: Google users indirectly pay Google scientists' high salaries, and in return recieve accurate search results, language translation, and map routing. Advanced mathematical knowledge is a skill which sets you apart.
+5. **Job security in the face of AI advancement**: Artificial intelligence has recently matured to the point where it can do somewhat complex mathematical reasoning. However, we speculate that there will typically be a human expert who pilot these AI models and is accountable for their outputs (this will be for social and political reasons, not just technically ones). If there are many hopeful candidates for such a job, it creates an increase in supply, and companies hiring for these jobs have the luxury to select the best. To be one of the best, you must deveop mastery over mathematics, as this is considered impressive (see point 2). So, the future holds an opportunity to hold a respectable job by being very good at statistics and machine learning. 
+6. **Satisfaction**: the urge to learn mathematics is often driven by curiosity. There is something very satisfying about abstract perfection, much like seeing a train running with smooth efficiency. However math (especially Statistics) also finds application in places where the rubber meets the road so hard, you have to make sure your tires don't catch fire. In such situations, taming the beast with nothing but your intellect can be extremely rewarding.
+
+
+## The strange web of mathematics
+Mathematics often appears in unexpected ways in machine learning literature. Let’s take a simple example: calculating the mean i.e. the average of $n$ numbers. This is a concept which should be familiar to most readers.
+
+Concretely, suppose you have $n$ data points, $x_1, \ldots, x_n$ all of which are real numbers. To calculate the mean, you sum these values and divide by $n$, which is expressed mathematically as:
+
+$$
+\mu = \frac{1}{n} \sum_{i=1}^{n} x_i
+$$
+
+Suppose an ${(n+1)}^{th}$ datapoint comes along. How can you compute the mean of these $(n+1)$ datapoints, if you already know the mean of the first $n$?
+
+Recomputing from scratch is one approach. Instead, we can use an incremental method to update the mean with each new data point. The formula for this is:
+
+$$
+\mu_{n+1} = \mu_n + \frac{x_{n+1} - \mu_n}{n+1}
+$$
+
+This allows us to update the mean in an online fashion, without needing to recompute everything. 
+
+Now, you might ask, "That's neat, but when would I ever need this?". 
+
+It's a fair question: on my computer (an M1 Apple Macintosh), I ran two programs: one which recomputes the mean from scratch for each datapoint, and one which computes the mean incrementally. For 10,000 datapoints, the former took 140 milliseconds while the latter took 2.4 milliseconds. While this is a significant difference, I could not notice it; the difference would only be apparent in the rate case when I had millions of datapoints. So it seems like the incremental mean is a mathematical curiosity. 
+
+However, what if I told you that a slight modification to the incremental-mean method is essential for training stochastic multi-armed bandits, a kind of reinforcement learning algorithm. Bandit algorithms, which estimate the true mean from samples, are fundamental to real-time decision-making in applications like news recommendation and A/B testing. They must also run in sub-millisecond latency, or else they are too slow to be practically usable. Suddenly, the time difference becomes very important.
+
+This example highlights an important point: as a practitioner, you never know when a mathematical concept like this will suddenly become critical when applying an algorithm. As a researcher, making the connections between mathematical concepts allow you to innovate and come up with new approaches. Until you understand these interconnections, you're limiting your ability to think creatively and solve complex problems. 

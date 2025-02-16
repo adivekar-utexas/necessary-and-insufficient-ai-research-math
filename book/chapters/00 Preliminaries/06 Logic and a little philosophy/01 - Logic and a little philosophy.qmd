@@ -1,0 +1,23 @@
+# Logic and a little philosophy
+
+We are not philosophers. But a few mathematical subjects in this book are based on philosophy. Some readers may not like philosophy, claiming it has no practical value. However, philosophy has an important place in the motivation for mathematics as a whole. Ultimately, the mathematical objects we encounter are abstract notions of the real world. Even though at present we accept them as-is, at some point in history each object was newly discovered, and someone had to argue that it was appropriate. This was a philosophical argument made by a mathematician, saddled with some amount of subjectivity and interpretation. Nonetheless, the subsquent mathematics has been useful. Rigorous philosophical arguments are a common trend in all the sciences; a PhD, after all, is a "Doctorate of Philosophy". 
+
+So, we claim that philosphy is relevant to our study of mathematics. At the same time, we don't want it to become a focus. Machine learners want to, frankly, train models to do cool things like identify diseases, generate text, segment images, and rank search results. Philosophy does not rank high on the list of skills that are impressive on a resume. 
+
+And, so we devote only this small section to the most cruical philosophical underpinnings of mathematics. Think of it as a crash course.
+
+
+## Platonism and truth-value realism
+When practicing mathematics, we collectively believe in a school of thought known as platonism: i.e. in the existence of **abstract mathematical objects** like numbers, sets and functions. "2" and "3" are such an abstract mathemtatical objects. Under the platonist view, "2" exists. The nuance here is how platonism defines existence: the core argument of platonism is that "2" has existence **independent of the minds of people**; even if everyone in the world perished, the abstract object of "2" would continue to "exist". 
+
+At the same time, platonism recognizes that 2 does not exist in the same sense that real-world objects like the moon exist; rather, it exists conceptually, with no physical representation in the world, and thus is not affected by changes in the real world (and vice verca). 
+
+As a point of etymology, platonism is unrelated to the views of the historical figure Plato, but rather derives from the arguments of Gottlob Frege (from 1884 onwards), and has been endorsed by prominient figures such as Kurt Gödel, Bertrand Russell, and W.V.O. Quine.
+
+Additionally, when doing mathematics, we collectively agree on the idea of "truth-value realism": that statements involving mathematical objects are either strictly true or strictly false, never in-between. Consequently, the job of mathematicians is thus to **discover** true statements (which have always existed) and shine a spotlight on them. 
+
+We will not unwind this philosophical thread any further. Most practitioners of mathematics generally agree that the platonist view and truth-value realism are sensible assumptions, and additional details are irrelevant. 
+
+Our crucial point is that: rigorous philosophical arguments are the foundation of the rigorous practice of mathematics; without them, people would not agree on what a "set" is or whether the statement "a set can contain itself" is true or false.
+
+## Logic
