@@ -1,0 +1,66 @@
+project:
+  # type: book
+  type: website
+
+website:
+  search:
+    location: navbar
+    type: overlay
+  title: "IAIO Math Book"
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+    right:
+      - text: PDF
+        href: index.pdf
+    
+
+# book:
+#   title: "Necessary and Insufficient Mathematics for AI Researchers"
+#   search:
+#     location: navbar
+#     type: overlay
+#   author: "Abhishek R. Divekar"
+#   date: "8/5/2024"
+#   chapters:
+#     - index.qmd
+#     - intro.qmd
+    
+#     # - part: "Optimization Basics"
+#     #   chapters: 
+#     #     - "chapters/27 - Convex Optimization - Essentials/02 Convex Functions/01 Zeroth-order Convexity condition.qmd"
+#     # - part: "Cards"
+#     #   chapters:
+#     #     - chapters/objects.qmd
+#     - summary.qmd
+#     - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    otherFormats: false
+    include-before-body: before-body.html
+    include-after-body: after-body.html
+    css: styles.css
+    # math: katex
+    # theme: litera
+    toc: false
+    grid: 
+      sidebar-width: 200px
+      body-width: 900px
+      margin-width: 200px
+      gutter-width: 1.5rem
+  # pdf:
+  #   documentclass: scrreprt
+
+execute:
+  freeze: auto  # re-render only when source changes
+
+jupyter: quarto-nim-air
+code-fold: true
+
+comments:
+  hypothesis:
+    theme: clean

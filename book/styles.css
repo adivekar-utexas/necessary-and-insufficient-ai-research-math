@@ -1,0 +1,132 @@
+/* Import an exquisite serif font */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* Disable native scrollbars */
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Merriweather', serif;
+}
+
+/* Default: Portrait Mode */
+/* Content occupies 80% of viewport width with 15vh padding top and bottom */
+#content {
+    width: 80vw;
+    height: 100vh;
+    margin: 0 auto;
+    padding-top: 0vh;
+    padding-bottom: 20vh;
+    overflow: hidden;
+    /* Use CSS columns to flow content into pages */
+    column-width: 80vw;
+    column-gap: 0;
+    column-fill: auto;
+}
+
+/* Navigation buttons styling for desktop and landscape */
+#prevButton,
+#nextButton {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: #fff;
+    font-size: 3em;
+    /* Increase arrow size */
+    height: 2.5em;
+    /* Same fixed height for both */
+    width: 1.5em;
+    /* Same fixed height for both */
+    padding: 0px 10px;
+    /* Increase clickable area */
+    display: inline-flex;
+    /* Or 'flex' if you prefer a block-level container */
+    align-items: center;
+    /* Vertically center contents */
+    justify-content: center;
+    /* Horizontally center contents */
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* Place navigation buttons relative to the content container's edge */
+#prevButton {
+    left: calc((100vw - 90vw) / 2 - 10px);
+}
+
+#nextButton {
+    right: calc((100vw - 90vw) / 2 - 10px);
+}
+
+/* Landscape mode */
+/* Content occupies 60% of viewport width (with same 15vh vertical padding) and is centered */
+@media (orientation: landscape) {
+    #content {
+        width: 60vw;
+        column-width: 60vw;
+        padding-top: 0vh;
+        padding-bottom: 25vh;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+}
+
+
+/* Hide navigation buttons in portrait mode */
+@media (orientation: portrait) {
+    #content {
+        width: 80vw;
+        column-gap: 0.5px;
+        /* No gap between columns */
+        overscroll-behavior: none;
+        /* Prevent rubber-banding on modern browsers */
+        -webkit-overflow-scrolling: auto;
+        /* Disable iOS inertia scrolling */
+    }
+
+    #prevButton {
+        left: 0;
+    }
+
+    #nextButton {
+        right: 0;
+    }
+}
+
+/* Hide navigation buttons only if in portrait AND pointer is coarse (touch). */
+@media (orientation: portrait) and (pointer: coarse) {
+
+    #prevButton,
+    #nextButton {
+        display: none;
+    }
+}
+
+/* Avoid unwanted column breaks on headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    break-inside: avoid-column;
+    break-after: avoid;
+    page-break-after: avoid;
+}
+
+/* Also prevent a break between a heading and the paragraph immediately after it */
+h1+p,
+h2+p,
+h3+p,
+h4+p,
+h5+p,
+h6+p {
+    break-inside: avoid-column;
+}
