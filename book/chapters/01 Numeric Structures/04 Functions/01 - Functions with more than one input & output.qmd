@@ -1,0 +1,273 @@
+<!-- Domain, range, polynomials. -->
+
+# Functions with more than one input & output
+
+## Univariate scalar-valued function
+The most basic function $f(x)$ is one which takes as input a single (real) number & outputs a single (real) number. We typically denote this as:
+$$
+f: \mathbb{R} \to \mathbb{R}
+$$
+
+This is known as a univariate scalar-valued function.
+
+- The **Domain** is the set of values which $x$ is allowed to take. 
+
+  For a univariate scalar-valued function:
+  $$
+  \text{dom}(f) \subseteq \mathbb{R}
+  $$
+
+- The **Range** is the set of values $y = f(x)$ which can be output from the function (often called the image), i.e. 
+  $$
+  \text{Range}(f) = \{ y \mid y = f(x), \forall x \in \text{dom}(f) \}
+  $$
+
+- The **Co-domain** typically refers to a superset of the range. For example, if $f(x) = x^2$ has $\text{dom}(f) = \{1,2,3\}$, then we will have $\text{Range}(f) = \{1,4,9\}$, but the $\text{Co-domain}(f)$ might be some other subset of $\mathbb{R}$.
+
+In general, we can say the following about it:
+
+$$
+\text{Range}(f) \subseteq \text{Co-domain}(f)
+$$
+The co-domain is typically used in the function definition $f: A \to B$, and it restricts the values to come from a certain set $B$ (which, like $\mathbb{R}$, can be countably infinite).
+
+
+A univariate scalar-valued function can be represented as $y = f(x)$, and can be drawn using a standard $x$-$y$ axis:
+
+$$
+y = f(x)
+$$
+
+Here, we depict a parabola (not centered at the origin) via:
+
+$$
+y = f(x) = \frac{(x - h)^2}{4p} + k
+$$
+
+for $p > 0$.
+
+
+
+
+## Multivariate scalar-valued function
+
+An extension of a **univariate** function $f(x)$ (which is defined using a single variable $x$) is a **multivariate scalar-valued function**. A function $f(x_1, x_2, \dots, x_d)$ is defined using multiple variables $x_1, x_2, \dots, x_d$.
+
+A common example is a multivariate scalar-valued polynomial, such as:
+$$
+y = f(x_1, x_2) = 3x_1^3 - 7x_1 + 7x_2^{5/2}
+$$
+
+The general form of such functions is:
+$$
+f: \mathbb{R}^d \to \mathbb{R}
+$$
+**Note here:** While the input of the function is multiple values:
+$$
+x = (x_1, x_2, \dots, x_d), \quad \text{where } x_i \in \mathbb{R}
+$$
+the output is still a single scalar value $y = f(x)$, where $f(x) \in \mathbb{R}$. This is why the function is still called **scalar-valued**—the range of values returned from the function is a set of scalars.
+
+We can represent this function **compactly** as a multivariate scalar-valued function.
+
+The input to a multivariate scalar-valued function can be grouped for convenience into a vector:
+$$
+x =
+\begin{bmatrix}
+x_1 \\
+\vdots \\
+x_d
+\end{bmatrix}
+\in \mathbb{R}^d
+$$
+Thus, we have:
+$$
+\text{dom}(f) \subseteq \mathbb{R}^d
+$$
+
+**This allows us to continue using $y = f(x)$.**
+
+::: {.notes}
+In the field of *optimization*, the objective function is typically a multivariate scalar-valued function, whereas the **gradient** (first derivative) and **hessian** (second derivative) of the objective function are multivariate vector-valued and matrix-valued functions, respectively.
+:::
+
+
+## Visualizing multivariate scalar-valued functions
+
+In general, it is possible but clumsy to graph **multivariate scalar-valued functions**. 
+
+In the special case where $d = 2$, we can visualize $y = f(x_1, x_2)$ using a **3D plot** as follows:
+
+$$
+y = f(x_1, x_2) \to \mathbb{R}
+$$
+
+Here, the $x_1 x_2$-plane is the plane of all possible input vectors:
+$$
+x =
+\begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix}
+$$
+
+The vertical line is the corresponding mapped value:
+
+$$
+y = f(x_1 = x_1, x_2 = x_2) \in \mathbb{R}
+$$
+
+An important idea is that of a **contour plot**, which is a way to visualize functions $y = f(x_1, x_2)$ in **2D**. 
+
+Essentially, the idea is to pick values of $y$, say $y = c_1, y = c_2, \dots, y = c_k$, and plot only the values at those points on the $x_1 x_2$-plane. This is equivalent to taking a **"bird’s-eye view"** of the function, where our **line of sight is down the $y$-axis** of the **3D plot**, we obtain the following **contour plot**:
+
+$$
+\text{(Illustration of contour plot with level curves)}
+$$
+
+Another way to think about these **concentric ellipses** is as **levels of $y$**. If we imagine **horizontal planes** cutting the $y$-axis at values $y = \alpha$, then the points in $(x_1, x_2)^T$ that satisfy:
+
+$$
+f(x_1, x_2) = \alpha
+$$
+
+are exactly the points where $y = f(x_1, x_2) = \alpha$. More precisely, these contours in $x_1, x_2$ are called **level-sets**, or **level-curves** in the case of multivariate scalar-valued functions.
+
+The definition extends beyond $d = 2$.
+
+
+### Level-set
+$$
+L_{\alpha}(f) = \{ x \mid x \in \mathbb{R}^d, f(x) = \alpha \}
+$$
+where
+$$
+x =
+\begin{bmatrix}
+x_1 \\
+\vdots \\
+x_d
+\end{bmatrix}
+$$
+
+
+### Sublevel-set
+A related concept is the **sublevel-set**, defined as:
+$$
+L_{\alpha}^-(f) = \{ x \mid x \in \mathbb{R}^d, f(x) \leq \alpha \}
+$$
+It is **"strict"** if:
+$$
+f(x) < \alpha
+$$
+
+
+### Superlevel-set
+Similarly, the **superlevel-set** is defined as:
+$$
+L_{\alpha}^+(f) = \{ x \mid x \in \mathbb{R}^d, f(x) \geq \alpha \}
+$$
+It is **"strict"** if:
+$$
+f(x) > \alpha
+$$
+
+
+**Note:** If $f(x)$ is a **convex scalar-valued function**, the contours **can never intersect**, as it means that $f(x)$ has **at least two different values** at the same point $x$, which is impossible.
+
+
+3️. Another way to visualize the **curve** of a **multivariate scalar-valued function** is via a plot as follows:
+
+$$
+y = f(x)
+$$
+
+$$
+\text{(Graph showing a generic function curve)}
+$$
+
+Here, the notation **somewhat** abuses the idea of a plot since the **x-axis** is now representing a **vector** $x \in \mathbb{R}^d$. However, it is useful for **talking about the shape of functions**, especially **common functions $f(x)$**.
+
+One understanding is that this graph represents the function at $d = 1$, and the **higher-dimensional function looks similar**.
+
+
+
+## Multivariate Vector-Valued Functions:
+
+This is the most **general form** of a function: one which inputs a vector of **"n"** variables and outputs a vector of **"m"** variables.
+
+$$
+f: \mathbb{R}^n \to \mathbb{R}^m
+$$
+
+Here, $y = f(x)$, where $x \in \mathbb{R}^n$, $y \in \mathbb{R}^m$, means:
+
+$$
+\begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_m
+\end{bmatrix}
+=
+f \left(
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix}
+\right)
+$$
+
+- **Input is a vector**, so $f(x)$ is **multivariate**.
+- **Returned value is a vector**, so $f(x)$ is **vector-valued**.
+
+
+
+## Linear Transformations as Vector-Valued Functions:
+
+Perhaps the simplest such vector-valued function is a **linear transformation** of a linear combination of basis vectors.
+
+Let:
+$$
+x_0 e_0 + x_1 e_1 + \dots + x_n e_n
+$$
+be a linear combination of the basis vectors $e_0, e_1, \dots, e_n$.
+
+Then, let us define a **linear transformation** $L(z)$, which operates on a vector $z \in \mathbb{R}^n$ and returns a vector $w \in \mathbb{R}^m$, i.e.,
+
+$$
+L: \mathbb{R}^n \to \mathbb{R}^m
+$$
+
+This is a **multivariate vector-valued function**.
+
+The **key property** of a **linear transformation** is:
+
+1. **Homogeneity**: $L(\alpha z) = \alpha L(z)$
+2. **Additivity**: $L(w + z) = L(w) + L(z)$
+
+Thus:
+
+$$
+L(x_0 e_0 + x_1 e_1 + \dots + x_n e_n) = x_0 L(e_0) + \dots + x_n L(e_n)
+$$
+
+Defining:
+
+$$
+a_i = L(e_i)
+$$
+
+(i.e., the **linear transformation** of the $i^{th}$ basis vector), we can **compose this linear transformation** (of a linear combination) as a **matrix** $A \in \mathbb{R}^{m \times n}$, where $A$ has **columns**:
+
+$$
+A = (a_1 | a_2 | \dots | a_{n-1})
+$$
+
+Thus, the transformation can be written as:
+
+$$
+y = Ax
+$$
