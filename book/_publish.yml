@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: 970ac0d4-924e-4329-aa10-62a086c6ade5
+      url: 'https://adivekar.quarto.pub/math-for-ai-research'

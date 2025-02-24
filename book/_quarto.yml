@@ -6,7 +6,7 @@ website:
   search:
     location: navbar
     type: overlay
-  title: "IAIO Math Book"
+  title: "AI Math"
   navbar:
     left:
       - text: Home
@@ -49,7 +49,7 @@ format:
     toc: false
     grid: 
       sidebar-width: 200px
-      body-width: 900px
+      body-width: 1500px
       margin-width: 200px
       gutter-width: 1.5rem
   # pdf:
