@@ -302,12 +302,12 @@ p+p .math.display {
         display: flex;
         /* Ensure they're displayed */
         position: fixed;
-        bottom: 5px;
+        bottom: 0;
         /* Position near the bottom */
         top: auto;
         /* Remove any top positioning */
-        width: 40px;
-        height: 30px;
+        width: 7.5vh;
+        height: 5vh;
         align-items: center;
         /* Vertically center the arrow */
         justify-content: center;
