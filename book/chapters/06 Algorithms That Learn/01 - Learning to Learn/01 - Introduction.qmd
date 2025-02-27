@@ -1,0 +1,26 @@
+# Computational & Statistical Learning Theory
+
+Roughly speaking, **"learning"** is the process of converting experience (things you have seen) into expertise or knowledge.
+
+In Machine Learning, we seek to automate the learning process. As we shall see, this is not without challenges, and the field of **statistical learning** is dedicated to solving this problem.
+
+## Setting up the problem:
+
+Let's consider a **supervised binary classification** problem. Suppose you go to a tropical island for a few months (on sabbatical). There, you encounter a new kind of fruit (to you) called a **dragon fruit**.
+
+You've never seen this kind of fruit before, but your tour guide offers one to you, and you find it delicious. The next day, you visit the local market to purchase more, but something's wrong.
+
+Among the dragon fruits, you see **varying sizes and colors**, from **green to dark magenta**. You'd like to be able to tell which ones are **tasty** and which are **not**.
+
+Buying fruits at random is not going to work, since you would like to eat a few dragon fruits **every day**, and **buying at random** means consuming half **tasteless fruit**—which means you've wasted half your money on non-tasty fruit.
+
+A smarter way to go about it would be to **purchase, say, 10 dragon fruits**, **note various properties** of each fruit (**size, color, etc.**), and then **have a bite** to determine whether each fruit is **tasty** or **not**. 
+
+In doing so, you will eventually **learn** which properties of a dragon fruit correspond to being tasty. For example, you might learn that **small, light magenta fruits** are tasty, but **large, light magenta fruits** are not, and that **green fruits are not tasty, regardless of size**.
+
+After this **learning exercise** on just **m = 10 fruits**, you would be able to use your newfound expertise to determine (hopefully **with high accuracy**) which fruit from the market is **tasty** and which is **not**. This would have saved you **a lot of money**, as compared to **randomly guessing** which fruit is tasty.
+
+A **machine learner** solves **exactly** the problem as in the situation above (at least, in the **supervised binary classification setting**). 
+
+Given a **training set** of examples, it produces a **hypothesis** (also called a **predictor** or, in this case, a **classifier**). This hypothesis can then be used to **predict on new, unseen examples**.
+
