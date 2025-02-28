@@ -6,32 +6,43 @@ window.addEventListener("load", function () {
     return;
   }
 
-  // Use the container's clientWidth as the page width.
   let pageWidth = content.clientWidth;
-  let totalPages = Math.ceil(content.scrollWidth / pageWidth);
+  const tolerance = 5; // pixels of tolerance to avoid fractional overflow issues
   let currentPage = 0;
+
+  // Compute total pages, using tolerance to avoid a phantom extra page.
+  function computeTotalPages() {
+    return Math.floor((content.scrollWidth + tolerance) / pageWidth);
+  }
+
+  let totalPages = computeTotalPages();
 
   const prevButton = document.getElementById("prevButton");
   const nextButton = document.getElementById("nextButton");
 
-  // Update the visibility of navigation buttons based on current page.
+  // Update navigation buttons: hide prev if first, hide next if near the end.
   function updateButtonsVisibility() {
     if (prevButton) {
       prevButton.style.visibility = currentPage === 0 ? "hidden" : "visible";
     }
     if (nextButton) {
-      nextButton.style.visibility = currentPage === totalPages - 1 ? "hidden" : "visible";
+      // Hide the next button if advancing one more page would overshoot by only a few pixels.
+      if ((currentPage + 1) * pageWidth >= content.scrollWidth - tolerance) {
+        nextButton.style.visibility = "hidden";
+      } else {
+        nextButton.style.visibility = "visible";
+      }
     }
   }
 
   // Update the page number display.
   function updatePageNumber() {
+    totalPages = computeTotalPages();
     if (pageNumberElement) {
       pageNumberElement.textContent = "[" + (currentPage + 1) + "/" + totalPages + "]";
     }
   }
 
-  // Function to update the page: scroll to the appropriate column, update buttons and page number.
   function updatePage() {
     content.scrollTo({
       left: currentPage * pageWidth,
@@ -41,7 +52,7 @@ window.addEventListener("load", function () {
     updatePageNumber();
   }
 
-  // Navigation using buttons.
+  // Button navigation.
   if (prevButton && nextButton) {
     prevButton.addEventListener("click", function () {
       if (currentPage > 0) {
@@ -51,35 +62,36 @@ window.addEventListener("load", function () {
     });
 
     nextButton.addEventListener("click", function () {
-      if (currentPage < totalPages - 1) {
+      if ((currentPage + 1) * pageWidth < content.scrollWidth - tolerance) {
         currentPage++;
         updatePage();
       }
     });
   }
 
-  // Navigation using keyboard (arrow keys and page up/down).
+  // Keyboard navigation.
   document.addEventListener("keydown", function (e) {
     if ((e.key === "ArrowLeft" || e.key === "PageUp") && currentPage > 0) {
       currentPage--;
       updatePage();
-    }
-    else if ((e.key === "ArrowRight" || e.key === "PageDown") && currentPage < totalPages - 1) {
+    } else if ((e.key === "ArrowRight" || e.key === "PageDown") && (currentPage + 1) * pageWidth < content.scrollWidth - tolerance) {
       currentPage++;
       updatePage();
     }
   });
 
-  // Update dimensions on window resize.
+  // Recalculate dimensions on window resize.
   window.addEventListener("resize", function () {
     pageWidth = content.clientWidth;
-    totalPages = Math.ceil(content.scrollWidth / pageWidth);
+    totalPages = computeTotalPages();
+    if ((currentPage + 1) * pageWidth >= content.scrollWidth - tolerance) {
+      currentPage = Math.max(0, totalPages - 1);
+    }
     updatePage();
   });
 
   // Swipe functionality for portrait mode.
   let touchStartX = null;
-
   content.addEventListener("touchstart", function (e) {
     if (e.touches.length === 1) {
       touchStartX = e.touches[0].clientX;
@@ -90,15 +102,13 @@ window.addEventListener("load", function () {
     if (touchStartX === null) return;
     const touchEndX = e.changedTouches[0].clientX;
     const deltaX = touchEndX - touchStartX;
-    const swipeThreshold = 50; // Minimum swipe distance in pixels.
+    const swipeThreshold = 50; // Minimum swipe distance in pixels
 
     if (window.innerHeight > window.innerWidth && Math.abs(deltaX) > swipeThreshold) {
-      if (deltaX < 0 && currentPage < totalPages - 1) {
-        // Swipe left: move to next page.
+      if (deltaX < 0 && (currentPage + 1) * pageWidth < content.scrollWidth - tolerance) {
         currentPage++;
         updatePage();
       } else if (deltaX > 0 && currentPage > 0) {
-        // Swipe right: move to previous page.
         currentPage--;
         updatePage();
       }
