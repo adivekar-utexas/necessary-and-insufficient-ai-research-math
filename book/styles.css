@@ -231,6 +231,15 @@ p+p .math.display {
     right: calc((100vw - 90vw) / 2 - 10px);
 }
 
+#pageNumber {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: calc(1.2 * var(--p-font-size));
+    position: fixed; 
+    bottom: 1vh; 
+    width: 100%; 
+    text-align: center; 
+}
+
 /* Landscape mode */
 /* Content occupies 60% of viewport width (with same 15vh vertical padding) and is centered */
 @media (orientation: landscape) {
@@ -343,3 +352,4 @@ p+p .math.display {
     margin-bottom: 1rem;
     margin-top: 1rem;
 }
+

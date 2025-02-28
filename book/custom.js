@@ -1,11 +1,12 @@
 window.addEventListener("load", function () {
   const content = document.getElementById("content");
+  const pageNumberElement = document.getElementById("pageNumber");
   if (!content) {
     console.error("Content container not found");
     return;
   }
 
-  // Use the container's clientWidth as the page width
+  // Use the container's clientWidth as the page width.
   let pageWidth = content.clientWidth;
   let totalPages = Math.ceil(content.scrollWidth / pageWidth);
   let currentPage = 0;
@@ -13,7 +14,7 @@ window.addEventListener("load", function () {
   const prevButton = document.getElementById("prevButton");
   const nextButton = document.getElementById("nextButton");
 
-  // Update the visibility of navigation buttons based on current page
+  // Update the visibility of navigation buttons based on current page.
   function updateButtonsVisibility() {
     if (prevButton) {
       prevButton.style.visibility = currentPage === 0 ? "hidden" : "visible";
@@ -23,15 +24,24 @@ window.addEventListener("load", function () {
     }
   }
 
+  // Update the page number display.
+  function updatePageNumber() {
+    if (pageNumberElement) {
+      pageNumberElement.textContent = "[" + (currentPage + 1) + "/" + totalPages + "]";
+    }
+  }
+
+  // Function to update the page: scroll to the appropriate column, update buttons and page number.
   function updatePage() {
     content.scrollTo({
       left: currentPage * pageWidth,
       behavior: 'smooth'
     });
     updateButtonsVisibility();
+    updatePageNumber();
   }
 
-  // --- Button Click Navigation ---
+  // Navigation using buttons.
   if (prevButton && nextButton) {
     prevButton.addEventListener("click", function () {
       if (currentPage > 0) {
@@ -48,28 +58,26 @@ window.addEventListener("load", function () {
     });
   }
 
-  // --- Keyboard Navigation ---
+  // Navigation using keyboard (arrow keys and page up/down).
   document.addEventListener("keydown", function (e) {
-    // If user presses Left Arrow or Page Up => go to previous page
     if ((e.key === "ArrowLeft" || e.key === "PageUp") && currentPage > 0) {
       currentPage--;
       updatePage();
     }
-    // If user presses Right Arrow or Page Down => go to next page
     else if ((e.key === "ArrowRight" || e.key === "PageDown") && currentPage < totalPages - 1) {
       currentPage++;
       updatePage();
     }
   });
 
-  // --- Window Resize In Case of Orientation Change ---
+  // Update dimensions on window resize.
   window.addEventListener("resize", function () {
     pageWidth = content.clientWidth;
     totalPages = Math.ceil(content.scrollWidth / pageWidth);
     updatePage();
   });
 
-  // --- Swipe Functionality for Portrait Mode ---
+  // Swipe functionality for portrait mode.
   let touchStartX = null;
 
   content.addEventListener("touchstart", function (e) {
@@ -82,16 +90,15 @@ window.addEventListener("load", function () {
     if (touchStartX === null) return;
     const touchEndX = e.changedTouches[0].clientX;
     const deltaX = touchEndX - touchStartX;
-    const swipeThreshold = 50; // Minimum swipe distance in pixels
+    const swipeThreshold = 50; // Minimum swipe distance in pixels.
 
-    // Check if device is in portrait mode
     if (window.innerHeight > window.innerWidth && Math.abs(deltaX) > swipeThreshold) {
       if (deltaX < 0 && currentPage < totalPages - 1) {
-        // Swipe left: move to next page
+        // Swipe left: move to next page.
         currentPage++;
         updatePage();
       } else if (deltaX > 0 && currentPage > 0) {
-        // Swipe right: move to previous page
+        // Swipe right: move to previous page.
         currentPage--;
         updatePage();
       }
@@ -99,6 +106,7 @@ window.addEventListener("load", function () {
     touchStartX = null;
   });
 
-  // Initial button visibility update
+  // Initial update.
   updateButtonsVisibility();
+  updatePageNumber();
 });
