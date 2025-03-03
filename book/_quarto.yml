@@ -6,11 +6,8 @@ website:
   search:
     location: navbar
     type: overlay
-  title: "AI Math"
+  title: "AI Research Math"
   navbar:
-    left:
-      - text: Home
-        href: index.qmd
     right:
       - text: PDF
         href: index.pdf

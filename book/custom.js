@@ -102,7 +102,7 @@ window.addEventListener("load", function () {
     if (touchStartX === null) return;
     const touchEndX = e.changedTouches[0].clientX;
     const deltaX = touchEndX - touchStartX;
-    const swipeThreshold = 50; // Minimum swipe distance in pixels
+    const swipeThreshold = 100; // Minimum swipe distance in pixels
 
     if (window.innerHeight > window.innerWidth && Math.abs(deltaX) > swipeThreshold) {
       if (deltaX < 0 && (currentPage + 1) * pageWidth < content.scrollWidth - tolerance) {
@@ -119,4 +119,9 @@ window.addEventListener("load", function () {
   // Initial update.
   updateButtonsVisibility();
   updatePageNumber();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Add a fade-in class to the main container or body
+  document.body.classList.add('fade-in');
 });

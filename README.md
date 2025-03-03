@@ -4,7 +4,7 @@ Embarking on research in AI – whether in NLP, Computer Vision, or Reinforcemen
 
 Rather than following a linear progression, imagine a spiral staircase encircled by key pillars: linear algebra, probability, real analysis, and more. At each turn, you’ll revisit these areas at deeper levels, weaving them together into a coherent framework. By the time you reach the summit, you’ll not only appreciate each subject in isolation but also see how they all converge in advanced AI applications.
 
-To experience this journey in full, visit [adivekar.quarto.pub/ai-research-math](adivekar.quarto.pub/ai-research-math). If you find this approach valuable, please consider **starring this repository** - it helps us continue refining these materials for the research community.
+To experience this journey in full, visit [adivekar.quarto.pub/ai-research-math](https://adivekar.quarto.pub/ai-research-math/). If you find this approach valuable, please consider **starring this repository** - it helps us continue refining these materials for the research community.
 
 ![art-deco-spiral-staircase](images/art-deco-spiral-staircase.png)
 
