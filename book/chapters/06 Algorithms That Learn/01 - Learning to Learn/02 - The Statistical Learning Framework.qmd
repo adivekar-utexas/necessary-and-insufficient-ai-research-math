@@ -26,8 +26,6 @@ However, we might also have **one or more continuous features** in $X$, which wo
 
 In this case, the domain set $X$ is **infinite**.
 
-## (Mathematical Formulation)
-
 ### 2) The Target Range $Y$
 
 The **target range** (also called the **"Label set"** or **"Output set"**), denoted by $Y$ (sometimes $\mathcal{Y}$), is the set of values we want our learner to predict. 
@@ -40,7 +38,6 @@ $$
 
 For a **regression problem**, $Y$ might be **continuous**.
 
----
 
 ### 3) The Concept $f^*$ and its Concept Class $\mathcal{C}$
 
@@ -68,11 +65,8 @@ There might be **hundreds of properties** that go into this decision, some of wh
 
 Statistical learning is to **estimate** $f^*$ using data gathered from the real world.
 
----
 
-### **Formally:** 
-
-A **concept** is a function:
+Formally, a **concept** is a function:
 
 $$
 f: X \to Y
@@ -82,7 +76,6 @@ which maps examples from the instance space $X$ to produce true (ground-truth) l
 
 A **concept class** $\mathcal{C}$ is a **set of concepts** we may wish to learn (e.g., $\mathcal{C}$ can be the set of all triangles in the $\mathbb{R}^2$ plane).
 
----
 
 ### **4) Training Set $S$**
 
@@ -94,11 +87,8 @@ The other way is to **learn** $h$ (our estimate of $f^*$) from **examples gather
 
 Typically, we call this the **"training set"**, as we use this set to train our learner on how to best estimate $f^*$.
 
----
 
-#### **Formally**, in supervised learning:
-
-We assume a **training set** $S \subseteq X \times Y$, given as:
+Formally, in supervised learning, we assume a **training set** $S \subseteq X \times Y$, given as:
 
 $$
 S = \{(x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), \dots, (x^{(m)}, y^{(m)})\}
@@ -110,11 +100,8 @@ $$
 y^{(i)} = f^*(x^{(i)}), \quad \forall i \in \{1, 2, ..., m\}
 $$
 
----
 
-### **How do we gather such a training set $S$?**
-
-Clearly, we must **pick (sample) examples** from the **real world**. 
+How do we gather such a training set $S$? Clearly, we must **pick (sample) examples** from the **real world**. 
 
 But **how do we decide where to pick them from**?
 
@@ -183,7 +170,6 @@ $$
 h_\theta: X \to Y
 $$
 
----
 
 For our discussion, the most interesting piece of our setup is probably the **statistical learning algorithm**.
 
@@ -193,7 +179,6 @@ There are several paradigms of such algorithms:
 - **Empirical risk minimization** 
 - etc.
 
----
 
 A **common assumption** made by learning algorithms is that we **predefine** the structure of the **hypothesis class** $\mathcal{H}$.
 
@@ -217,7 +202,6 @@ As we will soon see in **more statistical hypothesis classes**, **better priors*
 
 This is called the **Bias-Variance Tradeoff**.
 
----
 
 ### **Key Assumption: The Learning Algorithm Does Not Know $f^*$ or $D(X)$**
 
@@ -259,8 +243,6 @@ This **error rate** $L_D(f^*, h)$ has several other names:
 - It is also called the **true error rate**.
 - It is also called the **generalization error** or **risk** (i.e., the probability that the prediction is wrong).
 - It is also called the **loss of the hypothesis**, which will become clear soon.
-
----
 
 ### **The Goal of Statistical Learning**
 

@@ -1,0 +1,480 @@
+## Parameter Estimation for Supervised Learning
+
+Let us now step back to the world of **supervised learning**,  
+where (in the general stochastic case) we have a **training set**:
+
+$$
+S = \{(x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), \dots, (x^{(m)}, y^{(m)})\}
+$$
+
+**Samples are drawn from a distribution**:
+
+$$
+D(X, Y) = D(X) D(Y | X)
+$$
+
+where:
+- $X$ is the set of **input features**.
+- $Y$ is the set of **target responses**.
+  - $Y$ can be a **finite set of classes** (for **classification**)  
+  - or a **real line** $\mathbb{R}$ (for **regression**).
+
+By **Bayes’ Rule**, we can split our true distributions:
+
+$$
+D(X, Y) = D(X) D(Y | X)
+$$
+
+where:
+- $D(X)$ is the **marginal distribution**.
+- $D(Y | X)$ is the **conditional distribution**.
+
+
+### Probabilistic Models in Supervised Learning
+
+In the **supervised ML** setting, we want our **learning algorithm $A$**  
+to find a **hypothesis** $h$ which, given an unseen example $x \in X$,  
+is able to predict a **probability distribution** over the target space $Y$:
+
+$$
+h(x) = P(Y | X = x)
+$$
+
+(This is called a **Probabilistic Model**.)
+
+
+### Classification vs. Regression
+
+#### **Classification**  
+For **classification**, $P(Y | X = x)$ is a **probability mass function (pmf)**.
+
+- We output the **class**:
+
+  $$
+  y^* = \arg\max_{y \in Y} P(Y = y | X = x)
+  $$
+
+  (i.e., the **most probable** class).
+
+#### **Regression**  
+For **regression**, $P(Y | X = x)$ is a **probability density function (pdf)**.
+
+- We output the **mean (expected) value** of this distribution:
+
+  $$
+  y^* = \mathbb{E}[Y | X = x]
+  $$
+
+
+### Why Predict a Distribution Instead of a Single Value?
+
+Predicting a **distribution** rather than a single value is more **informative**,  
+as it allows us to observe **not just the single predicted value**  
+(the one corresponding to the **highest probability**),  
+but also informs us of the **uncertainty** and the general distribution **over all target values**.
+
+**Note:**  
+In both of the above cases, the probability distribution $P(Y | X = x)$  
+is **potentially different for every example** $x \in X$.
+
+
+We see that we thus want our hypothesis $h_{\Theta}(x)$  
+to **output a probability distribution** $P(Y | X = x)$.  
+
+We notice that this probability distribution **might be different**  
+for each $x \in X$, and that $X$ is an **infinite space**,  
+thus we might have an **infinite number of probability distributions**.  
+
+As we shall see, different learning algorithms handle this differently,  
+while maintaining a **finite number of parameters**.
+
+
+### Discriminative vs. Generative Modeling
+
+Now, given the goal that we want our learning algorithm $A$  
+to output a **hypothesis** $h_{\Theta}(x)$ such that:
+
+$$
+h_{\Theta}(x) = P(Y | X = x)
+$$
+
+there are **two ways** in which the hypothesis can be **set up**  
+to output such a probability distribution:  
+
+1. **Discriminative Modeling**  
+2. **Generative Modeling**
+
+
+### **(i) Discriminative Modeling**
+
+Here, our **hypothesis is an estimate of the conditional distribution** $P(Y | X)$.
+
+- Typically, we assume that this **distribution has a certain shape**  
+  and fix the hypothesis function to be the **corresponding parameterized probability function**  
+  (with parameter set $\Theta$).
+
+- Thus, the **output probability distribution** is:
+
+$$
+h_{\Theta}(x) = P(Y | X = x, \Theta)
+$$
+
+
+### **(ii) Generative Modeling**
+
+Here, our **hypothesis is an estimate of the full joint distribution** $P(X, Y)$.
+
+- Typically, we assume that this **distribution has a certain shape**  
+  and fix the hypothesis function to be the **corresponding parameterized probability function**  
+  (with parameter set $\Theta$).
+
+- The **output probability distribution** is:
+
+$$
+h_{\Theta}(x) = \frac{P(X = x, Y | \Theta)}{P(X = x | \Theta)}
+$$
+
+where we **calculate the value** of the **marginal probability** $P(X)$  
+using the **law of total probability**:
+
+$$
+P(X = x) = \sum_{y} P(X = x, Y = y | \Theta) \quad \text{(if $Y$ is discrete)}
+$$
+
+$$
+P(X = x) = \int P(X = x, Y = y | \Theta) \, dy \quad \text{(if $Y$ is continuous)}
+$$
+
+
+## Generative vs. Discriminative Models
+
+| **Generative** | **Discriminative** |
+|---------------|------------------|
+|               |                  |
+
+
+In our **setup**, both **generative** & **discriminative** hypotheses  
+are assumed to have **parameters** $\Theta$,  
+which determine the exact shape of the distribution $P(Y | X, \Theta)$.  
+
+Said another way, they are **parametric probabilistic hypotheses/models**.
+
+
+### Model Selection in Supervised Learning
+
+Now, we arrive at the **same question** as in **density estimation**:  
+
+> How should our learning algorithm $A: S \to H$  
+> (which is **deterministic**)  
+> select the **best set of parameters** $\Theta \in H$?  
+
+Surprisingly, the **answer is the same**!  
+
+Depending on the problem (**classification**/**regression**),  
+both **generative & discriminative hypotheses** can be found using  
+the **MAP & MLE rules**.
+
+
+Concretely, for **supervised learning**,  
+we select the **parameters** $\Theta$ which **best explain the data**.
+
+
+## Maximum a Posteriori Estimation (MAP)
+
+The **parameters which best explain the data**  
+are the ones with the **highest probability**  
+under the observed **supervised training set**:
+
+$$
+S = \{(x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), \dots, (x^{(m)}, y^{(m)})\}
+$$
+
+For convenience, we will represent **$S$ separately** as:
+
+$$
+S_x = \{x^{(1)}, x^{(2)}, \dots, x^{(m)}\}, \quad S_y = \{y^{(1)}, y^{(2)}, \dots, y^{(m)}\}
+$$
+
+where $S = (S_x, S_y)$.
+
+Thus, our **MAP rule** will pick **parameters**  
+with the **highest probability**, given $S_x, S_y$:
+
+$$
+\Theta_{\text{MAP}} = \arg\max_{\Theta \in H} P(\Theta | S_x, S_y)
+$$
+
+Using **Bayes’ Rule**, we can express this as:
+
+$$
+P(\Theta | S_x, S_y) = \frac{P(S_x, S_y | \Theta) P(\Theta)}{P(S_x, S_y)}
+$$
+
+where:
+
+$$
+P(S_x, S_y | \Theta)
+$$
+
+is called the **likelihood of the observed data given the parameters** $\Theta$.  
+
+Some texts denote this as:
+
+$$
+L(\Theta | S_x, S_y) = P(S_x, S_y | \Theta)
+$$
+
+but we will use $P(S_x, S_y | \Theta)$ for clarity.
+
+
+### i.i.d. Assumption
+
+Now, $S_x, S_y$ is a **set of** $(x^{(i)}, y^{(i)})$ **pairs**,  
+where each $(x^{(i)}, y^{(i)})$ is assumed to be sampled  
+from the **true distribution** $P(X, Y)$ **in an i.i.d. fashion**.  
+
+Thus, they are **independent**:
+
+$$
+P(S_x, S_y | \Theta) = \prod_{i=1}^{m} P(x^{(i)}, y^{(i)} | \Theta)
+$$
+
+
+### Optimization Formulation
+
+For the **optimization objective** of **MAP**,  
+we can additionally **take the log** of the probabilities:
+
+$$
+\log P(x^{(i)}, y^{(i)} | \Theta)
+$$
+
+(to prevent **underflow**)  
+and also **change the maximization objective to a minimization**.
+
+
+### Negative Log-Likelihood (NLL) Formulation of MAP
+
+We can **convert the optimization objective**  
+by taking the **negative log**.  
+
+As explained in **density estimation**,  
+these two steps **do not change** the optimal $\Theta$.  
+
+Additionally, the **marginal probability** $P(S_x, S_y)$  
+can be **ignored** for a maximization/minimization.
+
+Thus:
+
+$$
+\Theta_{\text{MAP}} = \arg\max_{\Theta \in H} P(\Theta | S_x, S_y) = \arg\max_{\Theta \in H} P(S_x, S_y | \Theta) P(\Theta)
+$$
+
+Using the **i.i.d. assumption** and the **Negative Log-Likelihood (NLL) formulation**:
+
+$$
+\Theta_{\text{MAP}} = \arg\min_{\Theta \in H} - \sum_{i=1}^{m} \log P(x^{(i)}, y^{(i)} | \Theta) - \log P(\Theta)
+$$
+
+This gives the **Negative Log-Likelihood (NLL)** form.
+
+
+## Maximum Likelihood Estimation (MLE)
+
+As explained in **density estimation**,  
+if we have no reason to **prefer** one set of parameters over another,  
+we can **set the prior** to be **uniform**,  
+i.e., $P(\Theta) = \frac{1}{|H|}$.
+
+Thus, the **optimization objective**  
+becomes to **minimize the Negative Log-Likelihood**,  
+which is **equivalent to maximizing** the **likelihood probability distribution**.  
+
+We thus call this the **Maximum Likelihood Estimation (MLE) procedure**.
+
+$$
+\Theta_{\text{MLE}} = \arg\min_{\Theta \in H} P(S_x, S_y | \Theta)
+$$
+
+Applying the **Negative Log-Likelihood**:
+
+$$
+\Theta_{\text{MLE}} = \arg\min_{\Theta \in H} - \sum_{i=1}^{m} \log P(x^{(i)}, y^{(i)} | \Theta)
+$$
+
+
+### Observations:
+
+1. **Mathematical Clarity:**
+   - The **negative log-likelihood transformation**  
+     is correctly formulated.
+   - The **MLE as a special case of MAP** (with uniform prior)  
+     is clearly stated.
+
+2. **Conceptual Flow:**
+   - The transition from **MAP to MLE** is well-motivated.
+   - The importance of **NLL for optimization stability** is highlighted.
+
+3. **Possible Refinements:**
+   - The phrase **"if we have no reason to prefer one set of parameters over another"**  
+     could explicitly mention **non-informative priors**.
+   - An **example with a Gaussian likelihood**  
+     could demonstrate **MLE in action**.
+
+Would you like me to add a **worked-out example** of MLE/MAP  
+for a **Gaussian distribution** (estimating $\mu, \sigma$)?
+
+
+For both **MAP & MLE** in the **supervised setting**  
+(where we wish to estimate the **joint distribution** $P(X, Y)$),  
+we see that there is a **term** $P(y^{(i)} | x^{(i)}, \Theta)$,  
+which comes from applying the **i.i.d. assumption**  
+for the **likelihood factor** in **Bayes’ Rule**:
+
+$$
+P(S_x, S_y | \Theta)
+$$
+
+
+### **Discriminative vs. Generative Models**
+
+Both **discriminative** & **generative** models  
+need **some way** to create a probability distribution $P(X, Y | \Theta)$.  
+
+- **Discriminative models** substitute $P(X, Y | \Theta)$  
+  with $P(Y | X, \Theta)$ to obtain a **probability value**:
+
+  $$
+  P(Y = y | X = x, \Theta)
+  $$
+
+- **Generative models** attempt to estimate  
+  the **joint probability distribution** $P(X, Y | \Theta)$.
+
+  - When we need to **predict**, we use:
+
+    $$
+    h_{\Theta}(x) = P(Y | X = x, \Theta) = \frac{P(X = x, Y | \Theta)}{P(X = x | \Theta)}
+    $$
+
+    - $P(Y | X = x, \Theta)$ → **probability distribution**
+    - $P(X = x | \Theta)$ → **probability value**
+
+  - We calculate $P(X | \Theta)$ as:
+
+    $$
+    P(X | \Theta) = \sum_{y} P(X, Y = y | \Theta)
+    $$
+
+    Thus, **generative models** **indirectly estimate** $P(Y | X, \Theta)$  
+    **by way of** $P(X | \Theta)$.
+
+
+### **Discriminative Models**
+
+On the other hand, we see that **discriminative models**  
+directly estimate:
+
+$$
+P(Y | X, \Theta)
+$$
+
+where:
+
+$$
+P(X | \Theta) = P(Y | X, \Theta) P(X | \Theta)
+$$
+
+For **discriminative models**, the parameters $\Theta$  
+do **not affect** the **marginal distribution** $P(X | \Theta) = P(X)$,  
+and only output the **conditional distribution** $P(Y | X, \Theta)$.
+
+
+### **MAP Estimation for Discriminative Models**
+
+For **discriminative models**, MAP is formulated as:
+
+$$
+\Theta_{\text{MAP}} = \arg\max_{\Theta \in H} P(\Theta | S_x, S_y)
+$$
+
+Using **Bayes’ Rule**:
+
+$$
+= \arg\max_{\Theta \in H} P(\Theta) P(S_y | S_x, \Theta) P(X = S_x | \Theta)
+$$
+
+Since for **discriminative models**,  
+$P(X | \Theta) = P(X)$ is **constant**, we simplify:
+
+$$
+= \arg\max_{\Theta \in H} P(\Theta) P(S_y | S_x, \Theta)
+$$
+
+Applying the **i.i.d. assumption**:
+
+$$
+= \arg\max_{\Theta \in H} P(\Theta) \prod_{i=1}^{m} P(y^{(i)} | x^{(i)}, \Theta)
+$$
+
+
+### For Discriminative Models: (where we estimate $P(Y | X, \Theta)$)
+
+Using the **i.i.d. assumption**:
+
+$$
+\Theta_{\text{MAP}} = \arg\max_{\Theta \in H} \left[ P(\Theta) \prod_{i=1}^{m} P(y^{(i)} | x^{(i)}, \Theta) \right]
+$$
+
+Applying the **Negative Log-Likelihood (NLL) formulation**:
+
+$$
+\Theta_{\text{MAP}} = \arg\min_{\Theta \in H} \left[ P(\Theta) - \sum_{i=1}^{m} \log P(y^{(i)} | x^{(i)}, \Theta) \right]
+$$
+
+→ **NLL form**
+
+
+For **MLE**:
+
+$$
+\Theta_{\text{MLE}} = \arg\max_{\Theta \in H} \prod_{i=1}^{m} P(y^{(i)} | x^{(i)}, \Theta)
+$$
+
+Applying **NLL transformation**:
+
+$$
+\Theta_{\text{MLE}} = \arg\min_{\Theta \in H} \sum_{i=1}^{m} -\log P(y^{(i)} | x^{(i)}, \Theta)
+$$
+
+→ **NLL form**
+
+
+### For Generative Models: (where we estimate $P(X, Y | \Theta)$)
+
+Using the **i.i.d. assumption**:
+
+$$
+\Theta_{\text{MAP}} = \arg\max_{\Theta \in H} \left[ P(\Theta) \prod_{i=1}^{m} P(x^{(i)}, y^{(i)} | \Theta) \right]
+$$
+
+Applying **NLL transformation**:
+
+$$
+\Theta_{\text{MAP}} = \arg\min_{\Theta \in H} \left[ P(\Theta) - \sum_{i=1}^{m} \log P(x^{(i)}, y^{(i)} | \Theta) \right]
+$$
+
+
+
+For **MLE**:
+
+$$
+\Theta_{\text{MLE}} = \arg\max_{\Theta \in H} \prod_{i=1}^{m} P(x^{(i)}, y^{(i)} | \Theta)
+$$
+
+Applying **NLL transformation**:
+
+$$
+\Theta_{\text{MLE}} = \arg\min_{\Theta \in H} \sum_{i=1}^{m} -\log P(x^{(i)}, y^{(i)} | \Theta)
+$$
+

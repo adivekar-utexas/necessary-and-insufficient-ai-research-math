@@ -1,0 +1,253 @@
+## 1) Maximum a-posteriori (MAP) estimation
+
+Here, we define the **"best" parameter-set** $\theta$ as the one which **best explains the data**—i.e., has the **highest probability** under the observed data.
+
+Concretely, if our dataset is:
+
+$$
+S = \{ x^{(1)}, x^{(2)}, \dots, x^{(n)} \}
+$$
+
+then we try to find a set of parameters $\theta$ which has the highest probability in the universe where we have sampled exactly our train set $S$:
+
+$$
+\theta_{\text{MAP}} = \arg\max_{\theta \in H} P(\theta | S)
+$$
+
+Now, we are selecting the best $\theta$ using the **posterior distribution** $P(\theta | S)$, which is why it is called **maximum a posteriori (MAP) estimation**.
+
+Let us express $P(\theta | S)$ in terms of **Bayes’ rule**:
+
+$$
+P(\theta | S) = \frac{P(S | \theta) P(\theta)}{P(S)}
+$$
+
+(Here, we are conditioning on the fact that we obtain precisely the sampled dataset $S = \{ x^{(1)}, x^{(2)}, \dots, x^{(n)} \}$.)
+
+We are defining a **probability function** over all possible parameter values $\theta \in H$.
+
+- $H$ is **finite** if $\theta$ can only take a **finite** number of values for whatever reason. In this case, $P(\theta | S)$ is a **probability mass function (PMF)**, and we have an exact probability of each set of parameters $\theta$.
+- However, if $\theta$ takes **continuous values** (i.e., $H$ is **infinite**), then $P(\theta | S)$ is a **density function**, and thus we select $\theta_{\text{MAP}}$ as the $\theta$ with the highest value from this **posterior density function**.
+
+Now, how do we actually get the distribution $P(\theta | S)$?  
+The answer is that we use **Bayes’ Rule**:
+
+$$
+P(\theta | S) = \frac{P(S | \theta) P(\Theta)}{P(S)}
+$$
+
+Here, $P(\Theta)$ is the **prior distribution** of the model,  
+$P(S)$ is the **marginal distribution** of the data,  
+and $P(S | \theta)$ is used as the **likelihood function**.
+
+Let us consider how probability distributions $P(T | S)$ behave.  
+$T$ is a **random variable** mapping to parameter-sets in $H$.  
+We have so far used notation $P(\theta | S)$ to mean $P(T = \theta | S = S)$,  
+where $S$ is a random variable that can take values from all possible datasets.  
+Thus, $P(T | S) = P(T = \theta | S = S)$ is a **distribution**,  
+while $P(\theta | S) = P(T = \theta | S = S)$ is a **probability value**.
+
+- We **notice** that for all probability distributions $P(T | S)$ across various sampled training sets,  
+  $P(\theta | S) \propto P(S | \theta) P(\Theta)$.
+
+Thus, we can **ignore** the $P(S)$ term while taking the **argmax**:
+
+$$
+\theta_{\text{MAP}} = \arg\max_{\theta \in H} P(\theta | S)
+$$
+
+Applying **Bayes’ Rule**:
+
+$$
+= \arg\max_{\theta \in H} \frac{P(S | \theta) P(\Theta)}{P(S)}
+$$
+
+Since $P(S)$ does not depend on $\Theta$, we can simplify:
+
+$$
+\theta_{\text{MAP}} = \arg\max_{\theta \in H} P(S | \theta) P(\Theta)
+$$
+
+Thus, we can find the **best parameters** according to **MAP**  
+simply by **maximizing** over the **product** of the  
+**prior** $P(\Theta)$ and the **likelihood** $P(S | \theta)$,  
+across all $\theta \in H$.
+
+
+## 2) Maximum Likelihood Estimation (MLE)
+
+Recall that the **MAP rule** dictates that the learning algorithm $A$ should find an optimal parameter-set $\theta_{\text{MAP}}$, where:
+
+$$
+\theta_{\text{MAP}} = \arg\max_{\theta \in H} P(S | \theta) P(\Theta)
+$$
+
+(Typically, we set $P(\Theta)$ as we want it to be.)
+
+In certain cases, we may not have a reason to **believe** that **one** set of parameters should be preferred  
+(i.e., get a higher prior value $P(\Theta)$) compared to another.  
+In such a case, we might want to give **equal preference** to all possible parameter sets.  
+We can do this by **setting** $P(\Theta) = \frac{1}{|H|}$ for all $\Theta$.  
+Thus, when taking the **argmax**, the $P(\Theta)$ term is **constant** for all $\Theta$, and thus **we can ignore it**.
+
+We are left with just finding parameters $\Theta$ which **maximize** the **likelihood function** $P(S | \theta)$.  
+Such an algorithm is said to perform **Maximum Likelihood Estimation (MLE).**
+
+$$
+\theta_{\text{MLE}} = \arg\max_{\theta \in H} P(S | \theta)
+$$
+
+Since $P(\Theta)$ is **constant**, we get:
+
+$$
+\theta_{\text{MLE}} = \arg\max_{\theta \in H} P(S | \theta)
+$$
+
+
+### Note:
+Although it is **slightly problematic** to set $P(\Theta) = \frac{1}{|H|}$  
+when $H$ is an **infinite** set of parameter sets,  
+in general, it is useful to think of **MLE** as a **special case** of **MAP**.
+
+
+## Likelihood function for density estimation
+
+The likelihood function is $P(S | \theta)$  
+(which is sometimes represented by $L(\Theta; S)$ as $P(S; \Theta)$, but we will use $P(S | \theta)$).
+
+For **density estimation**, let:
+
+$$
+S = \{x^{(1)}, x^{(2)}, \dots, x^{(n)}\}
+$$
+
+$$
+P(S | \theta) = P(x^{(1)}, x^{(2)}, \dots, x^{(n)} | \Theta) \quad \text{(i.i.d. likelihood)}
+$$
+
+Now, using the **i.i.d. assumption**,  
+we assumed that $x^{(1)}, x^{(2)}, \dots, x^{(n)}$ were **independent**.  
+We also express this as:  
+
+> The $x^{(i)}$ are **conditionally independent** given $\Theta$  
+> (i.e., the r.v. for $\Theta$ acts as a shared latent variable).
+
+Thus:
+
+$$
+P(S | \theta) = \prod_{i=1}^{n} P(x^{(i)} | \Theta)
+$$
+
+
+### Log-Likelihood Formulation
+
+In **practical situations**, $P(x^{(i)} | \Theta)$ can be a **very small probability**,  
+and multiplying many of them can cause **the result to underflow**.
+
+Notice that for both **MAP & MLE**,  
+we compare our value $P(S | \theta)$ through any **monotonically increasing function**,  
+and we still end up with the **same optimal parameters**.
+
+Thus, we replace $P(S | \theta)$ with **log-likelihood** $\log P(S | \theta)$:
+
+$$
+\log P(S | \theta) = \sum_{i=1}^{n} \log P(x^{(i)} | \Theta)
+$$
+
+Since the numbers $\log P(x^{(i)} | \Theta)$ are typically around **-10 or -100**,  
+summing them is **unlikely to underflow**.
+
+
+Thus, we redefine **MAP** and **MLE** as follows:
+
+### MAP:
+$$
+\theta_{\text{MAP}} = \arg\max_{\theta \in H} P(S | \theta) P(\Theta)
+$$
+
+Applying log:
+
+$$
+\theta_{\text{MAP}} = \arg\max_{\theta \in H} \sum_{i=1}^{n} \log P(x^{(i)} | \Theta) + \log P(\Theta)
+$$
+
+
+### MLE:
+$$
+\theta_{\text{MLE}} = \arg\max_{\theta \in H} P(S | \theta)
+$$
+
+Applying log:
+
+$$
+\theta_{\text{MLE}} = \arg\max_{\theta \in H} \sum_{i=1}^{n} \log P(x^{(i)} | \Theta)
+$$
+
+
+This is called the **log-likelihood formulation of MAP & MLE**,  
+**assuming i.i.d. samples**.
+
+Additionally, we often like to express **optimization** objectives  
+like **MAP & MLE** as **minimization** problems.  
+Thus, we can swap out **argmax** for **argmin**  
+by changing $\log P(S | \Theta)$ to $-\log P(S | \Theta)$.  
+
+This gives us the **Negative Log-Likelihood formulation** of **MAP & MLE**.
+
+
+### For Density Estimation:
+
+#### MAP:
+$$
+\theta_{\text{MAP}} = \arg\max_{\Theta \in H} P(S | \Theta) P(\Theta)
+$$
+
+Applying log:
+
+$$
+\theta_{\text{MAP}} = \arg\max_{\Theta \in H} P(\Theta) \sum_{i=1}^{n} \log P(x^{(i)} | \Theta)
+$$
+
+Using negative log-likelihood:
+
+$$
+\theta_{\text{MAP}} = \arg\min_{\Theta \in H} -\log P(\Theta) - \sum_{i=1}^{n} \log P(x^{(i)} | \Theta)
+$$
+
+
+#### MLE:
+$$
+\theta_{\text{MLE}} = \arg\max_{\Theta \in H} P(S | \Theta)
+$$
+
+Applying log:
+
+$$
+\theta_{\text{MLE}} = \arg\min_{\Theta \in H} -\sum_{i=1}^{n} \log P(x^{(i)} | \Theta)
+$$
+
+
+### Parametric vs. Non-Parametric Density Estimation
+
+**Note:** Here, we have considered **parametric models** for density estimation,  
+i.e., those which assume we have a **finite parameter set** $\Theta$.  
+
+The **advantage** of this is that to predict **future values** $P(x = x^*)$,  
+we only need the **stored parameters** $\Theta$.  
+
+Concretely, $P(x | S) = P(x | \Theta)$,  
+since predictions $P(x | \Theta)$ **depend only on $\Theta$ and are independent of $S$**.  
+
+Thus, if $\Theta$ is **smaller in size than $S$**,  
+we have effectively **compressed** the knowledge in the training set.
+
+
+### Non-Parametric Density Estimation
+
+There are also **non-parametric models** for density estimation,  
+which assume $P(x)$ (the **density function**)  
+**cannot be defined in terms of a finite set of parameters $\Theta$**.  
+
+These **typically allow** $\Theta$ to be **infinitely large**  
+(as a function),  
+where the amount of information that $\Theta$ can capture **grows with $S$**.

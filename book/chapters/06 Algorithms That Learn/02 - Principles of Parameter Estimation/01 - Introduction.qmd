@@ -1,0 +1,130 @@
+# Principles of Parameter Estimation
+
+So far, we have seen algorithms which practically perform classification (Perceptron, Logistic Regression) as well as regression (Linear Regression). Both of these fall into the realm of supervised learning, where we have target responses for a universe which we want to learn how to predict using the inputs/covariates.
+
+## Density Estimation
+
+Let us now consider another learning problem, this time an **unsupervised** setting. All we are given is a sample of points:
+
+$$
+x_1, x_2, \dots, x_n \in \mathbb{R}^d
+$$
+
+which we assume is drawn from an unknown distribution $x \sim D(X)$, where $X \subseteq \mathbb{R}^d$. 
+
+For example, it might be possible that for $1000$ samples, the point:
+
+$$
+(5.2, 3.14, 7.3)
+$$
+
+occurs $15\%$ of the time (which is more than random chance).
+
+As such, each unique example $x \in X$ has some probability of occurring, i.e., $D(x)$. Our goal is to use the training sample $S$ to estimate the distribution $D(X)$. 
+
+Since $D: X \to [0,1]$ is essentially a **probability density function (PDF)** for the continuous multivariate random variable:
+
+$$
+x = (x_1, x_2, \dots, x_d) \in X \quad \text{(where } X = \mathbb{R}^d \text{)}
+$$
+
+this task is called **(probability) density estimation**.
+
+Informally, density estimation tries to answer the question:
+
+> Given some data sampled from an unknown distribution, how do we estimate the shape of that distribution?
+
+Typically, we assume that the $n$ examples $S = \{x^{(1)}, x^{(2)}, \dots, x^{(n)}\}$ 
+were sampled in an **i.i.d.** fashion, and as a result, the probability of sampling those $n$ examples together 
+can be broken down into the product of the probability of sampling each one individually:
+
+$$
+D(X) = D(x^{(1)}, x^{(2)}, \dots, x^{(n)}) = \prod_{i} D(x^{(i)})
+$$
+
+(Note: here, each $x^{(i)}$ is a multivariate random variable, and our sample space is the **uncountably infinite** instance space $X = \mathbb{R}^d$. 
+Typically, each **r.v.** $x \sim D$ is just an identity mapping of an outcome in this sample space, thus $x^{(i)} \in X$. 
+The "experiment" here is sampling $n$ examples from $D(X)$, and we run a single trial of this experiment, so we get a **single sample** $S$, which we use for training.)
+
+
+Let's take a simple example: Suppose you have sampled $n = 10$ examples 
+
+$$
+S = \{x^{(1)}, x^{(2)}, \dots, x^{(10)}\}
+$$
+
+where $x^{(i)}$ is the length of a dragonfruit.
+This is still a learning problem, so we assume a learning algorithm $A: S \to H$, which produces a hypothesis $h = A(S)$ from the **hypothesis space** $H$.
+
+The true distribution $D(X)$ is unknown to us, but let us assume that it is a **univariate Gaussian distribution**, i.e.,
+
+$$
+D(x) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right), \quad \forall x \in X = \mathbb{R}
+$$
+
+We see that this is a **parameterized distribution**: the shape of $D(X)$ depends on the parameters $\mu$ and $\sigma$, which we combine into a vector: $\theta = \left[\mu, \sigma \right]$
+
+Assume the true $D(X)$ has $\theta^* = \left[\mu^*, \sigma^* \right]$.
+To estimate this distribution, the most straightforward approach is to let $H$ be the space of all **univariate Gaussian distributions**.
+Thus, our learning algorithm $A$ becomes a **search procedure** for the "best" parameter set $\theta = \left[\mu, \sigma \right] \in \Theta$ (where $\Theta$ is the space of all possible parameter sets).
+
+We notice that since we assume $h(.)$ is a **univariate Gaussian**, i.e. $h_{\theta}(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right)$, searching for the "best" $\theta \in \Theta$ also gives the best $h_{\theta} \in H$.
+
+Our hypothesis function $h_{\theta}$ is now a parameterized function:
+
+$$
+h_{\theta}(x) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right)
+$$
+
+where $\theta = \left[ \mu, \sigma \right]$.
+
+Thus, different values of $\theta$ create different hypothesis distributions, some arguably "better" than others.
+
+
+```{python}
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+# Define the range of x values
+x = np.linspace(-5, 5, 500)
+
+# Define parameters (mean and standard deviation) for the three Gaussians
+mu1, sigma1 = -2.5, 0.7
+mu2, sigma2 =  0.0, 0.8
+mu3, sigma3 =  2.0, 0.5
+
+# Calculate the PDF values
+y1 = norm.pdf(x, mu1, sigma1)
+y2 = norm.pdf(x, mu2, sigma2)
+y3 = norm.pdf(x, mu3, sigma3)
+
+# Plot the three curves
+plt.plot(x, y1, label=r'$N(\mu=-2.5, \sigma^2=0.7^2)$')
+plt.plot(x, y2, label=r'$N(\mu=0, \sigma^2=0.8^2)$')
+plt.plot(x, y3, label=r'$N(\mu=2, \sigma^2=0.5^2)$')
+
+# Optionally, plot some sample points on the x-axis
+sample_points = np.arange(-3, 4)  # integers from -3 to 3
+plt.scatter(sample_points, np.zeros_like(sample_points), 
+            color='black', zorder=5)
+
+# Add legend, labels, and show
+plt.title("Three Gaussian Curves with Different Means and Variances")
+plt.xlabel("x")
+plt.ylabel("density f(x)")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+
+
+Now, how should our learning algorithm $A: S \to H$ (which is **deterministic**) select the **best** set of parameters $\theta$?  
+
+There are two similar methods to go about it: **MAP** and **MLE**.
+
+
+
+

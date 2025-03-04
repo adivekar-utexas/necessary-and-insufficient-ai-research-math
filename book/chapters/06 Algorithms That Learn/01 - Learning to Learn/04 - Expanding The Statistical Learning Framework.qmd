@@ -3,7 +3,6 @@
 To **move beyond the assumptions above**, let us **expand** the **Statistical Learning Framework**  
 we had used for **simple PAC learning**.
 
----
 
 ### **1. Data Labels Generating Distribution**
 
@@ -27,7 +26,6 @@ $$
      - **Given that** a particular $x$ has been sampled from $D_X$,
      - Assigns **each label** $y \in Y$ a **conditional probability** $D_Y(y | x)$.
 
----
 
 ### **2. Relationship Between Marginal and Conditional Distributions**
 
@@ -52,7 +50,6 @@ $$
 L_D(h) = P_{(x,y) \sim D} [ h(x) \neq y ] = D \left( (x,y) \mid h(x) \neq y \right)
 $$
 
----
 
 ### **Empirical Training Error**
 
@@ -69,7 +66,6 @@ $$
   1 - \text{Training Accuracy} = \text{Misclassification Error Rate}.
   $$
 
----
 
 ### **3. Goal of the Learning Algorithm**
 
@@ -78,7 +74,6 @@ As before, our **goal** is to get a **hypothesis** $h$:
 - That **minimizes the generalization error** $L_D(h)$.
 - This is **expected to be produced by a learning algorithm** $A: X^m \times Y^m \to \mathcal{H}$, as before.
 
----
 
 ### **Key Insight: The Learning Task is Defined by $D(X, Y)$**
 
@@ -96,7 +91,6 @@ An **important difference** between:
 is that the **output label** $y^{(i)}$ is now a **probabilistic function** of $x^{(i)}$.  
 That is, **labels are stochastic rather than deterministic** (as they were before).
 
----
 
 ### **Why is this important?**
 
@@ -115,7 +109,6 @@ That is, **labels are stochastic rather than deterministic** (as they were befor
 - **In the real world**, it is **naïve** to assume that the **true label** $y^{(i)}$  
   is **completely determined** by a **finite set of input features** $x^{(i)}$.
 
----
 
 ### **Example: Predicting Gender from Height**
 
@@ -130,7 +123,6 @@ That is, **labels are stochastic rather than deterministic** (as they were befor
   D_Y(Y | X = x^{(i)}).
   $$
 
----
 
 ### **Proper PAC Learning vs. Agnostic PAC Learning**
 
@@ -156,7 +148,6 @@ $$
 - This was because we assumed that **the same label** $y$  
   was **assigned to every instance** $x \in X$.
 
----
 
 ### **The Stochastic Case and Conditional Probabilities**
 
@@ -176,7 +167,6 @@ $$
   **all points** $x \in X$ have some degree of uncertainty,  
   meaning multiple values of $y$ have **non-zero probability**.
 
----
 
 ### **Example: Dragonfruit Classification**
 
@@ -191,7 +181,6 @@ We might have the following **conditional probabilities**:
 | (Magenta, Soft)    | 1               | 0                 |
 | (Magenta, Firm)    | 0               | 1                 |
 
----
 
 ### **Deterministic vs. Stochastic Labeling**
 
@@ -217,7 +206,6 @@ meaning that **every classifier will have some minimum generalization error**.
 - The corresponding classifier that **achieves this minimum error**  
   is called the **Bayes Optimal Predictor**, denoted as $f_{\text{Bayes}}$.
 
----
 
 ### **Bayes Error Rate and Its Properties**
 
@@ -226,7 +214,6 @@ meaning that **every classifier will have some minimum generalization error**.
   nor the **hypothesis class** $H$, nor the **training set** $S$.
 - Instead, it **only depends on the distribution** $D(X, Y)$.
 
----
 
 ### **Feature Selection and Its Impact on the Bayes Error Rate**
 
@@ -247,7 +234,6 @@ meaning that **every classifier will have some minimum generalization error**.
 - This **extra information** could allow us to **better separate the labels**,  
   reducing the **Bayes error rate**.
 
----
 
 ### **Example: Modified Conditional Probabilities**
 
@@ -258,7 +244,6 @@ meaning that **every classifier will have some minimum generalization error**.
 | (Green, Firm, Spherical)    | 0.95            | 0.05              |
 | (Other cases remain the same, independent of Shape) |  |  |
 
----
 
 ### **Key Takeaways:**
 1. **The Bayes error rate sets a fundamental limit** on how well we can classify,  
@@ -273,7 +258,6 @@ meaning that **every classifier will have some minimum generalization error**.
 We observe that **better separability of features** leads to a **lower Bayes error rate**.  
 Conversely, introducing **more features** (if they are **noisy**) can **increase the Bayes error rate**.
 
----
 
 ### **Updated Conditional Probabilities with Shape Feature**
 
@@ -283,7 +267,6 @@ Conversely, introducing **more features** (if they are **noisy**) can **increase
 | (Green, Soft, Oblong)           | 0.51            | 0.49              |
 | (Other cases remain the same, independent of Shape) |  |  |
 
----
 
 ### **Defining the Bayes Optimal Predictor**
 
@@ -300,7 +283,6 @@ $$
 This means that for **any given input** $x$,  
 the **best possible classifier** simply **chooses the most likely label**.
 
----
 
 ### **Bayes Error Rate and the Learner's Limitations**
 
@@ -309,7 +291,6 @@ the **best possible classifier** simply **chooses the most likely label**.
   **$f_{\text{Bayes}}$ is also unknown**.
 - This presents a **fundamental challenge** in machine learning.
 
----
 
 ### **Practical Learning and Approximation of $f_{\text{Bayes}}$**
 
@@ -342,7 +323,6 @@ $$
 
 where $f_{\text{Bayes}}$ represents the **Bayes optimal predictor**.
 
----
 
 ### **The Irreducible Error in Learning**
 
@@ -352,7 +332,6 @@ where $f_{\text{Bayes}}$ represents the **Bayes optimal predictor**.
   or modifying the hypothesis class $H$.  
   It is **an inherent property of the data distribution $D(X, Y)$.**
 
----
 
 ### **Impact of Noise on Learning**
 
@@ -367,7 +346,6 @@ where $f_{\text{Bayes}}$ represents the **Bayes optimal predictor**.
 Having defined the new **stochastic Statistical Learning framework**,  
 we can now define what **Agnostic PAC Learnability** means within this framework.
 
----
 
 ### **Definition of Agnostic PAC-Learnability**
 A hypothesis class **$H$** is **Agnostic PAC-learnable** if:
@@ -395,7 +373,6 @@ A hypothesis class **$H$** is **Agnostic PAC-learnable** if:
    h^* = \arg\min_{h \in H} L_D(h)
    $$
 
----
 
 ### **Moving Away from the Realizability Assumption**
 Unlike previous models that assumed the **true function** $f$  
