@@ -21,7 +21,7 @@ Lower-order tensors are so often used, that we have distinct names for them:
 | Order (K) | Name                          | Notation                                                | Example                                                                | Realized example                                                         |
 |-----------|-------------------------------|---------------------------------------------------------|------------------------------------------------------------------------|-----------------|
 | 0         | ***Scalar***                  | Greek: $\alpha,$ $\beta,$ $\gamma,$ etc                 | $\alpha \in \mathbb{R}$                                                | $\alpha = 5$                                                             |
-| 1         | ***Vector***                  | Latin lowercase: $\textbf{x},$ $\textbf{x},$ etc.       | $\textbf{x} \in \mathbb{R}^d$                                          | $\textbf{x} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$                 |
+| 1         | ***Vector***                  | Latin lowercase: $\textbf{a},$ $\textbf{x},$ etc.       | $\textbf{x} \in \mathbb{R}^d$                                          | $\textbf{x} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$                 |
 | 2         | ***Matrix, Dyad***      | Latin uppercase: **A**, **B**, etc.                     | $\mathbf{A} \in \mathbb{R}^{m \times n}$                               | $\textbf{A} = \begin{bmatrix} 45 & 42 & 69 \\ 18 & 23 & 8 \end{bmatrix}$ |
 | 3+        | ***Polyad*** | Calligraphic uppercase: $\mathcal{A}, \mathcal{X}$, etc | $\mathcal{A} \in \mathbb{R}^{N_1 \times \cdots \times N_K}$ | Hard to visualize                                                        |
 
