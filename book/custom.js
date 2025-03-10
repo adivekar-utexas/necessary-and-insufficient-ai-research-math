@@ -10,6 +10,33 @@ window.addEventListener("load", function () {
   const tolerance = 5; // pixels of tolerance to avoid fractional overflow issues
   let currentPage = 0;
 
+  // Custom easing function (ease-out quadratic)
+  function easeOut(t) {
+    return t; // Linear
+    // return t * (2 - t);  // Quadratic
+    // return 1 - Math.pow(1 - t, 3); // Cubic
+  }
+
+  // Animate the scrollLeft property of an element from its current value to target within duration (ms)
+  function animateScrollTo(element, target, duration) {
+    const start = element.scrollLeft;
+    const change = target - start;
+    const startTime = performance.now();
+  
+    function animate() {
+      const currentTime = performance.now();
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOut(progress);
+      element.scrollLeft = start + change * easedProgress;
+      if (elapsed < duration) {
+        requestAnimationFrame(animate);
+      }
+    }
+    // Start the animation immediately.
+    animate();
+  }
+
   // Compute total pages, using tolerance to avoid a phantom extra page.
   function computeTotalPages() {
     return Math.floor((content.scrollWidth + tolerance) / pageWidth);
@@ -26,7 +53,6 @@ window.addEventListener("load", function () {
       prevButton.style.visibility = currentPage === 0 ? "hidden" : "visible";
     }
     if (nextButton) {
-      // Hide the next button if advancing one more page would overshoot by only a few pixels.
       if ((currentPage + 1) * pageWidth >= content.scrollWidth - tolerance) {
         nextButton.style.visibility = "hidden";
       } else {
@@ -43,11 +69,10 @@ window.addEventListener("load", function () {
     }
   }
 
+  // Updated updatePage uses custom animation for a faster scroll.
   function updatePage() {
-    content.scrollTo({
-      left: currentPage * pageWidth,
-      behavior: 'smooth'
-    });
+    // Animate with a very short duration (e.g., 60ms)
+    animateScrollTo(content, currentPage * pageWidth, 60);
     updateButtonsVisibility();
     updatePageNumber();
   }
@@ -90,6 +115,7 @@ window.addEventListener("load", function () {
     updatePage();
   });
 
+  /*
   // Swipe functionality for portrait mode.
   let touchStartX = null;
   content.addEventListener("touchstart", function (e) {
@@ -102,7 +128,7 @@ window.addEventListener("load", function () {
     if (touchStartX === null) return;
     const touchEndX = e.changedTouches[0].clientX;
     const deltaX = touchEndX - touchStartX;
-    const swipeThreshold = 100; // Minimum swipe distance in pixels
+    const swipeThreshold = 150; // Minimum swipe distance in pixels
 
     if (window.innerHeight > window.innerWidth && Math.abs(deltaX) > swipeThreshold) {
       if (deltaX < 0 && (currentPage + 1) * pageWidth < content.scrollWidth - tolerance) {
@@ -115,6 +141,7 @@ window.addEventListener("load", function () {
     }
     touchStartX = null;
   });
+  */
 
   // Initial update.
   updateButtonsVisibility();
@@ -122,6 +149,5 @@ window.addEventListener("load", function () {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Add a fade-in class to the main container or body
   document.body.classList.add('fade-in');
 });
