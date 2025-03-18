@@ -14,6 +14,8 @@ body {
 
 :root {
     --p-font-size: 1rem;
+    --content-width: 61vw;
+    --nav-button-width: 6.5vw;
 }
 
 
@@ -182,7 +184,7 @@ p+p .math.display {
 #content {
     top: var(--header-height);
     position: relative;
-    width: 81vw;
+    width: var(--content-width);
     column-width: 80vw;
     height: 100vh;
     margin: 0 auto;
@@ -227,11 +229,11 @@ p+p .math.display {
 
 /* Place navigation buttons relative to the content container's edge */
 #prevButton {
-    left: calc((100vw - 90vw) / 2 - 10px);
+    left: calc(((100vw - var(--content-width) - 1vw) / 2 - var(--nav-button-width)) / 1.5);
 }
 
 #nextButton {
-    right: calc((100vw - 90vw) / 2 - 10px);
+    right: calc(((100vw - var(--content-width) - 1vw) / 2 - var(--nav-button-width)) / 1.5);
 }
 
 
@@ -255,9 +257,13 @@ p+p .math.display {
 /* Landscape mode */
 /* Content occupies 60% of viewport width (with same 15vh vertical padding) and is centered */
 @media (orientation: landscape) {
+    :root {
+        --content-width: 65vw;
+    }
+
     #content {
-        width: 61vw;
-        column-width: 60vw;
+        width: var(--content-width);
+        column-width: calc(var(--content-width) - 1vw);
         padding-top: 0vh;
         padding-bottom: 20vh;
         margin-left: auto;
@@ -268,12 +274,17 @@ p+p .math.display {
 
 
 @media (orientation: portrait) {
+    :root {
+        --content-width: 81vw;
+    }
+
     #quarto-margin-sidebar {
         display: none;
     }
 
     #content {
-        width: 80vw;
+        width: calc(var(--content-width));
+        column-width: calc(var(--content-width) - 1vw);
         padding-bottom: 18vh;
         column-gap: 0.0px;
         /* No gap between columns */
@@ -289,18 +300,10 @@ p+p .math.display {
 
     #prevButton,
     #nextButton {
-        bottom: 0;
-        top: 97vh;
-        height: 5vh;
-        width: 5vh;
-    }
-
-    #prevButton {
-        left: calc((100vw - 80vw) / 2);
-    }
-
-    #nextButton {
-        right: calc((100vw - 80vw) / 2);
+        /* bottom: 0;
+        top: 97vh; */
+        height: calc(var(--nav-button-width));
+        width: calc(var(--nav-button-width));
     }
 }
 
@@ -312,11 +315,12 @@ p+p .math.display {
 
     :root {
         --p-font-size: 0.8rem;
+        --content-width: 86vw;
     }
 
     #content {
-        width: 86vw;
-        column-width: 85vw;
+        width: calc(var(--content-width));
+        column-width: calc(var(--content-width) - 1vw);
         padding-top: 0vh;
         padding-bottom: 20vh;
         column-gap: 0.0px;
@@ -331,12 +335,12 @@ p+p .math.display {
         display: flex;
         /* Ensure they're displayed */
         position: fixed;
-        bottom: 0;
         /* Position near the bottom */
-        top: 97vh;
+        /* bottom: 0;
+        top: 97vh; */
         /* Remove any top positioning */
-        width: 5vh;
-        height: 5vh;
+        width: calc(var(--nav-button-width));
+        height: calc(var(--nav-button-width));
         align-items: center;
         /* Vertically center the arrow */
         justify-content: center;
@@ -347,14 +351,6 @@ p+p .math.display {
         border: none;
         cursor: pointer;
         box-sizing: border-box;
-    }
-
-    #prevButton {
-        left: 10%;
-    }
-
-    #nextButton {
-        right: 10%;
     }
 
     #pageNumber {
