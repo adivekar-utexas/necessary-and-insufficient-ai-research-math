@@ -287,7 +287,8 @@ p+p .math.display {
         max-width: 70%;
     }
 
-    #prevButton, #nextButton {
+    #prevButton,
+    #nextButton {
         bottom: 0;
         top: 97vh;
         height: 5vh;
@@ -384,79 +385,85 @@ p+p .math.display {
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 :root {
-  /* Brand / accent color */
-  --brand-color: #4f46e5;      /* A rich, modern purple */
-  --background-color: #ffffff; /* Main background */
-  --text-color: #1f1f1f;       /* Primary text color */
-  --secondary-text-color: #555;
-  
-  /* Sizing & spacing */
-  --header-height: 60px;
-  --content-width: 80vw;
-  
-  /* Typography */
-  --base-font: 'Inter', system-ui, sans-serif;
-  /* --base-font-size: 16px; */
-  --heading-font-weight: 600;
-  
-  /* Subtle shadows, corners, transitions */
-  --box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-  --border-radius: 8px;
-  --transition-speed: 0.3s;
+    /* Brand / accent color */
+    --brand-color: #4f46e5;
+    /* A rich, modern purple */
+    --background-color: #ffffff;
+    /* Main background */
+    --text-color: #1f1f1f;
+    /* Primary text color */
+    --secondary-text-color: #555;
+
+    /* Sizing & spacing */
+    --header-height: 60px;
+    --content-width: 80vw;
+
+    /* Typography */
+    --base-font: 'Inter', system-ui, sans-serif;
+    /* --base-font-size: 16px; */
+    --heading-font-weight: 600;
+
+    /* Subtle shadows, corners, transitions */
+    --box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
 }
 
 /* Base reset & box-sizing */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0; 
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-html, body {
-  /* width: 100%;
+html,
+body {
+    /* width: 100%;
   height: 100%; */
-  overflow: hidden; /* As you already have horizontal "pages" */
-  font-family: var(--base-font);
-  /* font-size: var(--base-font-size); */
-  color: var(--text-color);
-  background: var(--background-color);
+    overflow: hidden;
+    /* As you already have horizontal "pages" */
+    font-family: var(--base-font);
+    /* font-size: var(--base-font-size); */
+    color: var(--text-color);
+    background: var(--background-color);
 }
 
 /* -------------------------------------------------------------
    2. Header / Navbar
 ------------------------------------------------------------- */
 header .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--header-height);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  background: var(--brand-color);
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  z-index: 10000;
-  transition: background var(--transition-speed);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    background: var(--brand-color);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    z-index: 10000;
+    transition: background var(--transition-speed);
 }
 
 header .navbar .navbar-title {
-  font-size: 1.2rem;
-  font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 header .navbar a.navbar-link {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 1.5rem;
-  transition: opacity var(--transition-speed);
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    transition: opacity var(--transition-speed);
 }
+
 header .navbar a.navbar-link:hover {
-  opacity: 0.8;
+    opacity: 0.8;
 }
 
 /* -------------------------------------------------------------
@@ -476,114 +483,128 @@ header .navbar a.navbar-link:hover {
      you can keep your existing styles here. 
      Just ensure the user sees some padding/space. 
   */
-/* } */ */
+/* } */
+*/
 
 /* Example "page" styling if you are using .page elements */
 .page {
-  flex: 0 0 100vw;
-  height: 100%;
-  padding: 3rem 5vw;
-  overflow-y: auto; /* Let each page scroll if needed */
-  scroll-snap-align: start;
-  background: var(--background-color);
-  transition: background var(--transition-speed);
+    flex: 0 0 100vw;
+    height: 100%;
+    padding: 3rem 5vw;
+    overflow-y: auto;
+    /* Let each page scroll if needed */
+    scroll-snap-align: start;
+    background: var(--background-color);
+    transition: background var(--transition-speed);
 }
 
 /* -------------------------------------------------------------
    4. Typography
 ------------------------------------------------------------- */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: var(--heading-font-weight);
-  color: var(--text-color);
-  margin-bottom: 1rem;
-  line-height: 1.2;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: var(--heading-font-weight);
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    line-height: 1.2;
 }
 
-p, ul, li {
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  color: var(--secondary-text-color);
-  text-align: justify;
+p,
+ul {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: var(--secondary-text-color);
+    text-align: justify;
 }
 
-strong, b {
-  color: var(--text-color);
-  font-weight: 600;
+strong,
+b {
+    color: var(--text-color);
+    font-weight: 600;
 }
 
 /* Links */
 a {
-  color: var(--brand-color);
-  text-decoration: none;
-  transition: color var(--transition-speed);
+    color: var(--brand-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
 }
+
 a:hover {
-  color: #3f3ac9; /* Slightly darker shade of brand color */
+    color: #3f3ac9;
+    /* Slightly darker shade of brand color */
 }
 
 /* -------------------------------------------------------------
    5. Code Blocks & Tables
 ------------------------------------------------------------- */
-pre, code {
-  font-family: 'Source Code Pro', monospace;
-  background: #f5f5f5;
-  color: #333;
+pre,
+code {
+    font-family: 'Source Code Pro', monospace;
+    background: #f5f5f5;
+    color: #333;
 }
 
 pre {
-  padding: 1rem;
-  border-radius: var(--border-radius);
-  overflow-x: auto;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    overflow-x: auto;
 }
 
 /* Center tables, add subtle styling */
 .table-container {
-  text-align: center;
+    text-align: center;
 }
+
 .table-container table {
-  margin: 1rem auto;
-  border-collapse: separate;
-  border-spacing: 0;
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  box-shadow: var(--box-shadow);
+    margin: 1rem auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
 }
 
 .table-container th,
 .table-container td {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #ddd;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #ddd;
 }
+
 .table-container th {
-  background: #f0f0f0;
-  font-weight: 600;
+    background: #f0f0f0;
+    font-weight: 600;
 }
 
 /* -------------------------------------------------------------
    6. Navigation Buttons (Prev / Next) 
 ------------------------------------------------------------- */
 .nav-button {
-  position: fixed;
-  transform: translateY(-50%);
-  width: 60px;
-  height: 60px;
-  background: var(--brand-color);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  box-shadow: var(--box-shadow);
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 2000;
-  transition: opacity var(--transition-speed), background var(--transition-speed);
-  touch-action: manipulation;
+    position: fixed;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background: var(--brand-color);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2000;
+    transition: opacity var(--transition-speed), background var(--transition-speed);
+    touch-action: manipulation;
 }
 
 .nav-button:hover {
-  background: #3f3ac9;
+    background: #3f3ac9;
 }
 
 /* Hide or show in portrait, etc. as you wish with media queries. */
@@ -592,28 +613,36 @@ pre {
    7. Page Number
 ------------------------------------------------------------- */
 #pageNumber {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,0.8);
-  padding: 0.3rem 0.6rem;
-  border-radius: var(--border-radius);
-  font-weight: 600;
-  box-shadow: var(--box-shadow);
-  transition: background var(--transition-speed);
-  z-index: 1000;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.3rem 0.6rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    box-shadow: var(--box-shadow);
+    transition: background var(--transition-speed);
+    z-index: 1000;
 }
 
 /* -------------------------------------------------------------
    8. Subtle Fade-in Animation on Page Load
 ------------------------------------------------------------- */
 .fade-in {
-  opacity: 0;
-  animation: fadeIn var(--transition-speed) ease-in forwards;
+    opacity: 0;
+    animation: fadeIn var(--transition-speed) ease-in forwards;
 }
 
 @keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+    to {
+        opacity: 1;
+    }
+}
+
+.next-link {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    padding: 1rem;
+    margin-top: 2rem;
 }

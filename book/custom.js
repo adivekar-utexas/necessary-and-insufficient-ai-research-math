@@ -71,8 +71,9 @@ window.addEventListener("load", function () {
 
   // Updated updatePage uses custom animation for a faster scroll.
   function updatePage() {
-    // Animate with a very short duration (e.g., 60ms)
-    animateScrollTo(content, currentPage * pageWidth, 60);
+    let PAGE_TURN_DURATION_MS = 150;
+    // Animate with a short duration in milliseconds:
+    animateScrollTo(content, currentPage * pageWidth, PAGE_TURN_DURATION_MS);
     updateButtonsVisibility();
     updatePageNumber();
   }
