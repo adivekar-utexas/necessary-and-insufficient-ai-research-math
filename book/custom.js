@@ -116,7 +116,6 @@ window.addEventListener("load", function () {
     updatePage();
   });
 
-  /*
   // Swipe functionality for portrait mode.
   let touchStartX = null;
   content.addEventListener("touchstart", function (e) {
@@ -129,7 +128,7 @@ window.addEventListener("load", function () {
     if (touchStartX === null) return;
     const touchEndX = e.changedTouches[0].clientX;
     const deltaX = touchEndX - touchStartX;
-    const swipeThreshold = 150; // Minimum swipe distance in pixels
+    const swipeThreshold = Math.floor(0.35 * content.scrollWidth); // Minimum swipe distance in pixels
 
     if (window.innerHeight > window.innerWidth && Math.abs(deltaX) > swipeThreshold) {
       if (deltaX < 0 && (currentPage + 1) * pageWidth < content.scrollWidth - tolerance) {
@@ -142,7 +141,6 @@ window.addEventListener("load", function () {
     }
     touchStartX = null;
   });
-  */
 
   // Initial update.
   updateButtonsVisibility();

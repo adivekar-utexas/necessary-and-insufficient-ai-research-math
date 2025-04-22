@@ -2,44 +2,49 @@
 
 ![The Persistence of Memory, Salvador Dalí 1931](images/the-persistence-of-memory.png){fig-alt="The Persistence of Memory, Salvador Dalí 1931"}
 
-Why study math? It's often difficult to explain why learning mathematics is important, especially when we have so many tools that minimize our need for it. We have tax consultants and software that handle complex calculations for us. Advanced systems like ChatGPT can perform complex reasoning when given well-defined inputs, and Google Search had been around for nearly three decades since the time we started writing this book. If you are employed as an engineer, there's almost always a pre-built library that does all the complex mathematical processing you need.
+It's difficult to explain why a mathematical education is important when modern tools minimize our need for it. Tax software crunches arithmetic and advanced AI systems such as ChatGPT handle complex reasoning for us. Engineers typically use pre-built libraries for mathematical processing, reducing their practical need to master math directly.
 
-So, why spend any time learning mathematics? There are arguments to be made about beauty; the satisfaction of seeing theorems come to life. However, this is highly subjective and unlikely to be appreciated in the moment by a researcher trying to meet a paper deadline, or students cramming for their next exam. Very few people read mathematics for leisure. 
+So, why bother learning mathematics deeply? Some argue for its intrinsic beauty: seeing theorems coming to life. But few appreciate this beauty when preparing for exams or racing toward research deadlines. Mathematics is rarely read for leisure.
 
-Instead, we will draw from practical experience: the writers of this book are AI Scientists at top tech companies. We take the view that mathematics is a tool - a wonderful weapon to wield - and the depth at which you grasp these foundations directly impacts your career in artificial intelligence. To the point: a wide mathematical foundation is unexpectedly useful in the scientific literature of artificial intelligence.
+Instead, let's draw from practical experience. We, the authors of this book, are AI scientists at top tech companies. Mathematics is a powerful tool, and your grasp of its foundations directly shapes your success in artificial intelligence. Simply put, a solid mathematical foundation is more useful than you might expect when navigating AI research.
 
-Let’s take a simple example: calculating the mean of $n$ numbers. This concept should be familiar to most readers. Concretely, suppose you have $n$ datapoints, $x_1, \ldots, x_n$ all of which are real numbers (positive or negative). To calculate the mean, you sum these values and divide by $n$. This is expressed mathematically as:
+
+Consider a simple example: calculating the mean of $n$ numbers. This should be familiar. Suppose you have $n$ datapoints, $x_1, \ldots, x_n$ all of which are real numbers (positive or negative). The mean is calculated as:
 
 $$
 \mu = \frac{1}{n} \sum_{i=1}^{n} x_i
 $$
 
-Suppose the ${(n+1)}^{th}$ datapoint comes along. How can we compute the mean of all $(n+1)$ datapoints, if we already know the mean of the first $n$?
-
-Recomputing from scratch is one approach, but it is tedious. Instead, we can use an incremental update method to continuously update the mean with each incoming datapoint, without needing to recompute everything:
+When an additional datapoint arrives, how do you efficiently update the mean? Recomputing from scratch works, but it’s inefficient. Instead, use an **incremental update**:
 
 $$
 \mu_{n+1} = \mu_n + \frac{x_{n+1} - \mu_n}{n+1}
 $$
 
 
-Now, you might say, "This is interesting, but when will I ever need this?". It's a fair question. On my computer (an M1 Apple Mac), I ran two programs to calculate the mean of $n$ datapoints: (1) the first recomputed the mean from scratch for each datapoint; (2) the second computed the mean incrementally.
+You might wonder, "Will I actually need this in real life?". It's a fair question. To test this practically, I ran two programs on my M1 Mac: one recomputed the mean each time, and another used the incremental approach. For $n=10,000$ datapoints, recomputing took 140 milliseconds; the incremental approach took just 2.4 milliseconds. While this difference may be apparent with millions of datapoints, it isn't at the scale of thousands, which we deal with regularly.
 
-For $n=10,000$ datapoints, the former took 140 milliseconds while the latter took 2.4 milliseconds. While this is a huge difference, I could not perceive the difference; the difference would only be apparent when I had millions of datapoints (a rare situation). 
+So, is the incremental mean just a mathematical curiosity, with no practical value? Not at all. A slight variation of this incremental method is essential for training **multi-armed bandits**, a reinforcement learning algorithm.
 
-So, should we conclude that the incremental mean is a mathematical curiosity, of no practical value?  Not quite, as a slight modification of the incremental-mean method is essential for training **multi-armed bandits**, a kind of reinforcement learning algorithm.
+Bandit algorithms estimate true means from samples and are fundamental to real-time applications like news recommendations and A/B testing. Here, sub-millisecond latency is mandatory. Suddenly, the incremental mean method shifts from a curiosity to a necessity.
 
-Bandit algorithms, which estimate the true mean from samples, are fundamental to online decision-making in applications like news recommendation and A/B testing. They must also often run in sub-millisecond latency, or else they are too slow to be practically usable. Suddenly, this time difference becomes very important, and our incremental mean goes from curiosity to a practical tool. 
+Anyone exploring AI literature knows the feeling: you're cruising through a paper when: BAM! you are suddenly confronted by a dense mathematical equation - perhaps concerning Reproducing Kernel Hilbert Spaces, or something equally complex. 
 
-It’s a scenario familiar to anyone reading AI literature: you're cruising through a paper when suddenly — BAM! — you are confronted with a dense equation, perhaps something involving Reproducing Kernel Hilbert Spaces or another intimidating concept. In that instant, you face two choices:
+In that instant, you face two choices:
 
-- **Ignore the term**: this might spare you some time immediately, but you risk misinterpreting the paper’s core message and never really grasping the research.
+- **Ignore it**: Saving time now but risking misunderstanding the paper’s core insights.
 
-- **Try to decode the term**: this may feel like the responsible approach, yet it can consume days of painstaking effort — only to fade from your memory within a week, leaving you back where you started the next time it appears.
+- **Decode it**: Commit days of intense effort to understand the equation...only for it to fade from your memory within a week, leaving you back where you started the next time it appears.
 
-Fortunately, there’s a third, far more effective path: **prepare for the battle in advance**. You can’t anticipate every possible topic under the sun, but a solid foundation means that when an unfamiliar concept appears, refreshing what you already know takes mere minutes rather than days. By investing early in your mathematical foundations, you equip yourself to tackle the literature with confidence and depth.
+Fortunately, there’s a third, better approach: **prepare in advance**. A solid mathematical foundation allows for a quick refresher instead of re-learning repeatedly. An early investment in mathematics lets you confidently grasp and apply new concepts.
+
 
 ## To summarize
-As a practitioner, math is your toolbox. You never know when a mathematical concept will suddenly become critical when developing or applying an algorithm. 
 
-As a researcher your job is to weave gossamer threads in this mathematical web, transforming once-impossible problems into elegant, interconnected solutions. Without becoming familiar with these mathematical threads, you limit your ability to make these connections.
+This book is for students of all ages and backgrounds who seek to master the math that powers artificial intelligence.
+
+As an **AI student**, mastering mathematics early equips you with the tools needed to rapidly grow your future career in the wide fields of artificial intelligence.
+
+As an **AI practitioner**, math is your toolbox. You never know when a concept becomes crucial for algorithm development or in applications.
+
+As an **AI researcher**, you must weave ideas into elegant, interconnected solutions. A strong mathematical foundation unlocks your ability to innovate in creating virtual minds - the defining challenge of our era.

@@ -6,7 +6,7 @@ website:
   search:
     location: navbar
     type: overlay
-  title: "AI Research Math"
+  title: "AI Math From Scratch"
   navbar:
     right:
       - text: PDF
@@ -37,6 +37,9 @@ bibliography: references.bib
 
 format:
   html:
+    # filters:
+      # - meta.lua
+      # - navlinks.lua
     otherFormats: false
     include-before-body: before-body.html
     include-after-body: after-body.html
