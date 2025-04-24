@@ -1,4 +1,4 @@
-# Math for Artificial Intelligence, From Scratch
+# Artificial Intelligence Mathematics, From Scratch
 
 Learning AI in depth – whether in NLP, Computer Vision, Reinforcement Learning or beyond – required for a robust mathematical foundation. This book aims to provide it. It begins with high-school set theory and probability, and gradually ascends to cover graduate-level topics. 
 
