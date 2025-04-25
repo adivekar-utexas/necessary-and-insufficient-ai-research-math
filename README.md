@@ -1,13 +1,12 @@
 # Artificial Intelligence Math, From Scratch
 
-Mastering AI begins with mastering the math. **AI Math From Scratch** gives you the necessary foundation, with no paywalls and no jargon. 
+Mastering AI begins with mastering the math. **AI Math From Scratch** gives you the necessary foundation, with no jargon and no paywalls. 
 
 We begin at high-school level set theory and probability, then advance through linear algebra, calculus, real analysis, and beyond until you can read graduate-level papers with confidence.
 
 Think of the journey as a spiral staircase wrapped in sturdy pillars. Each turn links the pillars tighter, revealing how the pieces power NLP, computer vision, reinforcement learning, and emerging AI paradigms. On the way up you’ll also pick up modern tooling - NumPy, PyTorch, and parallel-Python patterns - so the math lives in real code, not just on paper.
 
-Ready to level up? Start reading (and contributing!) here → **[adivekar.quarto.pub/ai-math-from-scratch](https://adivekar.quarto.pub/ai-math-from-scratch)** 🚀
-
+Ready to level up? Start reading here → **[adivekar.quarto.pub/ai-math-from-scratch](https://adivekar.quarto.pub/ai-math-from-scratch)** 🚀
 
 ## ⭐ Support This Project ⭐
 
@@ -24,6 +23,8 @@ It takes one second, and creates real impact:
 | **Proves demand** | Signals to mentors, reviewers, and future partner orgs that *free AI math* is worth backing. |
 | **Motivates the team** | A tiny dopamine hit keeps volunteers refining examples, diagrams, and proofs. |
 
+**TL;DR:** If you like what we’re building, click the ⭐️!
+
 ### Who benefits from your support?
 
 * **Students in low-income or under-resourced regions** – they get a high-school to graduate-level AI math roadmap at zero cost. 
@@ -36,13 +37,7 @@ It takes one second, and creates real impact:
 * **Open an issue** with suggestions, typos, or tricky sections that need love.  
 * **Submit a Pull-Request** – new examples, clearer wording, or fresh diagrams are always welcome! See the CONTRIBUTING section below.
 
-> **TL;DR:** If you like what we’re building, click the ⭐️!
-
-
 ![art-deco-spiral-staircase](images/art-deco-spiral-staircase.png)
-
-
-<!-- ## A Mathematical Path to AI Mastery -->
 
 
 ## CONTRIBUTING
