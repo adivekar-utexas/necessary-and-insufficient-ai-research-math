@@ -4,17 +4,17 @@ Mastering AI begins with mastering the math. **AI Math From Scratch** gives you 
 
 We begin at high-school level set theory and probability, then advance through linear algebra, calculus, real analysis, and beyond until you can read graduate-level papers with confidence.
 
-Think of the journey as a spiral staircase wrapped in sturdy pillars. Each turn links the pillars tighter, revealing how the pieces power NLP, computer vision, reinforcement learning, and emerging AI paradigms. On the way up you’ll also pick up modern tooling - NumPy, PyTorch, and parallel-Python patterns - so the math lives in real code, not just on paper.
+Think of the journey as a spiral staircase wrapped in sturdy pillars, just like the image below. Each turn you ascend links the pillars tighter, revealing how the pieces power NLP, computer vision, reinforcement learning, and emerging AI paradigms. On the way up you’ll also pick up modern tooling - NumPy, PyTorch, and parallel-programming patterns - so the math lives in real code, not just on your screen.
 
 Ready to level up? Start reading here → **[adivekar.quarto.pub/ai-math-from-scratch](https://adivekar.quarto.pub/ai-math-from-scratch)** 🚀
 
-## ⭐ Support This Project ⭐
+<img src="images/art-deco-spiral-staircase.png" width="800" height="800">
 
-**Please help us by starring this repository!**
+## Support This Project ⭐
 
-Every single GitHub star is a vote for open, inclusive AI education. If our textbook (or the idea of it) helps you, inspires you, or simply sounds cool, please click the ⭐️ button at the top-right of the repo. 
+**Please help us by starring this repository! ⭐**
 
-It takes one second, and creates real impact:
+Every GitHub star is a vote for open, inclusive AI education. If our textbook helps you, inspires you, or simply sounds cool, please click the ⭐️ button at the top-right of the repo. 
 
 | What your star does | Why it matters |
 |---------------------|---------------|
@@ -23,13 +23,6 @@ It takes one second, and creates real impact:
 | **Proves demand** | Signals to mentors, reviewers, and future partner orgs that *free AI math* is worth backing. |
 | **Motivates the team** | A tiny dopamine hit keeps volunteers refining examples, diagrams, and proofs. |
 
-**TL;DR:** If you like what we’re building, click the ⭐️!
-
-### Who benefits from your support?
-
-* **Students in low-income or under-resourced regions** – they get a high-school to graduate-level AI math roadmap at zero cost. 
-* **Self-taught AI engineers** – clear, open-source explanations beat paywalled courses.  
-* **The research community** – a common reference lowers the barrier to entry and raises the floor of understanding.
 
 ### How else can you help?
 
@@ -37,7 +30,11 @@ It takes one second, and creates real impact:
 * **Open an issue** with suggestions, typos, or tricky sections that need love.  
 * **Submit a Pull-Request** – new examples, clearer wording, or fresh diagrams are always welcome! See the CONTRIBUTING section below.
 
-![art-deco-spiral-staircase](images/art-deco-spiral-staircase.png)
+### Who benefits from your support?
+
+* **Students in low-income or under-resourced regions** – they get a high-school to graduate-level AI math roadmap at zero cost. 
+* **Self-taught AI engineers** – clear, open-source explanations beat paywalled courses.  
+* **The research community** – a common reference lowers the barrier to entry and raises the floor of understanding.
 
 
 ## CONTRIBUTING
