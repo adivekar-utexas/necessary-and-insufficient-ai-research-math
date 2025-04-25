@@ -9,7 +9,7 @@ Think of the journey as a spiral staircase wrapped in sturdy pillars. Each turn 
 Ready to level up? Start reading (and contributing!) here → **[adivekar.quarto.pub/ai-math-from-scratch](https://adivekar.quarto.pub/ai-math-from-scratch)** 🚀
 
 
-## ⭐ Support This Project
+## ⭐ Support This Project ⭐
 
 **Please help us by starring this repository!**
 
