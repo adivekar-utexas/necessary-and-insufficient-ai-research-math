@@ -12,9 +12,9 @@ Ready to level up? Start reading here → **[adivekar.quarto.pub/ai-math-from-sc
 
 ## Support This Project ⭐
 
-**Please help us by starring this repository! ⭐**
+**Please help us by starring this repository!** Every GitHub star is a vote for open, inclusive AI education. 
 
-Every GitHub star is a vote for open, inclusive AI education. If our textbook helps you, inspires you, or simply sounds cool, please click the ⭐️ button at the top-right of the repo. 
+If our textbook helps you, inspires you, or simply sounds cool, please click the ⭐️ button at the top-right of the repo. 
 
 | What your star does | Why it matters |
 |---------------------|---------------|
