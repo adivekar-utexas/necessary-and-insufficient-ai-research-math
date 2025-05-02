@@ -1,0 +1,63 @@
+# Why Fields?
+
+Measure theory, just like it sounds, is a branch of mathematics that deals with, well, *measuring* things. In real life, we're quite used to measuring tangible things, the dimensions of a table, the size of our TV screen, etc.
+
+Let's start with a simple task: measuring a line on $$\mathbb{R}$$, the reals. Say we need to measure the interval $$[4, 7]$$. We can all agree that the measure of this is $$7 - 4 = 3$$. So, we essentially measured the *length* of this segment. However, this so-called specific measurement is unique to the reals. How do we generalize measuring things?
+
+Thus, in mathematics, we measure sets. Specifically, we measure *subsets* of sets. Why sets? Well, sets are just collections of objects. And we can represent pretty much anything in the form of sets, making them extremely useful and flexible.
+
+Okay, so we have our task: Given a set $$S$$, we're going to measure subsets $$A \subseteq S$$. However, there are a various number of *measures* that we can have. Given a certain region in $$\mathbb{R}\times \mathbb{R}$$, we may want to measure the *area* bounded by the region, or the *perimeter* of the region, or the *number of lattice points in the region*, and so on. Just taking $$\mathbb{R}$$ as an example, it is an infinite set. There are an infinite number of subsets of $$\mathbb{R}$$, and it's quite difficult to measure an infinite number of subsets.
+
+This is why we introduce something known as fields. Fields just help us define which subsets we're going to measure. The first type of fields we're going to deal with are $$\sigma$$-fields.
+
+# Definitions and Basics
+
+**Definition**: A $$\sigma$$-field (also called $$\sigma$$-algebra) on a set $$S$$ is a set $$\mathcal{F}$$ such that each $$A \in \mathcal{F}$$ also satisfies $$A \subseteq S$$ such that:
+
+1. $$\emptyset \in \mathcal{F}$$
+2. $$A \in \mathcal{F} \Rightarrow A^{c} \in \mathcal{F}$$
+3. For a sequence of sets $$\{A_i\}_{i=1}^{n} \; \forall \; n \in \mathbb{N}$$ such that $$A_i \in \mathcal{F} \; \forall \; 1 \leq i \leq n$$, we also have $$\bigcup_{i=1}^{\infty} A_{i} \in \mathcal {F}$$
+
+Let's go through the definition step by step. The first condition tells us that $$\mathcal{F}$$ contains $$\emptyset$$, the null set. The second condition tells us that for every subset $$A \subseteq S$$, the complement $$A^c$$ of $$A$$ in $$S$$ is also contained in $$\mathcal{F}$$. Finally, the third condition tells us that $$\mathcal{F}$$ is closed under countable unions of the subsets.
+
+**Question 1**: Show that the first condition $$\emptyset \in \mathcal{F}$$ is equivalent to $$S\in \mathcal{F}$$.
+
+**Solution**: From the second condition, we know that 
+
+$$A \in \mathcal{F} \Rightarrow A^{c} \in \mathcal{F}$$
+
+So, 
+
+$$\emptyset \in \mathcal{F} \Rightarrow \emptyset^{c} = S \in \mathcal{F}$$
+
+**Question 2**: Show that the third condition of $$\mathcal{F}$$ being closed under countable unions implies that $$\mathcal{F}$$ is closed under finite unions as well.
+
+**Solution**: In the sequence of sets $$A_{i}$$ we set $$A_i = \emptyset \; \forall \; i \gt n$$. This gives:
+
+$$\bigcup_{i=1}^{\infty} A_{i} \in \mathcal {F} \Rightarrow \bigcup_{i=1}^{n} A_{i} \in \mathcal {F}$$
+
+because $$A \cup \emptyset = A$$. This completes our proof.
+
+It turns out that $$\sigma$$-fields are also closed under countably infinite (and by extension, finite) intersections, set theoretic differences and symmetric differences. We call this fact *closure under countable set operations*.
+
+**Definition:** For a set $$A\in \mathcal{F}$$ where $$\mathcal{F}$$ is a $$\sigma$$-field, we say that $$A$$ is *measurable* with respect to $$\mathcal{F}$$. We also say that $$A$$ is $$\mathcal{F}$$-measurable.
+
+**Definition:** A pair $$(S, \mathcal{F})$$ where $$S$$ is a set and $$\mathcal{F}$$ is a $$\sigma$$-field of subsets of $$S$$ is known as a *measurable space*.
+
+# Additional problems
+
+1. Show that $$\mathcal{F}$$ being closed under countable set operations can be reduced to the condition that $$A, B \in \mathcal{F} \Rightarrow A * B \in \mathcal{F}$$ where $$*$$ is the set operation in question.
+
+2. Prove closure for $$\sigma$$-fields under the following operations: intersections, set theoretic differences, symmetric differences. Feel free to use the result from the previous problem.
+
+3. Show that the following are $$\sigma$$-fields for a certain set $$S$$:
+    
+    i. The power set $$\mathcal{P}(S)$$ of $$S$$
+
+    ii. The set $$\{\emptyset, S\}$$ (trivial $$\sigma$$-field)
+
+    iii. The set $$\{\emptyset, A, A^c, S\} \; \forall \; A \subset S$$
+
+4. Show that an intersection of $$\sigma$$-fields on $$S$$ is also a $$\sigma$$-field on $$S$$.
+
+Now that we have our basis of fields, we can start measuring them! We'll study measures in the next chapter.
