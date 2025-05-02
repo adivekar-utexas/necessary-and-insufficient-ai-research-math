@@ -1,0 +1,1 @@
+Q: Are you expected "closure" to be covered in the preliminaries?
