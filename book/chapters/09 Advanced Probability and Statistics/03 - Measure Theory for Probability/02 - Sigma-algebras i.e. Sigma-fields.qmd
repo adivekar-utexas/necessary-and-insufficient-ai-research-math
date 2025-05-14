@@ -1,4 +1,4 @@
-# Why Fields?
+# Why Measure Theory and Fields?
 
 Measure theory, just like it sounds, is a branch of mathematics that deals with, well, *measuring* things. In real life, we're quite used to measuring tangible things, the dimensions of a table, the size of our TV screen, etc.
 

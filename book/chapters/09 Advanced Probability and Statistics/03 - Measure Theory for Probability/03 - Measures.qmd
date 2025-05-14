@@ -1,0 +1,64 @@
+# Definitions
+
+We motivated the need for measures and covered the basics of fields in the branch of measure theory in the previous section. Now, we'll formally define what a measure is, motivate the definition of a measure and go over some common measures.
+
+**Definition**: Consider a measure space $(S, \mathcal{F})$. We say that $m: \mathcal{F} \rightarrow [0, \infty]$ is known as a measure if the following conditions are met:
+
+1. $m(\emptyset) = 0$
+2. For an infinite sequence of pairwise dijoint sets $A_i \in \mathcal{F}$, the following holds (**$\sigma$-additivity**):
+
+$$
+m(\bigcup_{i=1}^{\infty} A_{i}) = \sum_{i=1}^{\infty}m(A_i)
+$$
+
+The first condition is very intuitive: it essentially states that the measure of an empty set should be 0. Let's break down the second condition. It states that the measure of a union of pairwise disjoint (non-overlapping) sets in $\mathcal{F}$ is the sum of measures of the said sets. So, consider that we some quantity, say 100g, of jelly beans. We split this into groups with quantities $20g, 30g, 35g, 15g$. Now, clearly there is no overlap between these groups of jelly beans as each group of jelly beans is independent of the others. So the sum of their measures is just $(20 + 30 + 35 + 15) = 100g$ which is equal to the union (combination) of these groups which is $100g$.
+
+Now, let's just go through some common terminologies used:
+
+**Definition**: A tuple $(S, \mathcal{F}, m)$ where $S$ is a set, $\mathcal{F}$ is a $\sigma$-field on $S$ and $m: \mathcal{F} \rightarrow [0, \infty]$ is known as a *measure space*. Do note that this is different from the tuple $(S, \mathcal{F})$ which is known as a *measurable space*.
+
+**Definition**: $m(S) \in \overline{\mathbb{R}}$ is called the *total mass* of a measure $m$. The measure $m$ is termed as *finite* if $m(S) < \infty$. Here, $\overline{\mathbb{R}}$ denotes the extended real numbers, i.e. $\mathbb{R} \cup \{-\infty, +\infty\}$.
+
+**Question 1**: Show that $\sigma$-additivity also holds for a finite sequence of pairwise dijoint sets.
+
+**Solution**: In the sequence of sets $A_{i}$ we set $A_i = \emptyset \; \forall \; i \gt n$ where $n$ is a finite natural number. Now, substituting this into the condition gives our required result: $\sigma$-additivity for a finite sequence of $n$ pairwise dijoint sets.
+
+There are two more important properties of measures:
+
+1. If $A \subseteq B$ and $A, B \in mathcal{F}$, then for a measure $m$, $m(A) \le m(B)$. (**monotonicity**)
+2. For arbitrary sets $A, B \in \mathcal{F}$, $m(A) + m(B) = m(A \cup B) + m(A \cap B)$.
+
+The proofs for these properties are left as an excercise to the reader.
+
+# Common Measures
+
+1. Counting Measure: Consider a set $S$. Now, take $\mathcal{F} = \mathcal{P}(S)$. For a subset $A$ of $S$, the counting measure $m(A)$ also denoted as $n(A)$ or $\#(A)$ is the number of elements in $A$, i.e. the cardinality of the set $A$. Excercise: Show that the conditions for $m$ being a measure hold.
+
+2. Dirac Measure: Consider a measurable space $(S, \mathcal{F})$. Now pick an arbitrary element $x \in S$. Note that we will be defining the measure with respect to this certain element $x$. Now, the Dirac Measure $\delta_{x}(A)$ for a subset $A \subseteq S$ is defined as the piecewise function:
+
+$$
+\delta_{x}(A) = \begin{cases} 
+    1 & x \in A \\
+    0 & x \notin A
+\end{cases}
+$$
+
+The Dirac measure of a set $A$ with respect to a certain element $x$ in $S$ is essentially an indicator of whether or not $A$ contains $x$. Excercise: Show that the conditions for $\delta_{x}(A)$ being a measure hold.
+
+# Measure Theoretic Probability in Discrete Spaces
+
+Okay, let's define probability as a measure. We're not quite equipped with the tools to define probability for continuous functions, however we can define it for discrete ones. Let's get started.
+
+As was covered in previous chapters, let's define a sample space $S = \{x_1, x_2, ..., x_n\}$ where each $x_i$ is a certain outcome. We assign probabilities to each outcome $x_i$. We say that the probability of $x_i$ occuring is $p_i$ where $p_i \in [0, 1]$. Clearly $\sum_{i = 1}^n x_ip_i = 1$.
+
+Now, define $\mathcal{F} = \mathcal{P}(S)$. We define probability as a measure $m$ or $\mathbb{P}$ for a subset $A \subseteq S$:
+
+$$
+\mathcal{P}[A] = \sum_{i = 1}^n p_i\delta_{x_i}(A)
+$$
+
+where $\delta_{x_i}$ is the Dirac measure with respect to $x_i$. This definition can be explained intuitively. We calculate the probability of the set $A$ by adding up probabilities of every outcome $x_i$ that belongs to $A$. And this check for whether or not an outcome is contained in $A$ is done using the Dirac measure.
+
+So, if $A$ contains several outcomes, the probability of $A$ is just the sum of the individual probabilities of each outcome in $A$.
+
+We'll define probability for continuous functions once we cover Lebesgue measures and Lebesgue integrals in the later sections.
