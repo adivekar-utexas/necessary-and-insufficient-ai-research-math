@@ -1,0 +1,175 @@
+# The Typical Process of Statistical Inference
+
+---
+
+## 1. From Statistic to Insight
+
+By itself, a *statistic* (like the sample mean or standard deviation) is just a number computed from a sample:
+
+$$
+f(X_1, \dots, X_n)
+$$
+
+It’s useful — but its full power is revealed when we use it to estimate something about the **population**.
+
+This begins the process of **statistical inference**.
+
+---
+
+## 2. Population Parameters
+
+Suppose we could measure the attribute for all $N$ items in the population.  
+We could compute a true summary of that attribute — called a **population parameter**.
+
+For example, the **true mean Age** of the population is:
+
+$$
+\Theta = \mu_{\text{Age}} = \frac{1}{N} \sum_{i=1}^N a_i
+$$
+
+This value $\Theta$ is:
+- A fixed number (not a random variable)
+- Typically **unknown** in practice
+
+---
+
+## 3. Statistics as Estimators
+
+We usually can't compute the true parameter $\Theta$ — so we estimate it using a statistic.
+
+When we use a statistic *with the intent* of estimating a population parameter, we call it an **estimator**.
+
+Formally:
+$$
+\hat{\Theta} = h(X_1, \dots, X_n)
+$$
+
+Nothing changes about the function $h(\cdot)$ itself — it's still a statistic.  
+What changes is how we **interpret** it.
+
+---
+
+## 4. Examples of Estimators
+
+Let’s say the parameter of interest is the **standard deviation** of the "Age" attribute.
+
+Then $\Theta = \text{Std. Dev}(\text{Age})$
+
+We now consider 3 different sample statistics as potential estimators:
+
+### (a) Sample Mean
+$$
+h_1(X_1, \dots, X_n) = \frac{1}{n} \sum X_i
+$$
+
+This estimates the mean — not the standard deviation — so it's **not a good estimator** for $\Theta$ in this case.
+
+---
+
+### (b) Half of the Sample Range
+$$
+h_2(X_1, \dots, X_n) = \frac{1}{2} \left[ \max(X_i) - \min(X_i) \right]
+$$
+
+This measures spread, so it might be a **better** estimator of $\Theta$ than the mean — but still a rough one.
+
+---
+
+### (c) Sample Standard Deviation
+$$
+h_3(X_1, \dots, X_n) = \sqrt{ \frac{1}{n - 1} \sum_{i=1}^n (X_i - \bar{X})^2 }
+$$
+
+This is the **standard** estimator used for population standard deviation. It has a strong theoretical foundation (based on the chi-squared distribution).
+
+---
+
+## 5. How Good is an Estimator?
+
+There are several metrics to evaluate how well an estimator $\hat{\Theta}$ performs:
+
+- **Bias**
+- **Mean Squared Error (MSE)**
+- **Variance**
+
+(These are covered in detail in a later section.)
+
+> For now: just know that not all estimators are equal. Some give more accurate, consistent estimates than others.
+
+---
+
+## 6. Point vs Interval Estimation
+
+### Point Estimate
+
+A **point estimate** is a single value for the parameter:
+$$
+\hat{\theta} = 27.6
+$$
+For example, the estimated average age of voters in Massachusetts.
+
+### Interval Estimate (Confidence Interval)
+
+An **interval estimate** gives a range:
+$$
+\hat{\Theta} \in [22.3,\ 32.9]
+$$
+
+This means: “We are 95% confident the true value $\Theta$ lies in this interval.”
+
+Confidence intervals express the **uncertainty** of our estimate.
+
+---
+
+## 7. Hypothesis Testing
+
+Sometimes we want to make a **yes–no decision**.
+
+Example:
+> "We find statistical evidence that voters aged 20–30 prefer candidate A."
+
+This is the domain of **hypothesis testing** — the third major component of inference.
+
+Instead of estimating a value, we test whether some claim is **supported by the data**.
+
+> Hypothesis tests are popular because they provide **actionable** results (e.g., "reject" or "fail to reject" the null hypothesis).
+
+---
+
+## 8. The Trinity of Frequentist Inference
+
+Whenever we take a sample $X_1, \dots, X_n$, we usually apply one of these three procedures:
+
+| Step | Type                   | Description                            | Example                               |
+|------|------------------------|----------------------------------------|---------------------------------------|
+| ①    | Point Estimation       | Single-value estimate                  | $\hat{\theta} = 27.6$                 |
+| ②    | Interval Estimation    | Range with confidence                  | $[22.3,\ 32.9]$                        |
+| ③    | Hypothesis Testing     | Statistical yes/no decision            | "Voters 20–30 support candidate A"    |
+
+These form the **core tools of statistical inference**.
+
+---
+
+## 9. Frequentist vs Bayesian Inference
+
+So far, we've followed the **Frequentist** perspective, where:
+
+- The population parameter $\Theta$ is **fixed**.
+- Our sample introduces randomness.
+- We use sampling distributions to estimate or test.
+
+In **Bayesian inference**, however:
+
+- The population parameter $\Theta$ is also treated as a **random variable**
+- We use **Bayes’ Rule** to update beliefs about $\Theta$ as new data arrives
+
+We will explore Bayesian methods in a later chapter.
+
+---
+
+## 10. Summary
+
+- A **statistic** becomes an **estimator** when used to estimate a parameter
+- Estimators can be evaluated using Bias, Variance, and MSE
+- Inference has 3 main modes: Point estimation, Interval estimation, and Hypothesis testing
+- Frequentist inference treats $\Theta$ as fixed; Bayesian treats it as a r.v.

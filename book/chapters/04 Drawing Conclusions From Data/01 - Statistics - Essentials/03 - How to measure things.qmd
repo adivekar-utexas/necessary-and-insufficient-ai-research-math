@@ -1,0 +1,120 @@
+# How to Measure Things
+
+---
+
+## 1. Levels of Measurement
+
+Each item in a population or sample has *attributes* that can be measured — such as gender, age, or income.
+
+But not all attributes are measured the same way. In statistics, we classify attribute-values into **four types of measurements** known as the **NOIR levels**:
+
+- **N**ominal
+- **O**rdinal
+- **I**nterval
+- **R**atio
+
+These levels are ordered from least to most mathematically expressive.
+
+---
+
+## 2. The NOIR Levels
+
+### 2.1 $\boxed{N}$ Nominal Measure (Categorical)
+
+- Categorical values with **no inherent ordering**
+- Example:  
+  *Gender* of voters in Massachusetts → `"Male"`, `"Female"`, `"Non-binary"`
+
+You can only check if two values are the **same or different**.
+
+---
+
+### 2.2 $\boxed{O}$ Ordinal Measure
+
+- **Ordered** categories
+- Example:  
+  *Age group* labeled as `"Young"`, `"Middle-aged"`, `"Senior"`
+
+You can check for **relative ranking**, but **not distances**.
+
+---
+
+### 2.3 $\boxed{I}$ Interval Measure
+
+- **Quantitative** values with **fixed intervals**
+- Example:  
+  *Birth year* — the difference between years is meaningful:
+  $$1990 - 1975 = 15$$
+
+But **no true zero**. You can add/subtract, but ratios are meaningless.
+
+---
+
+### 2.4 $\boxed{R}$ Ratio Measure
+
+- **Interval measure** with a **true zero**
+- Example:  
+  *Age in years* can take values like $0, 1, ..., 150$
+
+Because there’s an objective zero, you can compute **ratios**:
+> Age 20 is twice Age 10.
+
+---
+
+## 3. Why Ratio Measures Are Special
+
+Ratio measures support **all mathematical operations**:
+
+- Add
+- Subtract
+- Multiply
+- Divide
+
+They’re the only type for which you can meaningfully say things like:
+> “This value is 3 times that one.”
+
+In **physics**, many attributes like **mass**, **velocity**, and **force** are **ratio measures**. This is why you can calculate:
+
+- Means
+- Percentages
+- Ratios
+
+Only on ratio-scaled data.
+
+---
+
+## 4. Summary Table of Measurement Levels
+
+Here’s a quick comparison of the four levels:
+
+| **Level**   | **Feature**        | **Allowable Operations**                              | **Examples**                        |
+|-------------|--------------------|--------------------------------------------------------|-------------------------------------|
+| Nominal     | Identity (same/diff) | Count frequencies                                       | Gender, ice cream flavors           |
+| Ordinal     | Order              | As nominal, plus: rank/order                           | Movie ratings, ranking of colleges  |
+| Interval    | Equal intervals    | As ordinal, plus: add, subtract, calculate mean        | Birth year, temperature (Celsius)   |
+| Ratio       | True zero          | As interval, plus: multiply/divide, ratios, percentages | Age, height, weight, time duration  |
+
+---
+
+## 5. Why Measurement Type Matters
+
+The level of measurement of an attribute determines **which statistics are meaningful**.
+
+| Statistic         | Requires Measurement Type |
+|------------------|---------------------------|
+| Mode              | Nominal or higher         |
+| Median            | Ordinal or higher         |
+| Mean, Variance    | Interval or Ratio         |
+| Percentages, Ratios | Ratio only               |
+
+Trying to compute the **mean** of nominal data like “ice cream flavors” is meaningless.  
+But computing the **mode** of nominal data (most common flavor) is fine.
+
+---
+
+## 6. Summary
+
+- Different attributes require different levels of measurement
+- The NOIR hierarchy: Nominal → Ordinal → Interval → Ratio
+- The more expressive the level, the more statistical operations you can perform
+- Ratio measures allow all operations and are critical for most AI/ML tasks

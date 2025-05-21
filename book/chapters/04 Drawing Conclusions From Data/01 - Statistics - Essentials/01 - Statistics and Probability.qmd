@@ -1,0 +1,182 @@
+# Statistics and Probability
+
+---
+
+## 1. Motivation: Why Statistics?
+
+A **statistician** or **scientist** is often interested in a particular aspect of a group of items.  
+For example, the group could be *all eligible voters in the state of Massachusetts*, and the *attribute* could be the **average age** of these voters, or the **percentage** who intend to vote.
+
+Even though it might be important to know the true value of such an attribute, measuring it for every voter is typically impractical.
+
+---
+
+## 2. The Challenge of Measuring Everything
+
+The number of eligible voters is large — possibly in the tens of millions. It would be extremely expensive and time-consuming to ask every single voter about their age or voting intent.
+
+Luckily, we don’t have to.
+
+We can instead **select a small, representative subset** (a sample), and use it to make an informed estimate about the population.
+
+---
+
+## 3. Populations and Samples
+
+Let’s introduce key terms:
+
+- **Population**: The entire group of interest (e.g., all eligible MA voters)
+- **Sample**: A subset of the population that we can actually measure (e.g., 10,000 voters)
+- **Attribute**: A measurable feature of each item (e.g., age)
+
+---
+
+## 4. Attribute-Values and Notation
+
+Let the population have $N$ items.  
+Each item has an attribute-value denoted:
+
+$$
+a_1, a_2, \dots, a_N
+$$
+
+We select a sample of size $n$, and measure the attribute for each sampled item:
+
+$$
+X_1, X_2, \dots, X_n
+$$
+
+Because of the **randomized nature of sampling**, each $X_i$ is treated as a **random variable**.
+
+---
+
+## 5. Sampling and Randomness
+
+Since our sample is drawn at random, the act of sampling is like running a random experiment.
+
+Hence:
+$$
+X_1, X_2, \dots, X_n \quad \text{are random variables}
+$$
+
+They are drawn from an unknown population distribution, which we now discuss.
+
+---
+
+## 6. The Population Distribution
+
+Even though the population has a finite size $N$, we often **approximate** the distribution of the attribute-values with a well-known distribution like:
+
+- Bernoulli
+- Gaussian
+- Poisson
+
+We call this assumed distribution the **population distribution**, denoted $\mathcal{D}$.
+
+> Under simple random sampling:
+> $$
+> X_1, \dots, X_n \overset{\text{iid}}{\sim} \mathcal{D}
+> $$
+
+While we do not know the exact parameters of $\mathcal{D}$, we usually assume we know its family.
+
+---
+
+## 7. Defining a Statistic
+
+Once we have sampled values $X_1, \dots, X_n$, we compute a **statistic**.
+
+A statistic is any function of the sample:
+
+$$
+f(X_1, \dots, X_n)
+$$
+
+This function summarizes the data.  
+Examples include:
+
+- Mean
+- Mode
+- Median
+- 99th percentile
+- Variance
+
+Some functions are **valid but useless** (e.g., the sum of the 10th digit of each $X_i$), while others are both valid and useful.
+
+---
+
+## 8. Sampling Distributions
+
+Since $X_1, \dots, X_n$ are random variables, any statistic $f(X_1, \dots, X_n)$ is also a **random variable**.
+
+Its distribution is called the **sampling distribution** of the statistic.
+
+For example, the sample mean:
+
+$$
+\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i
+$$
+
+is a statistic whose sampling distribution approaches the **Normal distribution** as $n \to \infty$ (Central Limit Theorem).
+
+> **Important:** The population is always assumed to be fixed.  
+> The randomness comes from the **sampling procedure**, which leads to variation in the statistic.
+
+---
+
+## 9. Sampling Repeatedly
+
+If we repeat the sampling process $k$ times, we get:
+
+$$
+(X_1^{(1)}, \dots, X_n^{(1)}), \quad (X_1^{(2)}, \dots, X_n^{(2)}), \quad \dots, \quad (X_1^{(k)}, \dots, X_n^{(k)})
+$$
+
+We will obtain different values for each sample mean:
+$$
+\bar{X}^{(1)}, \bar{X}^{(2)}, \dots, \bar{X}^{(k)}
+$$
+
+This is why the statistic $\bar{X}$ has a **sampling distribution**.
+
+---
+
+## 10. The Population Parameter
+
+Now imagine we somehow measured the attribute-values for all $N$ items in the population:
+
+$$
+a_1, a_2, \dots, a_N
+$$
+
+We compute the **true statistic** on this full dataset:
+
+$$
+\Theta = f(a_1, \dots, a_N)
+$$
+
+This value $\Theta$ is called the **population parameter**.
+
+It is not random — it's just a calculation on fixed numbers.
+
+---
+
+## 11. Example: True Mean Age
+
+If the attribute is Age, then the true mean age across the entire population is:
+
+$$
+\Theta = \mu_{\text{Age}} = \frac{1}{N} \sum_{i=1}^N a_i
+$$
+
+This is the **population mean** — a fixed number we’re trying to estimate using a statistic (like $\bar{X}$).
+
+---
+
+## 12. Summary
+
+- Populations are large; samples are small.
+- Attribute-values from the sample are treated as **random variables**.
+- A **statistic** is any function of these random variables.
+- A **parameter** is a fixed (but unknown) value based on the whole population.
+- The statistic has a **sampling distribution** because the sample is random.
