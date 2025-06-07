@@ -1,0 +1,16 @@
+# 2.2.1 Vector Addition
+
+**Definition 2.2.1.1** (Vector Addition). \ Vector Addition is the element-wise sum of two vectors $\mathbf{u}, \mathbf{v} \in \mathbb{R}^n$ to yield another vector $\mathbf{w} \in \mathbb{R}^n$.
+$$
+\mathbf{u} + \mathbf{v} = \begin{bmatrix} u_1\\ u_2\\ \vdots\\ u_n \end{bmatrix} + \begin{bmatrix} v_1\\ v_2\\ \vdots\\ v_n \end{bmatrix} = \begin{bmatrix} u_1 + v_1\\ u_2 + v_2\\ \vdots\\ u_n + v_n \end{bmatrix} \in \mathbb{R}^n
+$$
+$$
+\mathbf{L} :  \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}^n
+$$
+\
+\
+
+**Example 2.2.1.1**
+$$
+\begin{bmatrix} 5\\ 3\\ \end{bmatrix} + \begin{bmatrix} 2\\ 6\\ \end{bmatrix} = \begin{bmatrix} 5 + 2\\ 3 + 6\\ \end{bmatrix} = \begin{bmatrix} 7\\ 9\\ \end{bmatrix} \in \mathbb{R}^2
+$$
