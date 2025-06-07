@@ -1,0 +1,393 @@
+### **Expanding the Statistical Learning Framework**
+
+To **move beyond the assumptions above**, let us **expand** the **Statistical Learning Framework**  
+we had used for **simple PAC learning**.
+
+
+### **1. Data Labels Generating Distribution**
+
+Previously, we had assumed a **distribution** $D: X \to [0,1]$.  
+Now, we define the **full distribution**:
+
+$$
+D: X \times Y \to [0,1]
+$$
+
+- When **given an instance** $x \in X$ from the **domain set** $X$,  
+  - And labeled $y \in Y$ from the **output space** $Y$,
+  - The **distribution returns a probability value** in **$[0,1]$**.
+
+- We can imagine $D$ as being **composed of two distributions**:
+
+  1. **A marginal distribution** $D_X: X \to [0,1]$, which:
+     - Assigns **each example** $x \in X$ a probability $D_X(x)$ of being **sampled**.
+
+  2. **A conditional distribution** $D_Y: Y | X \to [0,1]$, which:
+     - **Given that** a particular $x$ has been sampled from $D_X$,
+     - Assigns **each label** $y \in Y$ a **conditional probability** $D_Y(y | x)$.
+
+
+### **2. Relationship Between Marginal and Conditional Distributions**
+
+By definition of **conditional probability**, we have:
+
+$$
+D(X, Y) = D_X(X) \cdot D_Y(Y | X).
+$$
+
+> **Example: Dragonfruit Classification**  
+> In our **dragonfruit example**,  
+> $D_X(\text{color=Magenta, softness=soft})$  
+> represents **the probability of observing a dragonfruit** with these **features**.
+
+### **2. Training Error and Generalization Error of a Given Hypothesis $h$**
+
+For a **particular hypothesis** $h: X \to Y$  
+(which was **produced by an algorithm** $A$ searching over a **hypothesis class** $\mathcal{H}$),  
+we can update our **definition of true/generalization error** as follows:
+
+$$
+L_D(h) = P_{(x,y) \sim D} [ h(x) \neq y ] = D \left( (x,y) \mid h(x) \neq y \right)
+$$
+
+
+### **Empirical Training Error**
+
+Our definition of **empirical training error**  
+on a **training set** $S = \{ (x^{(i)}, y^{(i)}) \}_{i=1}^{m}$ does not change:
+
+$$
+L_S(h) = \frac{\left| \{ i \in \{1, \dots, m\} \mid h(x^{(i)}) \neq y^{(i)} \} \right|}{m}
+$$
+
+- This is equivalent to:
+
+  $$
+  1 - \text{Training Accuracy} = \text{Misclassification Error Rate}.
+  $$
+
+
+### **3. Goal of the Learning Algorithm**
+
+As before, our **goal** is to get a **hypothesis** $h$:
+
+- That **minimizes the generalization error** $L_D(h)$.
+- This is **expected to be produced by a learning algorithm** $A: X^m \times Y^m \to \mathcal{H}$, as before.
+
+
+### **Key Insight: The Learning Task is Defined by $D(X, Y)$**
+
+> **In the new framework**, the learning task is **completely defined** by the **distribution** $D(X, Y)$.  
+> Our goal is to **find a hypothesis** $h$ with **low generalization error** $L_D(h)$ over $D(X, Y)$.  
+> *(Earlier, our focus was on $L_S(h)$).*
+
+### **4. Stochasticity of the New Statistical Learning Framework**
+
+An **important difference** between:
+
+- The **old learning framework** (using $D(X)$)  
+- The **new learning framework** (using $D(X, Y)$)  
+
+is that the **output label** $y^{(i)}$ is now a **probabilistic function** of $x^{(i)}$.  
+That is, **labels are stochastic rather than deterministic** (as they were before).
+
+
+### **Why is this important?**
+
+- This **stochasticity** is a **direct consequence** of the fact that **each label** $y^{(i)}$  
+  may now be **sampled from the conditional probability distribution**:
+
+  $$
+  D_Y(Y | X = x^{(i)})
+  $$
+
+  rather than being **deterministically labeled** by a function from a **concept class** $C$.
+
+- **The stochastic nature** of the **new statistical learning framework** is **very practical**  
+  because it reflects the **real-world uncertainty** in labeling.
+
+- **In the real world**, it is **naïve** to assume that the **true label** $y^{(i)}$  
+  is **completely determined** by a **finite set of input features** $x^{(i)}$.
+
+
+### **Example: Predicting Gender from Height**
+
+- Suppose we measure **height** ($x^{(i)}$)  
+  and wish to predict the **gender** ($y^{(i)}$).
+- Several input values, like $x =$ `"5'5'' to 6'0''`,  
+  **could correspond to both male and female labels**.
+- Thus, we define each unique point $x^{(i)} \in X$  
+  to be associated with a **probability distribution over the target**:
+
+  $$
+  D_Y(Y | X = x^{(i)}).
+  $$
+
+
+### **Proper PAC Learning vs. Agnostic PAC Learning**
+
+- **“Proper” PAC Learning** used the **deterministic** Statistical Learning Framework, where:
+
+  $$
+  x^{(i)} \sim D(X), \quad y^{(i)} = f^*(x^{(i)})
+  $$
+
+- **Agnostic PAC Learning** instead **uses the stochastic Statistical Learning framework**.
+- This **changes the guarantees** we can make **about error**.
+
+### **5. Bayes Error Rate and the Bayes Optimal Predictor**
+
+In the **deterministic case**, by definition, there existed  
+a **true concept function** $f: X \to Y$ from a concept class $C$  
+(i.e., $f \in C$) such that its **generalization error** was zero:
+
+$$
+L_D(f) = 0.
+$$
+
+- This was because we assumed that **the same label** $y$  
+  was **assigned to every instance** $x \in X$.
+
+
+### **The Stochastic Case and Conditional Probabilities**
+
+- In the **stochastic case**, however, labels for a **given** $x \in X$  
+  come from a **conditional probability distribution**:
+
+  $$
+  D_Y(Y | X).
+  $$
+
+- Unless we have the case where:
+
+  $$
+  \forall x \in X, \exists y \in Y \text{ such that } D_Y(y | x) = 1,
+  $$
+
+  **all points** $x \in X$ have some degree of uncertainty,  
+  meaning multiple values of $y$ have **non-zero probability**.
+
+
+### **Example: Dragonfruit Classification**
+
+We might have the following **conditional probabilities**:
+
+| $x$ (Color, Softness) | $D_Y(y = \text{tasty} | x)$ | $D_Y(y = \text{not tasty} | x)$ |
+|--------------------|-----------------|-------------------|
+| (Green, Soft)      | 0.2             | 0.8               |
+| (Green, Firm)      | 0               | 1                 |
+| (Pink, Soft)       | 1               | 0                 |
+| (Pink, Firm)       | 1               | 0                 |
+| (Magenta, Soft)    | 1               | 0                 |
+| (Magenta, Firm)    | 0               | 1                 |
+
+
+### **Deterministic vs. Stochastic Labeling**
+
+- Here, **most of the conditional distributions** $D(Y | x)$ are **deterministic**.
+  - These cases can be **correctly labeled** by a **deterministic function** $f$,
+    which could be imagined as a **decision tree or if-else rules**.
+
+- However, in cases where **$D(Y | x)$ assigns nonzero probability to multiple labels**,  
+  such as $D_Y(y = \text{tasty} | x = \text{(Green, Soft)}) = 0.2$,  
+  **a perfect classifier cannot exist**.
+
+### **Bayes Optimal Predictor and Bayes Error Rate**
+
+In the **stochastic case**, we have seen that **perfect learning is not possible**,  
+meaning that **every classifier will have some minimum generalization error**.
+
+- This **minimum possible error** is known as the **Bayes error rate**:
+
+  $$
+  L_D(f_{\text{Bayes}})
+  $$
+
+- The corresponding classifier that **achieves this minimum error**  
+  is called the **Bayes Optimal Predictor**, denoted as $f_{\text{Bayes}}$.
+
+
+### **Bayes Error Rate and Its Properties**
+
+- The **Bayes error rate** is a **property of the learning task** $D(X, Y)$.
+- It **does not depend on the learning algorithm** $A$,  
+  nor the **hypothesis class** $H$, nor the **training set** $S$.
+- Instead, it **only depends on the distribution** $D(X, Y)$.
+
+
+### **Feature Selection and Its Impact on the Bayes Error Rate**
+
+- The **Bayes error rate can change** if we **modify the feature space** $X$.
+- **Example:** Suppose we **add a new feature** `"Shape"` to our dataset.  
+  The new feature space is now:
+
+  $$
+  X = \{\text{Color}, \text{Softness}, \text{Shape}\}
+  $$
+
+  where **Shape** can take values in:
+
+  $$
+  \{\text{Spherical}, \text{Oblong}\}.
+  $$
+
+- This **extra information** could allow us to **better separate the labels**,  
+  reducing the **Bayes error rate**.
+
+
+### **Example: Modified Conditional Probabilities**
+
+| $x$ (Color, Softness, Shape) | $D_Y(y = \text{tasty} | x)$ | $D_Y(y = \text{not tasty} | x)$ |
+|-----------------------------|-----------------|-------------------|
+| (Green, Soft, Spherical)    | 0.01            | 0.99              |
+| (Green, Soft, Oblong)       | 0.95            | 0.05              |
+| (Green, Firm, Spherical)    | 0.95            | 0.05              |
+| (Other cases remain the same, independent of Shape) |  |  |
+
+
+### **Key Takeaways:**
+1. **The Bayes error rate sets a fundamental limit** on how well we can classify,  
+   even with the best possible classifier.
+2. **Feature selection impacts the Bayes error rate**—some features may  
+   help **separate classes more effectively**.
+3. **Adding informative features** (like `"Shape"`) can **reduce the Bayes error rate**  
+   and improve classification performance.
+
+### **Bayes Optimal Predictor and the Bayes Error Rate**
+
+We observe that **better separability of features** leads to a **lower Bayes error rate**.  
+Conversely, introducing **more features** (if they are **noisy**) can **increase the Bayes error rate**.
+
+
+### **Updated Conditional Probabilities with Shape Feature**
+
+| $x$ (Color, Softness, Shape) | $D_Y(y = \text{tasty} | x)$ | $D_Y(y = \text{not tasty} | x)$ |
+|----------------------------------|-----------------|-------------------|
+| (Green, Soft, Spherical)        | 0.49            | 0.51              |
+| (Green, Soft, Oblong)           | 0.51            | 0.49              |
+| (Other cases remain the same, independent of Shape) |  |  |
+
+
+### **Defining the Bayes Optimal Predictor**
+
+To **achieve the lowest generalization error**  
+(i.e., **to reach the Bayes error rate**),  
+the **Bayes Optimal Predictor** $f_{\text{Bayes}}$  
+must **select the target value** $y \in Y$  
+with the **highest probability** $D_Y(y | x)$.
+
+$$
+\forall x \in X, \quad f_{\text{Bayes}}(x) = \arg\max_{y \in Y} D_Y(y | x)
+$$
+
+This means that for **any given input** $x$,  
+the **best possible classifier** simply **chooses the most likely label**.
+
+
+### **Bayes Error Rate and the Learner's Limitations**
+
+- **$f_{\text{Bayes}}$ depends on $D_Y(Y | X)$, the conditional portion of $D(X, Y)$.**
+- Since **$D(X, Y)$ is unknown to the learner**,  
+  **$f_{\text{Bayes}}$ is also unknown**.
+- This presents a **fundamental challenge** in machine learning.
+
+
+### **Practical Learning and Approximation of $f_{\text{Bayes}}$**
+
+Our learning process involves:
+
+1. **Using a learning algorithm** $A: X \times Y \to H$.
+2. **Sampling a training set** $S \sim D^m(X, Y)$ of size $m$.
+3. **Producing a hypothesis** $h_S = A(S)$.
+4. **Minimizing the generalization error** $L_D(h_S)$.
+
+However:
+- The **best hypothesis** $h_S$ **need not be** $f_{\text{Bayes}}$.
+- The quality of $h_S$ depends on **how closely $f_{\text{Bayes}}$ belongs to the hypothesis class $H$**.
+- If **$f_{\text{Bayes}} \notin H$**, then the **best approximation within $H$** is the best we can do.
+
+### **Bayes Error and the Limitations of Learning**
+
+In the stochastic setting, the goal is to **find the best hypothesis**  
+$h^*$ from the hypothesis class $H$ that minimizes generalization error:
+
+$$
+h^* = \arg\min_{h \in H} L_D(h)
+$$
+
+Since we are constrained by $H$, it is evident that:
+
+$$
+L_D(f_{\text{Bayes}}) \leq L_D(h^*)
+$$
+
+where $f_{\text{Bayes}}$ represents the **Bayes optimal predictor**.
+
+
+### **The Irreducible Error in Learning**
+
+- The **Bayes error rate** is also called the **irreducible error**  
+  because it represents the **minimum possible error** that any learner can achieve.
+- This **error cannot be eliminated** by improving the learning algorithm **$A$**  
+  or modifying the hypothesis class $H$.  
+  It is **an inherent property of the data distribution $D(X, Y)$.**
+
+
+### **Impact of Noise on Learning**
+
+- If **$D_Y(y | x)$ assigns nonzero probability to multiple labels $y$**  
+  for the same input $x$, learning becomes fundamentally **limited**.
+- **Reducing hypothesis complexity** does not reduce the **Bayes error rate**.
+- The **only way to reduce the error further** is to **improve feature selection**  
+  (i.e., capture more informative attributes of $x$ that determine $y$).
+
+### **Agnostic PAC Learnability**
+
+Having defined the new **stochastic Statistical Learning framework**,  
+we can now define what **Agnostic PAC Learnability** means within this framework.
+
+
+### **Definition of Agnostic PAC-Learnability**
+A hypothesis class **$H$** is **Agnostic PAC-learnable** if:
+
+1. There exists a function $m_{\mathcal{H}}: (0,1)^2 \to \mathbb{N}$.
+2. There exists a **learning algorithm** $A: X \times Y \to H$  
+   with the following property:
+
+   - For **every** $\epsilon, \delta \in (0,1)$,
+   - And for **every data-label generating distribution** $D(X, Y)$,
+   - When running $A$ on $m = m_{\mathcal{H}}(\epsilon, \delta)$  
+     **i.i.d. examples** drawn from $D(X, Y)$,
+
+   The algorithm **produces a hypothesis** $h_S$ such that:
+
+   $$
+   \text{with probability} \geq (1-\delta), \quad L_D(h_S) - \min_{h \in H} L_D(h) \leq \epsilon
+   $$
+
+   That is, the **generalization error** of $h_S = A(S)$  
+   is **within** $\epsilon$ of the best possible hypothesis in $H$,  
+   which we define as:
+
+   $$
+   h^* = \arg\min_{h \in H} L_D(h)
+   $$
+
+
+### **Moving Away from the Realizability Assumption**
+Unlike previous models that assumed the **true function** $f$  
+was within the hypothesis class $H$,  
+**Agnostic PAC-Learnability does not make this assumption.**
+
+- The **best hypothesis** in $H$ may still have a **nonzero generalization error**:
+
+  $$
+  \min_{h \in H} L_D(h)
+  $$
+
+- This error **may not be the same** as the **Bayes error rate**  
+  since we **cannot guarantee** that $f_{\text{Bayes}} \in H$.
+
+- Thus, the **best we can do** is to be **$\epsilon$-accurate**  
+  **with respect to the best hypothesis in $H$**.
+

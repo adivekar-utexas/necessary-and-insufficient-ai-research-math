@@ -1,0 +1,260 @@
+## The Statistical Learning Framework
+
+Here, we will formally (i.e., mathematically) set up the framework in which **statistical learning** will take place.
+
+### 1) The Input Domain $X$
+
+The **input domain** $X$ (also called the **"Domain set"** or the **"Instance space"**) is defined by $X(\text{chi})$. This is the set of all possible objects we want to label, e.g., the set of all dragon fruits. Each item in this set (called a **domain point**) is **unique** and has some properties. 
+
+Typically, we represent these properties by a **vector of features**, and as a result, the **domain set** becomes **all unique points in the feature space**.
+
+For example, suppose that our **dragon fruit instances** have two features:
+
+- **Color** $\in \{\text{Green, Pink, Magenta}\}$
+- **Softness** $\in \{\text{Soft, Firm}\}$
+
+In that case, our **domain set** would be all $3 \times 2 = 6$ possibilities of dragon fruits:
+
+$$
+X = \{ (\text{Green, Soft}), (\text{Green, Firm}), (\text{Pink, Soft}), (\text{Pink, Firm}),
+(\text{Magenta, Soft}), (\text{Magenta, Firm}) \}
+$$
+
+We see that $X$ here is a **discrete space**.
+
+However, we might also have **one or more continuous features** in $X$, which would map each domain point to a **point in a continuous space**.
+
+In this case, the domain set $X$ is **infinite**.
+
+### 2) The Target Range $Y$
+
+The **target range** (also called the **"Label set"** or **"Output set"**), denoted by $Y$ (sometimes $\mathcal{Y}$), is the set of values we want our learner to predict. 
+
+For a **binary classification problem**, such as our **dragon fruit example**, we could have:
+
+$$
+Y = \{0,1\} \quad \text{or} \quad Y = \{\text{Not tasty, Tasty}\}
+$$
+
+For a **regression problem**, $Y$ might be **continuous**.
+
+
+### 3) The Concept $f^*$ and its Concept Class $\mathcal{C}$
+
+In order for anyone to **learn**, we must assume that there is **some correlation between $X$ and $Y$**. 
+
+For example, if **all green dragon fruits are not tasty**, then there is an underlying pattern.
+
+Formally, in **statistical learning**, we assume that the **relationship between $X$ and $Y$ is completely dictated by some function** $f^*$:
+
+$$
+f^*: X \to Y
+$$
+
+This is the **"perfect" function** for our problem, also called the **concept we are trying to learn**. 
+
+$f^*$ is a function which, given any $x \in X$ from the domain set, will return the **"correct"** $y^* = f^*(x) \in Y$ from the target range.
+
+If we could **freely use** $f^*$ for any domain point we encountered, then we **would not need to learn anything**.
+
+However, in most cases, $f^*$ is **unknown**.
+
+For example, we may **never know exactly** (without any doubt) **which properties of a dragon fruit make it tasty or not**. 
+
+There might be **hundreds of properties** that go into this decision, some of which might be **continuous**.
+
+Statistical learning is to **estimate** $f^*$ using data gathered from the real world.
+
+
+Formally, a **concept** is a function:
+
+$$
+f: X \to Y
+$$
+
+which maps examples from the instance space $X$ to produce true (ground-truth) labels from the target space $Y$.
+
+A **concept class** $\mathcal{C}$ is a **set of concepts** we may wish to learn (e.g., $\mathcal{C}$ can be the set of all triangles in the $\mathbb{R}^2$ plane).
+
+
+### **4) Training Set $S$**
+
+How do we estimate $f^*$? 
+
+One way to do so is to **codify** a long, complicated series of **if-else rules**. This was the approach taken by many default **expert systems**.
+
+The other way is to **learn** $h$ (our estimate of $f^*$) from **examples gathered from the real world**. 
+
+Typically, we call this the **"training set"**, as we use this set to train our learner on how to best estimate $f^*$.
+
+
+Formally, in supervised learning, we assume a **training set** $S \subseteq X \times Y$, given as:
+
+$$
+S = \{(x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), \dots, (x^{(m)}, y^{(m)})\}
+$$
+
+where $S$ is a sequence of **domain points** with corresponding **correct labels**:
+
+$$
+y^{(i)} = f^*(x^{(i)}), \quad \forall i \in \{1, 2, ..., m\}
+$$
+
+
+How do we gather such a training set $S$? Clearly, we must **pick (sample) examples** from the **real world**. 
+
+But **how do we decide where to pick them from**?
+
+As it turns out, this is **not as simple** as you might expect.
+
+For example, if you **only picked $m = 10$ dragon fruits** from the **nearest market** to learn from, you might learn a few rules which **do not work well on fruits in a different market**.
+
+This is called **sample bias** or **selection bias**—where the data you used to train is only a **small subset** of the world and does not work in other domains in the world.
+
+For the moment, let's **ignore selection bias** and assume that **all data points** were **chosen randomly** from the real world. 
+
+Concretely, let's assume there is a **probability distribution** $D$, which is defined over the **domain set** $X$. 
+
+For example, if $X = \{\text{Green, Pink, Magenta}\} \times \{\text{Soft, Firm}\}$, then we might have $D$ as the **probability mass function**:
+
+|          | Green | Pink | Magenta |
+|----------|-------|------|---------|
+| **Soft** | $\frac{1}{12}$ | $\frac{1}{12}$ | $\frac{1}{12}$ |
+| **Firm** | $\frac{5}{12}$ | $\frac{2}{12}$ | $\frac{2}{12}$ |
+
+The point being made here is that in the real world, **not every domain point $x \in X$** has an **equal probability of being seen**. 
+
+Above, we see that **Firm, Magenta dragon fruits** are seen in the market $\frac{5}{12}$ times.
+
+Note that $D(X)$ is **only defined** on the **input domain $X$**; it **does not depend on the target range $Y$** (at least for the moment).
+
+We thus assume that our **training set $S$** was **generated by sampling** $m$ points (randomly) from the **probability distribution $D(X)$** and then **labeling** by the **correct labeling function $f: X \to Y$**.
+
+Mathematically:
+
+$$
+S = \{(x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), \dots, (x^{(m)}, y^{(m)}) \}, \quad x^{(i)} \sim D(X), \quad y^{(i)} = f(x^{(i)}), \quad i \in \{1, 2, \dots, m\}
+$$
+
+### **5) The Learning Algorithm $A$ and Hypothesis $h$**
+
+A **learner** or **learning algorithm** $A$ is one which, when fed a training set $S$, produces a **hypothesis**:
+
+$$
+h = A(S)
+$$
+
+The **hypothesis** is also called a **predictor** or (if we are dealing with classification) a **classifier**.
+
+Concretely, the **hypothesis** is a function:
+
+$$
+h: X \to Y
+$$
+
+which is meant to be a **(good)** estimate of the **true target-generating concept**:
+
+$$
+f^*: X \to Y
+$$
+
+Most often, the **learning algorithm** $A$ is an **iterative process** which produces **artifacts** $\theta$, which are the **model parameters**.
+
+For example:
+- $\theta$ might be the **weights of a linear regression model**,
+- or the **if-else structure of a decision tree**.
+
+When we need to reference these **model parameters** for a **particular hypothesis**, we use the notation:
+
+$$
+h_\theta: X \to Y
+$$
+
+
+For our discussion, the most interesting piece of our setup is probably the **statistical learning algorithm**.
+
+There are several paradigms of such algorithms:
+- **Supervised vs. Unsupervised learning**
+- **MAP vs. MLE estimation**
+- **Empirical risk minimization** 
+- etc.
+
+
+A **common assumption** made by learning algorithms is that we **predefine** the structure of the **hypothesis class** $\mathcal{H}$.
+
+Then, we use the training set to **search** for a hypothesis **within** $\mathcal{H}$ whose **model parameters** are "best."
+
+In this strategy, the **learning algorithm** will **always** produce a **hypothesis from the hypothesis class $\mathcal{H}$** (also called a **hypothesis space**):
+
+$$
+h = A(S) \quad \text{s.t.} \quad h \in \mathcal{H}
+$$
+
+By **restricting** the algorithm to **output within $\mathcal{H}$**, we bias it towards **certain solutions**.
+
+Such a restriction is called an **inductive bias**.
+
+Bias is introduced **before** seeing the training data, and thus it only makes sense to introduce it **if we have some prior knowledge** of the relationship between $X$ and $Y$.
+
+For example, **logistic regression classifiers** assume $Y$ and $X$ are **linearly related** (after transformation via a function $\sigma$).
+
+As we will soon see in **more statistical hypothesis classes**, **better priors** **guard against overfitting** but **do so at the cost of higher inductive bias**. 
+
+This is called the **Bias-Variance Tradeoff**.
+
+
+### **Key Assumption: The Learning Algorithm Does Not Know $f^*$ or $D(X)$**
+
+It is **crucial** to call out that the **learning algorithm does not know**:
+1. The true function $f^*: X \to Y$
+2. The true probability distribution $D: X \to [0,1]$
+
+All it is given is the **training set $S$**.
+
+Of course, different **learning algorithms** have different **inductive biases**, some of which might perform **better on different problems**.
+
+To relate this to our **dragon fruit example**, imagine we are **newcomers** to the island and **do not know in advance**:
+- The **distribution** of **properties of various dragon fruits** we might encounter in the market ($D$)
+- How to **predict their tastiness** ($f^*$)
+
+We can only get a **better sense** of both by **drawing a sample and estimating**.
+
+### **6) Performance of a Hypothesis**
+
+We need a way to **measure the performance** of a hypothesis **quantitatively**. 
+
+For classifiers, one of the most **straightforward** ways is to measure the **misclassification error rate** in the real world, i.e., the error of $h$ is the probability of drawing $x \sim D(X)$ **for which** $h(x) \neq f^*(x)$.
+
+Concretely, we can define this probability as the **event** $E \subset X$, where:
+
+$$
+E = \{ x \in X \mid h(x) \neq f^*(x) \}
+$$
+
+That is, $D(E)$ is the probability of sampling an $x \in E$, which is mathematically equal to the **error rate**.
+
+**Formally**, we define the error (or **loss**) of a hypothesis $h$ as:
+
+$$
+L_D(f^*, h) = P_{x \sim D} (h(x) \neq f^*(x)) = D(\{x \in X \mid h(x) \neq f^*(x) \})
+$$
+
+This **error rate** $L_D(f^*, h)$ has several other names:
+- It is also called the **true error rate**.
+- It is also called the **generalization error** or **risk** (i.e., the probability that the prediction is wrong).
+- It is also called the **loss of the hypothesis**, which will become clear soon.
+
+### **The Goal of Statistical Learning**
+
+The goal of **statistical learning** can now be restated:
+
+We wish to **estimate** $f^*$ via $h_S = A(S)$, where:
+- $h_S$ is the **hypothesis function produced by the learning algorithm** $A$ using training set $S$.
+- Such that the **generalization error** of $h_S$ is **minimized**.
+
+That is:
+
+$$
+L_D(f^*, h_S) \text{ is minimized.}
+$$
+

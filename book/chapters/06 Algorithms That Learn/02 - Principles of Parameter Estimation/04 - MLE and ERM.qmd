@@ -1,0 +1,218 @@
+## MLE & ERM
+
+In **Empirical Risk Minimization (ERM)**,  
+the **learning algorithm** $A: X, Y \to H$  
+produces a **hypothesis** $h_{\Theta}$ such that  
+the **training loss** $\mathcal{L}(h_{\Theta})$ is **minimized**.
+
+The **training loss** is typically calculated **per example**  
+and then **aggregated** by taking the **expected loss value**  
+(i.e., the mean) across the **training set**.
+
+
+### **Loss Definition in PPL Learning**
+
+Let us revisit the **per-example loss definition**  
+for **generalized PPL learning**.
+
+- Let $D: Z \to [0,1]$ be the **true probability distribution**.  
+- Assume we have a **training set**:
+
+  $$
+  S = \{ z^{(1)}, z^{(2)}, \dots, z^{(m)} \} \quad \text{(i.i.d. from $D(Z)$)}
+  $$
+
+- A **function** $\ell: H \times Z \to \mathbb{R}_{+}$  
+  is called a **loss function**,  
+  where it maps **a hypothesis** $h_{\Theta}$  
+  to a **non-negative real value**.
+
+
+### **Risk & Training Error**
+
+Now, we define the **risk function**,  
+which is the **expected loss over a certain set**.
+
+#### **Generalization Error:**
+$$
+\mathcal{L}(h) = \mathbb{E}_{Z \sim D} \left[ \ell(h, Z) \right]
+$$
+
+#### **Training Error:**
+$$
+\mathcal{L}_S(h) = \mathbb{E}_{Z \sim S} \left[ \ell(h, Z) \right] = \frac{1}{m} \sum_{i=1}^{m} \ell(h, z^{(i)})
+$$
+
+
+
+### **Connection to MLE**
+
+Along with these definitions,  
+recall that **for parametric models**,  
+$h_{\Theta}$ comes from a **certain family of distributions**,  
+where we select a **particular distribution**  
+by **setting values of the parameters** $\Theta$.
+
+A **learning algorithm using the Empirical Risk Minimization rule**  
+returns a **parametric hypothesis** $h_{\Theta}$,  
+which selects $\Theta$ **so as to reduce the training error**.
+
+
+## Aligning MLE & ERM
+
+$$
+\Theta_{\text{ERM}} = \arg\min_{h_{\Theta} \in H} \mathcal{L}_S(h_{\Theta}) = \arg\min_{\Theta \in H} \mathcal{L}_S(\Theta) = \arg\min_{\Theta \in H} \frac{1}{m} \sum_{i=1}^{m} \ell(h_{\Theta}, z^{(i)})
+$$
+
+
+### **MLE Objective for Different Models**
+
+For **discriminative models**:
+
+$$
+\Theta_{\text{MLE}} = \arg\min_{\Theta \in H} \sum_{i=1}^{m} -\log P(y^{(i)} | x^{(i)}, \Theta)
+$$
+
+For **generative models**:
+
+$$
+\Theta_{\text{MLE}} = \arg\min_{\Theta \in H} \sum_{i=1}^{m} -\log P(x^{(i)}, y^{(i)} | \Theta)
+$$
+
+
+### **Connecting MLE & ERM**
+
+Thus, we see that **we can align the MLE & ERM objectives**  
+and make **MLE a special case of ERM**  
+if we **recast the negative log**  
+of the **estimated probability function** $P(Y | X, \Theta)$  
+as the **loss function** $\ell(h_{\Theta}, Z)$.
+
+
+### **Discriminative Classification & Logits**
+
+A **discriminative model** produces a **probability distribution**:
+
+$$
+h_{\Theta}(x) = P(Y | X = x, \Theta)
+$$
+
+We can use the **negative log** of the true response  
+as the **loss function**:
+
+$$
+\ell(h_{\Theta}, z^{(i)}) = \ell(h_{\Theta}, (x^{(i)}, y^{(i)})) = -\log P(Y = y^{(i)} | X = x^{(i)}, \Theta)
+$$
+
+For **discriminative classification**,  
+a **common strategy** (followed by **logistic regression**  
+and **all neural networks**)  
+is to create a model that **outputs a logit**.
+
+A **logit** is:
+- A **scalar** $t \in (-\infty, \infty)$ for **binary classification**.
+- A **vector** $t \in \mathbb{R}^{k}$ for **k-class classification**.
+
+
+### **Binary Classification with Logistic Regression**
+
+For **binary classification**,  
+we pass the **logit value** through a **sigmoid function**:
+
+$$
+\sigma(t) = \frac{1}{1 + e^{-t}}
+$$
+
+(This outputs a value in **[0,1]**,  
+which we can interpret as the **probability**  
+of the **positive class** $Y = 1$):
+
+$$
+P(Y = 1 | X = x^{(i)}, \Theta) = \sigma(t)
+$$
+
+Now, the **classifier’s loss** for one example is:
+
+$$
+\ell(h_{\Theta}, x^{(i)}, y^{(i)}) = \sum_{j=1}^{m} \frac{1}{m} \mathbb{1}[y^{(i)} = y^{(i)'}] \log P(Y = y^{(i)} | X = x^{(i)}, \Theta)
+$$
+
+For **binary classification**, this simplifies to:
+
+$$
+\ell(h_{\Theta}) = -y^{(i)} \log \sigma(t) - (1 - y^{(i)}) \log(1 - \sigma(t))
+$$
+
+**Binary Cross-Entropy Loss**
+
+
+### **(b) Multiclass Classification & Softmax Loss**
+
+For **multiclass classification**,  
+we pass the **logit vector** $t \in \mathbb{R}^{k}$  
+through a **softmax function**:
+
+$$
+\text{Softmax}: \mathbb{R}^{k} \to \mathbb{R}^{k}
+$$
+
+Like the **sigmoid function**,  
+this is a **probabilistic function**—  
+it takes a **vector of logits** and returns  
+a **vector representing a probability distribution**  
+over $k$ classes.
+
+The **output vector** $\text{Softmax}(t)$  
+has **all values between [0,1]**,  
+and the function is:
+
+$$
+\text{Softmax}(t)_j = \frac{e^{t_j}}{\sum_{j=1}^{k} e^{t_j}}, \quad \forall j \in \{1, \dots, k\}
+$$
+
+We **interpret each element** of the softmax vector  
+as the **corresponding probability value** for that class:
+
+$$
+P(Y = j | X = x^{(i)}, \Theta) = \text{Softmax}(t)_j
+$$
+
+Thus, the **classifier’s loss for one example** becomes:
+
+$$
+\ell(h_{\Theta}, x^{(i)}, y^{(i)}) = - \sum_{j=1}^{k} \mathbb{1}[y^{(i)} = j] \log P(Y = j | X = x^{(i)}, \Theta)
+$$
+
+Substituting the softmax function:
+
+$$
+\ell(h_{\Theta}, x^{(i)}, y^{(i)}) = - \sum_{j=1}^{k} \mathbb{1}[y^{(i)} = j] \log \text{Softmax}(t)_j
+$$
+
+which simplifies to:
+
+$$
+\ell(h_{\Theta}, x^{(i)}, y^{(i)}) = -\log \text{Softmax}(t)_{y^{(i)}}
+$$
+
+→ **Cross-Entropy Loss**
+
+
+### **(ii) Generative Models & Negative Log-Likelihood Loss**
+
+A **generative model** produces a **probability distribution**:
+
+$$
+h_{\Theta}(x^{(i)}) = P(X = x^{(i)}, Y = y^{(i)} | \Theta)
+$$
+
+To **align MLE & ERM objectives**,  
+we can use the **negative log**  
+of the **true probability value**  
+of the **true response** $y^{(i)}$  
+as the **loss function**:
+
+$$
+\ell(h_{\Theta}, x^{(i)}, y^{(i)}) = -\log P(X = x^{(i)}, Y = y^{(i)} | \Theta)
+$$
+

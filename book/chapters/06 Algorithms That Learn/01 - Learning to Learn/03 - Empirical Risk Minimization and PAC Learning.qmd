@@ -1,0 +1,1141 @@
+### **Empirical Risk Minimization (ERM)**
+
+As stated on the previous page, the **goal of a statistical learning algorithm** $A$ is to use a **training set** $S$ to produce a hypothesis $h_S: X \to Y$ with **minimum generalization error** $L_D(f^*, h_S)$.
+
+One complication is that **both $f^*$ and $D$ are unknown to $A$** and may in general be **unknown** to us. 
+
+As a result, the value of the **actual generalization error** of a hypothesis is **not available** to $A$. 
+
+So, how can $A$ produce a hypothesis with **minimum generalization error**?
+
+The answer is that **it cannot**; instead, it must use a **proxy**, called the **empirical risk** or **empirical error** (also called **training error**).
+
+The idea is that the **training set** is a **snapshot of the real world**, so it makes sense for the learning algorithm to **search for a hypothesis that reduces the training error**.
+
+Any learning algorithm which employs this paradigm is said to **employ Empirical Risk Minimization (ERM)**.
+
+---
+
+**Formally, under the ERM paradigm**, the learning algorithm should produce a hypothesis $h_S$ such that:
+
+$$
+L_S(h_S) = \frac{1}{m} \sum_{i=1}^{m} \mathbf{1} [ h_S(x^{(i)}) \neq y^{(i)} ]
+$$
+
+where:
+- $L_S(h_S)$ is the **training error**.
+- $1 - L_S(h_S)$ is the **train accuracy**.
+- $L_S(h_S)$ is also the **misclassification error** on the **training set $S$**.
+
+---
+
+### **Limitations of ERM**
+
+The **ERM paradigm** may seem like a **natural** way to pick a hypothesis, but it has **one flaw**:
+
+The hypothesis picked **may overfit** on the training set.
+
+That is:
+
+$$
+L_S(h_S) \approx 0, \quad \text{but} \quad L_D(f^*, h_S) \gg 0
+$$
+
+for some cases.
+
+To give an example that this is possible, consider a **learner** $A$ which, when given a **training set** $S$, generates a hypothesis that **memorizes** $S$:
+
+$$
+h_S(x) =
+\begin{cases} 
+y_i, & \text{if } \exists i \text{ s.t. } x = x_i \\
+0, & \text{otherwise}
+\end{cases}
+$$
+
+Clearly, this will have **zero training error**, i.e.,
+
+$$
+L_S(h_S) = 0
+$$
+
+However, it might **not** have a **low generalization error** $L_D(f^*, h_S)$ **unless we are guaranteed to always see the training inputs in the real world**.
+
+---
+
+### **The Fundamental Problem of ERM**
+
+In the example above, the **learning algorithm** $A$ was **probably not great**, but **even a perfectly good learner** can **overfit** if we sample a **non-representative training set** $S$.
+
+For example, if we go to the local market to buy **$m = 10$ dragon fruits** and **learn how to decide tastiness**, it is possible that **all 10 dragon fruits are tasty**.
+
+This is a **fundamental problem in ERM**.
+
+---
+
+### **Fixing ERM Overfitting by Adding Inductive Bias**
+
+As it turns out, there is a **nice theoretical property** which allows us to **change the learner** $A$ slightly **to guarantee that we do not overfit**.
+
+Concretely, this is done by **using a learner** which **always returns a hypothesis** $h_S$ **which comes from a fixed hypothesis class** $\mathcal{H}$.
+
+That is:
+
+$$
+h_S \in \mathcal{H}
+$$
+
+We will denote such a learning algorithm by **$\text{ERM}_\mathcal{H}$** (instead of just $A$ as we usually do).
+
+Note that $\mathcal{H}$ is **chosen in advance** (prior to training) and has a **finite size**.
+
+---
+
+**(Note: A "hypothesis class" is also called a "concept class")**
+
+As before, **ERM** will produce a **hypothesis** which **minimizes the empirical risk** (i.e., training error) on $S$:
+
+$$
+h_S = \text{ERM}_{\mathcal{H}}(S), \quad \text{where } h_S \in \arg \min_{h \in \mathcal{H}} L_S(h).
+$$
+
+Note that there may be **several hypotheses** which reach the minimum $L_S(h)$, so:
+
+$$
+\arg \min_{h \in \mathcal{H}} L_S(h)
+$$
+
+returns a **set of hypotheses**, of which $h_S$ can be **any one**.
+
+---
+
+### **Introducing Inductive Bias through $\mathcal{H}$**
+
+By **restricting** the produced **hypothesis** $h_S$ to be in $\mathcal{H}$, we **bias it** (i.e., we introduce an **inductive bias**).
+
+Usually, we **choose** a **hypothesis class** based on **some prior knowledge** of the problem.
+
+For example:
+- If we **know** that the data is **linearly separable**, we may restrict $\mathcal{H}$ to **linear classifiers**.
+
+---
+
+### **Finite Hypothesis Classes and Generalization**
+
+By **itself**, restricting $h_S$ to $\mathcal{H}$ **does not guarantee** that an **ERM learning algorithm does not overfit**.
+
+This is because we **have not specified any properties** about $\mathcal{H}$, so technically, it could include **any hypothesis**.
+
+Let's be more **concrete**:
+
+- Suppose we restrict $h_S \in \mathcal{H}$, where $\mathcal{H}$ has a **finite size**.
+- Then $\mathcal{H}$ is called a **finite hypothesis class**.
+
+This is a **fairly mild restriction**.
+
+For example, we might choose $\mathcal{H}$ to be **the set of all hypotheses which can be implemented in 40 characters of C++ code**.
+
+---
+
+### **Finite Hypothesis Classes Prevent Overfitting**
+
+We can show that, given a **sufficiently large training set**, **any hypothesis generated by an $\text{ERM}_{\mathcal{H}}$ learner** (where $\mathcal{H}$ is a finite hypothesis class) **will not overfit** on the real-world distribution $D(X)$.
+
+To do so, we must first make **two assumptions** about the setting.
+
+---
+
+### **1) The i.i.d. Assumption**
+
+Assume the training examples in $S$ are **independently and identically distributed (i.i.d.)** according to the **distribution** $D(X)$.
+
+Essentially, this means that:
+- Each point $x^{(i)}$ is sampled from $D(X)$ **independent** of every other point $x^{(j)}$ ($i \neq j$).
+- Each sampled point is then **labeled** by $f^*$, so $y^{(i)} = f^*(x^{(i)})$.
+
+This is a **fairly common assumption** in **statistical machine learning**, and we denote it by:
+
+$$
+S \sim D(X)^m
+$$
+
+where $m = |S|$. 
+
+That is, $D(X)^m$ is the **probability distribution** created when using $D(X)$ **$m$ times** to create a **particular $m$-tuple of points**:
+
+$$
+(x^{(1)}, x^{(2)}, \dots, x^{(m)})
+$$
+
+assuming each $x^{(i)}$ is **sampled independently** from the others.
+
+---
+
+### **2) The Realizability Assumption**
+
+Assume the **hypothesis class** $\mathcal{H}$ (used by learner $A$) has **at least one hypothesis $h^*$ with zero generalization error**, i.e.,
+
+$$
+L_D(f^*, h^*) = 0
+$$
+
+Essentially, we assume that there is **always some hypothesis** that **matches** the concept function $f^*: X \to Y$ **perfectly**, meaning that:
+
+$$
+h^* \in \mathcal{H} \quad \text{with zero generalization error.}
+$$
+
+---
+
+### **Implications of the Realizability Assumption**
+
+The **realizability assumption** implies that a learner $A = \text{ERM}$ which uses the **ERM rule** will **always output a consistent hypothesis** $h_S$:
+
+$$
+h_S \text{ is one which has zero training error } L_S(h_S) = 0.
+$$
+
+That is, $h_S$ is **consistent** (i.e., **it exactly fits the training set** $S$).
+
+This can be seen as follows:
+- An $\text{ERM}_{\mathcal{H}}$ learner will always **find a hypothesis** with **minimum training error** from $\mathcal{H}$.
+- Since $h^* \in \mathcal{H}$, and $L_D(f^*, h^*) = 0$, we also have:
+
+$$
+L_S(h^*) = 0
+$$
+
+(since $S$ is a **subset** of $D(X)$).
+
+Thus, $\text{ERM}_{\mathcal{H}}$ **will always produce** this $h_S$ **or another hypothesis** which also has **zero training error**.
+
+---
+
+### **Final Remark on ERM and Realizability**
+$$
+L_S(h_S) = 0 \quad \text{always for ERM under the realizability assumption.}
+$$
+
+As described before, the **major reason** why our $\text{ERM}_{\mathcal{H}}$ learner **might produce a hypothesis which overfits** $S$ but has **high generalization error** $L_D(f^*, h_S)$ is because:
+
+- $S$ is **sampled via a random process** from $D(X)$.
+- This, in turn, introduces **randomness** in the **choice of the hypothesis** $h_S \in \arg\min_{h \in \mathcal{H}} L_S(h)$.
+- Consequently, there is **randomness in the generalization error** $L_D(f^*, h_S)$.
+
+It is **possible** that **some choice of $S$ will cause $\text{ERM}_{\mathcal{H}}$ to produce $h_S$ which has high $L_D(f^*, h_S)$**.
+
+We will call **such a training set** $S$ **non-representative of the true distribution** $D(X)$.
+
+---
+
+### **Confidence and Generalization Guarantees**
+
+Formally, let us assume $\delta$ is the **probability of sampling a non-representative training set** $S$.
+
+We then define $(1 - \delta)$ as the **confidence parameter of our prediction**.
+
+We must also define what it means to have **"high generalization error"**.
+
+- Let us define **an accuracy parameter** $\epsilon$ as **the highest generalization error** that we tolerate.
+- If we sample an $S$ which causes $L_D(f^*, h_S) > \epsilon$, we say:
+
+  > "The learning algorithm has **failed to learn** due to a non-representative training set."
+
+(We assume the **learning algorithm itself does not have any problems learning on a representative $S$**).
+
+If $L_D(f^*, h_S) \leq \epsilon$, we say that **$h_S$ is an approximately correct predictor**.
+
+Given the formal definition of $\epsilon$ & $\delta$ and the assumptions before (i.i.d. and Realizability), we can now **prove** that:
+
+> Given a **large enough** $m$, an $\text{ERM}_{\mathcal{H}}$ learning algorithm (when $\mathcal{H}$ is finite) **will produce a hypothesis** $h_S$ **which does not overfit**, i.e.,
+
+$$
+L_D(f^*, h_S) \leq \epsilon
+$$
+
+with probability $(1 - \delta)$.
+
+---
+
+### **Proof Sketch**
+
+This can be achieved by proving there is **an upper bound on the probability of sampling a non-representative training set** $S$, which leads to failure of the learner.
+
+**Formally, we want to prove that the probability of event:**
+
+$$
+F = \{\text{learner fails: } L_D(f^*, h_S) > \epsilon \}
+$$
+
+is at most $\delta$, i.e.,
+
+$$
+D^m(S \mid L_D(f^*, h_S) > \epsilon) \leq \delta
+$$
+
+---
+
+### **Defining Bad Hypotheses and Misleading Training Sets**
+
+- Let $H_B \subset \mathcal{H}$ be the subset of **bad hypotheses** for which the generalization error is **above** $\epsilon$, i.e.,
+
+$$
+H_B = \{ h \in \mathcal{H} \mid L_D(f^*, h) > \epsilon \}
+$$
+
+- Let $M$ be the set of **misleading training sets**, where:
+
+  - $M \subset D(X)^m$ is the set of all training sets $S$ for which **there is a bad hypothesis** $h \in H_B$ that has **zero training error**, meaning it appears to be a good hypothesis.
+
+  - Thus, such training sets are **misleading**.
+
+---
+
+### **Key Probabilistic Argument**
+
+We wish to show that:
+
+> **Whenever the learner fails, the training set is misleading.**
+
+Formally, we need to prove:
+
+$$
+\text{TPR} (S \mid L_D(f^*, h_S) > \epsilon) \subseteq M
+$$
+
+where $\text{TPR}$ represents the probability that a failure occurs given that $L_D(f^*, h_S) > \epsilon$.
+
+By proving:
+
+$$
+A \subset B \Rightarrow P(A) \leq P(B),
+$$
+
+we **prove that all failures** of the learning algorithm **happen when the training set is misleading**.
+
+---
+
+### **Using Realizability to Constrain ERM**
+
+To prove this, we **recall** that from the **Realizability Assumption** on $\text{ERM}_{\mathcal{H}}$:
+
+- The selected hypothesis will **always** be:
+
+$$
+h_S \in \{ h \in \mathcal{H} \mid L_S(h) = 0 \}
+$$
+
+i.e., it will **always have zero training error**.
+As a result, the event:
+
+$$
+F = \{ L_D(f^*, h_S) > \epsilon \}
+$$
+
+(i.e., the learner fails) **implies that** the selected hypothesis has a **high generalization error**.
+
+This can **only occur** when:
+
+$$
+h_S \in H_B
+$$
+
+where $H_B$ is the set of bad hypotheses with high generalization error.
+
+If $h_S \in H_B$, then **$\exists h \in H_B$ such that**:
+
+$$
+L_S(h) = 0
+$$
+
+Thus, we see that **whenever** $S$ is in $H_B$, then:
+
+$$
+S \in M
+$$
+
+However, the **opposite is not true**:
+
+$$
+S \in M \not\Rightarrow h_S \in H_B
+$$
+
+(since $A \Rightarrow B$ does **not** imply $B \Rightarrow A$).
+
+Thus, we have shown that:
+
+$$
+\{ S \mid L_D(f^*, h_S) > \epsilon \} \subset M
+$$
+
+i.e.,
+
+$$
+\{ S \mid L_D(f^*, h_S) > \epsilon \} \subseteq M
+$$
+
+---
+
+### **Conclusion: Failures Occur Due to Misleading Training Sets**
+
+Hence, we have **proven that whenever the learner fails to produce a good hypothesis, the training set is misleading**.
+
+We can rewrite:
+
+$$
+M = \{ S \mid \exists h \in H_B \text{ s.t. } L_S(h) = 0 \}
+$$
+
+as:
+
+$$
+M = \bigcup_{h \in H_B} \{ S \mid L_S(h) = 0 \}
+$$
+
+i.e., the **union of all training sets** where the hypothesis **is bad but appears good**.
+
+Thus, the misleading set of training sets is $M$.
+
+---
+
+### **Bounding the Probability of Failure**
+
+Recall that we want to show that the **failure probability**:
+
+$$
+D^m(S \mid L_D(f^*, h_S) > \epsilon)
+$$
+
+has an **upper bound**.
+
+That is, we want to bound the probability of **sampling a misleading training set**, which **causes the learning algorithm to fail and produce a bad hypothesis**.
+
+Thus, we have:
+
+$$
+D^m(S \mid L_D(f^*, h_S) > \epsilon) \leq D^m(M)
+$$
+
+Since we proved:
+
+$$
+\{ S \mid L_D(f^*, h_S) > \epsilon \} \subseteq M
+$$
+
+this implies:
+
+$$
+D^m(S \mid L_D(f^*, h_S) > \epsilon) \leq D^m \left( \bigcup_{h \in H_B} \{ S \mid L_S(h) = 0 \} \right)
+$$
+
+Using the **union bound rule of probability**:
+
+$$
+P(A \cup B) \leq P(A) + P(B)
+$$
+
+we obtain an upper bound.
+
+$$
+D^m(S \mid L_D(f^*, h_S) > \epsilon) \leq \sum_{h \in H_B} D^m (S \mid L_S(h) = 0)
+$$
+
+---
+
+### **Bounding the Probability of Misleading Training Sets**
+
+- Consider any **particular** $h \in H_B$. We see that:
+
+$$
+D^m (S \mid L_S(h) = 0)
+$$
+
+$$
+= D^m \left( S \mid \frac{1}{m} \sum_{i=1}^{m} \mathbf{1}[h(x^{(i)}) \neq f^*(x^{(i)})] = 0 \right)
+$$
+
+- **Since we assume training samples are i.i.d.,** the probability for $m$ cases can be broken down into the **product of probabilities of each element**:
+
+$$
+D^m \left( \{ x \mid h(x) = f^*(x) \} \right)
+$$
+
+$$
+= \prod_{i=1}^{m} D \left( \{ x^{(i)} \mid h(x^{(i)}) = f^*(x^{(i)}) \} \right)
+$$
+
+- **Now, since $h \in H_B$, the probability that $h(x^{(i)}) \neq f^*(x^{(i)})$ for any particular $x^{(i)}$ is at least $\epsilon$:**
+
+$$
+D(X) \left( \{ x^{(i)} \mid h(x^{(i)}) \neq f^*(x^{(i)}) \} \right) > \epsilon
+$$
+
+$$
+1 - D(X) \left( \{ x^{(i)} \mid h(x^{(i)}) = f^*(x^{(i)}) \} \right) > \epsilon
+$$
+
+$$
+D(X) \left( \{ x^{(i)} \mid h(x^{(i)}) = f^*(x^{(i)}) \} \right) \leq 1 - \epsilon
+$$
+
+Thus:
+
+$$
+D^m (S \mid L_S(h) = 0) = \prod_{i=1}^{m} D(X) \left( \{ x^{(i)} \mid h(x^{(i)}) = f^*(x^{(i)}) \} \right)
+$$
+
+$$
+\leq (1 - \epsilon)^m
+$$
+
+Using the **Bernoulli inequality**, we know:
+
+$$
+(1 - \epsilon)^m \leq e^{-\epsilon m}
+$$
+
+---
+
+### **Final Bound on the Failure Probability**
+
+- Substituting this bound into our previous step:
+
+$$
+D^m(S \mid L_D(f^*, h_S) > \epsilon) \leq \sum_{h \in H_B} D^m (S \mid L_S(h) = 0)
+$$
+
+- Since we just showed:
+
+$$
+D^m (S \mid L_S(h) = 0) \leq e^{-\epsilon m}, \quad \forall h \in H_B
+$$
+
+it follows that:
+
+$$
+\sum_{h \in H_B} D^m (S \mid L_S(h) = 0) \leq |H_B| e^{-\epsilon m}
+$$
+
+$$
+\leq |\mathcal{H}| e^{-\epsilon m}
+$$
+
+(since $H_B \subseteq \mathcal{H}$ and for a fixed $\eta, \epsilon, m$, this is constant).
+
+---
+
+### **Conclusion: PAC Learning Bound**
+
+Thus, we have **proven there exists an upper bound on the probability of sampling a non-representative training set** $S$:
+
+$$
+D^m(S \mid L_D(f^*, h_S) > \epsilon) \leq |\mathcal{H}| e^{-\epsilon m}
+$$
+
+which leads to a **hypothesis with generalization error $> \epsilon$**.
+
+### **Geometric Intuition of the Bound**
+
+Geographically, we can **represent the bound** as follows:
+
+*(A hand-drawn diagram appears here, showing different enclosed regions within a sample space.)*
+
+Here, each dot $\cdot$ is a **training set** $S$ that is sampled as:
+
+$$
+S \sim D(X)^m
+$$
+
+Each **encircled region** corresponds to **all training sets** that lead to a particular **bad hypothesis** $h$.
+
+---
+
+### **Overlapping Hypothesis Regions and Misleading Training Sets**
+
+**Note:** We often assume that if $h \in H_B$ (as mentioned), the **same training set** might have **multiple hypotheses** where $L_S(h) = 0$.
+
+This means that the **regions can overlap each other**, since each encircled point produces a bad hypothesis.
+
+Each **encircled point** corresponds to a **misleading training set**.
+
+From our previous step, we **proved that** for any particular **bad hypothesis** $h \in H_B$:
+
+$$
+D^m(S \mid L_S(h) = 0) \leq (1 - \epsilon)^m
+$$
+
+i.e., the **fraction of training sets** which could have been used to produce it is at most $(1 - \epsilon)^m$.
+
+We see that this **drops quickly as we increase $m$**, which **aligns with our intuition**:
+
+> **As we use larger datasets, the fraction of training sets which can be misleading decreases exponentially.**
+
+---
+
+### **Bounding the Number of Misleading Training Sets**
+
+A **key result** states that the **number of misleading training sets** (i.e., which could produce a bad hypothesis) **is at most the sum of the training sets that could produce any of the bad hypotheses**.
+
+Geometrically, this says that:
+
+- The **sum of the number of points in the encircled region is upper bounded**.
+- The **union of these points** determines the number of **misleading sets**.
+
+Finally, **the bound says that the total number of misleading training sets** is at most:
+
+$$
+|H_B| \text{ times the size of the largest encircled region.}
+$$
+
+---
+
+### **Final Conclusion**
+
+Finally, **any point $S$ outside an encircled region cannot cause the learning algorithm to fail** (i.e., **produce an overfitting hypothesis**).
+
+### **Intuition for Failure of a Learner & True Error of the Hypothesis**
+
+A **nice example** to explain $\delta$ & $\epsilon$ is the **Marble Game**.
+
+- In this game, assume there are **two opaque jars**:
+  - **Jar A**: Contains **100% blue marbles**.
+  - **Jar B**: Contains **90% blue, 10% red marbles**.
+
+- You are given **one jar at random**.
+- Your **goal** is to **figure out which jar you have**.
+
+---
+
+### **The Sampling Process**
+- The **only action you can take** is to **sample a marble** from the jar and **observe if it is blue or red**.
+- Then **replace it**.
+- You can **randomly sample up to $m$ marbles**.
+
+Now, **let’s assume you received Jar B**.
+
+What is the **probability that you fail to determine** which jar you have?
+
+---
+
+### **Defining the Learning Algorithm**
+This is **only one real algorithm** you can employ:
+
+1. **Sample a marble** from the jar.
+   - **If it is red**, **declare** you have **Jar B**.
+   - **If it is blue**, you are **not sure** if you have **Jar A or B**, so you say **nothing**.
+2. **Repeat** this process **$m - 1$ times**.
+
+---
+
+### **When Does the Algorithm Fail?**
+- Why might this algorithm **fail** to determine **which jar it is**?
+- The answer is **when you draw $m$ blue marbles** in a row.
+
+  - The probability of this happening is:
+
+    $$
+    \left( \frac{90}{100} \right)^m = (0.9)^m
+    $$
+
+- This quantity is **analogous** to the probability that we **sample a training set that leads to a bad hypothesis** (i.e., **one which has generalization error $> \epsilon$**).
+
+  - We call this:
+
+    > **Failure of the learning algorithm to learn** (from the sampled training set).
+
+- As $|S|$ (i.e., the number of training samples) **increases**, we see that $\delta$ **decreases**.
+
+  - **With larger training sets, it is less likely we will fail to learn.**
+
+### **Finalizing the PAC-Learning Sample Complexity Bound**
+
+Let's get back to **bounding our $\text{ERM}_{\mathcal{H}}$ learner**.
+
+- For a particular hypothesis $h \in H_B$ (i.e., we assume that the hypothesis has a generalization error $> \epsilon$),
+  - What is the **probability that $h$ is consistent with $S$** (i.e., $L_S(h) = 0$)?
+
+---
+
+### **Probability of Sampling a Misleading Training Set**
+
+For this to happen, we would have to sample $S$ such that we **only draw points** from $D(X)$ **on which $h$ is correct**.
+
+- By assumption, $D(X)$ contains:
+  - A fraction **at most** $1 - \epsilon$ of examples where $h$ is **correct**.
+  - A fraction $\epsilon$ of examples where $h$ is **wrong**.
+
+Thus, the probability that we **only pick examples on which $h$ is correct** is:
+
+$$
+(1 - \epsilon)^m
+$$
+
+---
+
+### **Extending This Bound for Any $h \in H_B$**
+
+- We can **extend this** to determine, **not just for a given $h$**, but for **any** $h \in H_B$:
+  - What is the probability that we **draw a training set** containing only **correct examples for some bad hypothesis $h$**?
+
+- This probability is **bounded by**:
+
+$$
+|H_B| (1 - \epsilon)^m
+$$
+
+which is at most:
+
+$$
+|\mathcal{H}| (1 - \epsilon)^m
+$$
+
+---
+
+### **Deriving the PAC Sample Complexity Bound**
+
+This says that **it is possible** that:
+
+- **$h_S$ can be bad** (i.e., a **bad hypothesis $h \in H_B$** is chosen).
+- **"Bad" means**:
+
+  $$
+  L_S(h) = 0 \quad \text{but} \quad L_D(f^*, h) > \epsilon
+  $$
+
+- By choosing $\delta$ as a **probability bound**, such that:
+
+  $$
+  |\mathcal{H}| (1 - \epsilon)^m \leq \delta
+  $$
+
+  we can guarantee that **with probability $1 - \delta$**, we do **not** get a hypothesis where $L_D(f^*, h) > \epsilon$.
+
+- Since we assumed **realizability**, we must have:
+
+  $$
+  L_D(f^*, h^*) = 0
+  $$
+
+  which means:
+
+  $$
+  L_D(f^*, h_S) \leq \epsilon
+  $$
+
+  and we get an **accurate hypothesis**.
+
+---
+
+### **Final PAC-Learning Bound on $m$**
+
+Solving for $m$ in:
+
+$$
+|\mathcal{H}| (1 - \epsilon)^m \leq \delta
+$$
+
+we take the **logarithm on both sides**:
+
+$$
+m \geq \frac{\log |\mathcal{H}| + \log (1/\delta)}{\epsilon}
+$$
+
+Thus, with **$(1 - \delta)$ probability, our learning algorithm does not fail**.
+
+### **Corollary: Sample Complexity Bound**
+
+Given a **fixed bound** $\delta$, what size of dataset do we need to **ensure** $S$?
+
+---
+
+We have the inequality:
+
+$$
+|\mathcal{H}| (1 - \epsilon)^m \leq \delta
+$$
+
+Applying the **natural logarithm** on both sides:
+
+$$
+\ln |\mathcal{H}| + m \ln (1 - \epsilon) \leq \ln \delta
+$$
+
+Using the **approximation** $\ln (1 - x) \approx -x$ for small $x$:
+
+$$
+m \geq \frac{\ln |\mathcal{H}| - \ln \delta}{\epsilon}
+$$
+
+Thus:
+
+$$
+m > \frac{\log (|\mathcal{H}| / \delta)}{\epsilon}
+$$
+
+---
+
+### **Final Interpretation**
+
+This means **if you sample** at least:
+
+$$
+\frac{\log (|\mathcal{H}| / \delta)}{\epsilon}
+$$
+
+training points, then with **probability** $> (1 - \delta)$, the **selected hypothesis**:
+
+$$
+h_S = A(S)
+$$
+
+has error $\leq \epsilon$, i.e., it is **$(1 - \delta)$-accurate**.
+
+---
+
+### **Polynomial Sample Complexity**
+
+- Since we have $\log (|\mathcal{H}|)$, the **hypothesis class** (i.e., the space of all possible hypothesis functions $h: X \to Y$) can be **exponentially large**.
+- However, the **number of data points** required to ensure **$(1 - \delta)$-accuracy** is **polynomial**.
+- This property is known as:
+
+  > **Polynomial Sample Complexity**.
+
+---
+
+### **Importance of the Realizability Assumption**
+
+The **strongest assumption** in this derivation is the **realizability assumption**.
+
+- It **implies** that we have a learning algorithm $A$, which **always returns a hypothesis**:
+
+  $$
+  h_S = A(S)
+  $$
+
+  that has **zero training error**, i.e.,
+
+  $$
+  L_S(h_S) = 0
+  $$
+
+### **The PAC Framework of Learning**
+
+The **Probably Approximately Correct (PAC) framework** formalizes **learnability** by requiring that a learning algorithm **outputs a hypothesis** $h_S$ which **minimizes the empirical risk (ERM)** on a training set $S$, meaning:
+
+$$
+h_S \in \arg \min_{h \in \mathcal{H}} L_S(h)
+$$
+
+where $L_S(h)$ is the **training error** found on $S$.
+
+---
+
+### **Defining PAC Learnability**
+
+After defining **certain assumptions**, we claim that:
+
+> If the class $\mathcal{H}$ has a **sufficient size** (i.e., if $m \geq \frac{\log(|\mathcal{H}| / \delta)}{\epsilon}$), then:
+
+1. **With probability $1 - \delta$, the hypothesis $h_S$ is approximately correct** (i.e., generalization error $L_D(h_S) \leq \epsilon$).
+2. The learner will **output a hypothesis** that minimizes empirical risk (also called **the empirical risk minimizer**).
+
+This means that **under reasonable conditions**, if given a **training set $S$ of sufficient size**, then the hypothesis $h_S$ output by the learning algorithm will be **approximately correct**.
+
+---
+
+### **PAC Learnability in Finite Hypothesis Classes**
+
+As it turns out, what we have done in previous sections is **proving that any finite hypothesis class** $\mathcal{H}$ that learns nearly optimally **is PAC learnable**.
+
+Formally, let us define:
+
+$$
+P_{S \sim D(X)^m} [ L_D(f^*, h_S) \leq \epsilon ] \geq 1 - \delta
+$$
+
+as the **PAC learning criterion**.
+
+### **PAC Learnability (Probably Approximately Correct)**
+
+A **concept class** $C$ is said to be **PAC-learnable** iff there exists:
+
+1. **A function $m: (0,1)^2 \to \mathbb{N}$**  
+   - This function **takes in a tuple** $(\epsilon, \delta)$ where:
+     - $\epsilon$ (accuracy) and $\delta$ (confidence) are in $(0,1)$,
+     - It **returns a natural number** indicating the required sample size.
+
+2. **A learning algorithm $A$ satisfying the PAC property**  
+   - Assuming the **Realizability Assumption**, we consider:
+     - **$D$**: Any **data-generating probability distribution** over $X$.
+     - **$f^*$**: The **true labeling function** $f^*: X \to Y$.
+   - When the learning algorithm **is run on a training set** $S$ of size:
+
+     $$
+     m \geq m(\epsilon, \delta)
+     $$
+
+     - **Sampled from $D(X)$** and **labeled by $f^*$**,  
+     - With **probability at least $(1 - \delta)$**,  
+     - The hypothesis $h_S$ returned by the learning algorithm is **approximately correct**, meaning:
+
+       $$
+       L_D(f^*, h_S) \leq \epsilon
+       $$
+
+     - i.e., it has **sufficiently low generalization error**.
+
+---
+
+### **Key Approximation Parameters in PAC Learnability**
+
+1. **$\epsilon$: Accuracy Parameter**  
+   - Defines the **highest error** we tolerate.
+
+2. **$\delta$: Confidence Parameter**  
+   - Represents **how likely it is** that the hypothesis returned by the learner will meet the desired accuracy.
+
+---
+
+### **Why These Parameters Are Necessary?**
+
+- Our **training set $S$ is generated randomly** from $D(X)$,  
+  - Since it is sampled randomly, there is **always a small chance of getting a bad training set**.  
+  - Example: We might sample the **same point** $x \in D(X)$ multiple times if we are **really unlucky**.
+
+- Even if **$S$ is not feasible**,  
+  - If it is **finite**, and there **exists a classifier with zero training error**,  
+  - We still **allow a small margin of error $\epsilon$** in PAC learning.
+
+### **Note: PAC-Learnability as a Property of a Concept Class $C$**
+
+PAC-learnability is a property of a **concept class** $C$.  
+
+- A **concept class** itself is **loosely defined**; it is simply a **set of concept functions**:
+
+  $$
+  f: X \to Y
+  $$
+
+  where **each** $f$ is a function over $X$.
+
+- The **learning algorithm’s job** is to **use the training set $S$ to pick some hypothesis $h$ in $\mathcal{H}$**.
+- It is **free to do so however it likes**, but **typically, it uses a rule like ERM** to determine which hypothesis to pick.
+
+---
+
+### **Understanding Hypothesis Classes**
+
+- The **hypothesis class** is assumed to be **independent** of the learner.
+- In most cases, this assumption **gives us the flexibility** to swap it out with **another class** while still keeping the **same learning algorithm**.
+
+> The **same learning algorithm** (which might just use a simple rule like "use ERM") can apply to multiple hypothesis classes.
+
+Examples of hypothesis classes include:
+
+1. **The class of all decision trees**.
+2. **The class of all decision trees of depth $\leq 3$**.
+3. **The class of all logistic regression models**, etc.
+
+- Some of these **hypothesis classes have finite size**:
+  - Example: The set of **all decision trees with depth $\leq 3$** is **clearly finite**.
+  - However, **other hypothesis classes may be infinitely large**.
+
+> We call these **finite hypothesis classes**.
+
+---
+
+### **Note: Purpose of PAC Learning**
+
+The **purpose of PAC-learning** is to **analyze the performance of various learning algorithms** $A_1, A_2, \dots$, using **various hypothesis classes** $\mathcal{H}_1, \mathcal{H}_2, \dots$.
+
+- The goal is to **learn a target concept**:
+
+  $$
+  f: X \to Y
+  $$
+
+  **using an instance-space distribution** $D(X)$.
+
+- Once we know that a **concept class is PAC-learnable**, it means:
+
+  - For **every problem** (i.e., every function $f: X \to Y$)
+  - And for **every distribution** $D(X)$
+  - There **must be a hypothesis** $h$ **with sufficiently low generalization error**:
+
+    $$
+    L_D(h) \leq \epsilon
+    $$
+
+  - This follows from the **realizability assumption**, which says:
+
+    > "There exists a hypothesis with zero training error."
+
+There is, in fact, a hypothesis $h^* \in \mathcal{H}$ with **zero generalization error**.  
+If we sample **$m(\epsilon, \delta)$ instances** and use them to train a hypothesis $h_S$,  
+then there is a **$(1 - \delta)$ probability** that $h_S$ will have **arbitrarily low generalization error**:
+
+$$
+L_D(f^*, h_S) \leq \epsilon
+$$
+
+Thus, $h_S$ is **"approximately correct."**
+
+---
+
+### **Note 3: PAC Learning and Distribution-Free Assumption**
+PAC-learning is what is called **"distribution-free"**, meaning:
+
+- It **assumes any distribution $D(X)$ can be used**.
+- However, it **requires $D(X)$ to be fixed** for **i.i.d. sampling** to create $S$.
+
+---
+
+### **Sample Complexity of a Learning Problem**
+
+The function:
+
+$$
+m: (0,1)^2 \to \mathbb{N}
+$$
+
+which we invoke as $m(\epsilon, \delta)$, tells us **how many instances we must sample** to obtain a **probably correct hypothesis**.
+
+It is important to note that the **$\mathcal{H}$ subscript**:
+
+- **Varies between hypothesis classes**.
+- **Earlier, we proved** that for any **finite hypothesis class**, the value of $m(\epsilon, \delta)$ is at most:
+
+  $$
+  m_{\mathcal{H}}(\epsilon, \delta) \geq \frac{\log(|\mathcal{H}| / \delta)}{\epsilon}
+  $$
+
+  - This means **if we sample at least this many instances** $m$,  
+    then the hypothesis **produced in $h_S$ will be probably approximately correct**.
+
+---
+
+### **Using the Sample Complexity Formula**
+
+The **sample complexity formula** for a particular **$\mathcal{H}$** can be useful in three ways:
+
+1. Given **two of $m, \epsilon, \delta$**, we can **calculate a bound on the third**.
+2. If given a **particular set size $m$** and an **acceptable error $\epsilon$**,  
+   we can **calculate the probability** of actually getting a hypothesis that **meets this error threshold**:
+
+   $$
+   (1 - \delta)
+   $$
+
+> This is called the **"sample complexity limit"**, which **bounds how many instances we need** to ensure **PAC learnability**.
+
+### **Sample Complexity and Occam’s Razor**
+
+- **Sample Complexity agrees with Occam’s Razor** (valid).
+- **Occam’s Razor states**:  
+  > “A simpler solution is better.”  
+- Here, we want to **mathematically show** that **smaller hypothesis spaces are better**.
+
+---
+
+### **Proof**
+
+We have already shown before that for a **finite hypothesis class** $\mathcal{H}$, the **sample complexity bound** is:
+
+$$
+m \geq \frac{\log (|\mathcal{H}| / \delta)}{\epsilon}
+$$
+
+- We see that **if $\epsilon$ and $\delta$ are kept fixed**,  
+  then **$m$ grows with $\log (|\mathcal{H}|)$**.
+
+- This means that:
+  - As our **hypothesis space grows larger**,  
+  - The **number of instances** we must **sample and label** also **increases**,  
+  - To **ensure PAC learnability**.
+
+---
+
+### **The Tradeoff: Expressiveness vs. Simplicity**
+
+- **Reducing the hypothesis space comes with a tradeoff**:  
+  - A smaller space means the **produced hypotheses may be less expressive** (i.e., **less complex**).  
+  - However, this is **practically relevant**, because PAC only guarantees a **worst-case bound on $L_D(h_S)$**.  
+  - In practice, **a more expressive hypothesis may generalize better**.
+
+- **A more expressive hypothesis space can still lead to**:  
+  - The **same** generalization error $L_D(h_S)$.  
+  - But **with a much lower sample complexity**.
+
+Thus, while **$m(\epsilon, \delta)$ increases with $\log |\mathcal{H}|$**,  
+we still have some **flexibility in choosing a larger hypothesis class**.
+
+### **Agnostic PAC Learning (Removing the Realizability Assumption)**
+
+In the previous section, we defined that a **concept class** $C$ is **PAC-learnable** if there exists:
+
+1. A function $m: (0,1)^2 \to \mathbb{N}$, determining a **natural number**.
+2. A **learning algorithm** $A: X^m \times Y^m \to \mathcal{H}$, which, given a **supervised training set** $S$ (where $m = |S| \geq m_{\mathcal{H}}(\epsilon, \delta)$),
+   - **sampled i.i.d.** from a distribution $D(X)$,
+   - has a **$(1 - \delta)$ probability** to return a **hypothesis**:
+
+     $$
+     h_S = A(S)
+     $$
+
+     that is **approximately correct**, meaning:
+
+     $$
+     L_D(f^*, h_S) \leq \epsilon, \quad \forall f^* \in C, \quad \text{for any distribution } D.
+     $$
+
+---
+
+### **The Realizability Assumption in PAC Learning**
+
+An **assumption** in PAC learning is that:
+
+- The learning algorithm $A: X^m \times Y^m \to \mathcal{H}$ must **return a probably-approximately correct hypothesis** $h_S = A(S)$.
+- **The Realizability Assumption** states that **there exists at least one $h^* \in \mathcal{H}$** such that:
+
+  $$
+  L_D(f^*, h^*) = 0.
+  $$
+
+  - Equivalently:
+
+    $$
+    P_{x \sim D(X)} [ h^*(x) = f^*(x) ] = 1.
+    $$
+
+  - This means the **predictions from $h^*$ exactly match those of the true concept $f^* \in C$**.
+
+- **Implications**:
+  - This assumption also means **any learner using ERM** will return a **consistent hypothesis**:
+
+    $$
+    h_S = A(S), \quad \text{s.t.} \quad L_S(h_S) = 0.
+    $$
+
+---
+
+### **Why the Realizability Assumption May Fail**
+
+In **practical settings**, the **Realizability Assumption might not hold**, meaning:
+
+- The chosen **hypothesis class $\mathcal{H}$** may **not contain a perfect hypothesis** $h^*$ that exactly matches the **true concept** $f^* \in C$.
+- Our **labels** $y^{(1)}, y^{(2)}, \dots, y^{(m)}$ **are not necessarily determined by an exact function**.
+- The reason: Labels are often **determined by the limited number of features** we measure for each sample $x \in X$, where $X \subset \mathbb{R}^d$.
+
+---
+
+### **Agnostic PAC Learning: Handling Non-Realizable Cases**
+
+- Since **perfect hypotheses may not exist**, we introduce the **agnostic PAC framework**.
+- Here, we **relax the assumption** that $L_D(f^*, h^*) = 0$.
+- Instead, we focus on **finding the best possible hypothesis $h \in \mathcal{H}$** that **minimizes** generalization error:
+
+  $$
+  h^* = \arg \min_{h \in \mathcal{H}} L_D(f^*, h).
+  $$
+
+- This allows us to **extend PAC-learning to real-world scenarios**, where **noise or imperfect models** exist.

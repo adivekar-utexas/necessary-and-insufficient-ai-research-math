@@ -1,0 +1,3 @@
+# How integration becomes summation as continuous becomes discrete
+
+A fairly uncovered topic is how a continuous random variable becomes discrete, and subsequently how everything we did with integration becomes summation. 

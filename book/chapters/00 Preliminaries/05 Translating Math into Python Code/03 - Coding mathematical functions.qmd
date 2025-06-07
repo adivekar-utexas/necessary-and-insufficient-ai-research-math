@@ -1,0 +1,6 @@
+## Coding mathematical functions
+
+### Functions in Math vs Functions in code
+
+
+### How to code up mathematical functions

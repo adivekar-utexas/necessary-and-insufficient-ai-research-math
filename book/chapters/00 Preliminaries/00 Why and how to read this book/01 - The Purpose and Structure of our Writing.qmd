@@ -1,0 +1,62 @@
+## The purpose of this book
+
+Several textbooks have been written on machine learning and AI: some exceptional, and most at least adequate. The space includes texts on practical machine learning, statistical learning theory, deep learning, reinforcement learning, language processing, computer vision, and more. This book is "everything else": we seek to introduce mathematical concepts. It aims to be a guide, referred to by confused students and overworked practitioners.
+
+Why? Well, a common aspect in textbooks is a few sections at the back that briefly revisit the math required to understand the material: typically covering linear algebra, vector calculus, probability and statistics, to some degree. These summaries never present the material at sufficient depth to grasp the concepts. Authors will hand-wave this: "It is meant to be a refresher", they say. But the question is: Why? Nobody who knows the introduced concepts bothers reading these sections; if confused, they revisit the original sources (notes or dedicated material) where they first understood the topic. The practical purpose of these sections, then, is to safeguard from the criticism that the author's book is not accessible to newer readers.
+
+This book addresses this gap:
+
+-   For students of machine learning, this book offers a way to develop a fully-fleshed out mathematical background. We touch on topics in analysis, calculus, linear algebra, probability, statistics and machine learning, all from a mathematical perspective. You will also learn to "translate" math into code, an extremely practical skill.
+
+-   Authors of texts in machine learning subfields, or associated fields like statistics or operational research, can simply link to sections of this book. The beauty of version control means that each unique section in this book enjoys a versioned DOI tag, so from the point of view of an author, linking to one section in this book is as good as linking to a published paper. Authors consequently have to do less work covering background concepts in their texts or course material.
+
+The integration of a ChatGPT-like experience into this book's website means that we are able to offer a unique experience for students to learn interactively. We expect other textbooks will follow suit.
+
+## The structure of this book
+
+Most math textbooks aim to introduce concepts as early as possible, and build up from there. Of the face of it, this is a good idea: since topic A depends on topic B, we should cover A quickly and then proceed to B.
+
+This approach, however, often breaks down: to write a textbook on rigorous probability, you must first introduce complex measure theory in the first chapters, and then proceed to easy-to-understand concepts like a "what is a random variable". This creates much dissatisfaction for a learner, as they must power through fifty pages of borel sigma-fields and Lebesgue integration, in order to learn something which can be intuitively explained in just a few paragraphs. Some authors try to hide this gap by saying their textbook is "graduate-level", which means "you should have already studied the easy stuff before at least once".
+
+We looked at this practice, and decided it was nonsense. Mathmatics is rarely learned for fun; often, someone sits down to learn a hard topic only when they really need to. Thus, a person's mathematical education natually progresses in fits and spurts (and often with a great deal of impatience). A book should accommodate the learner, not the other way around.
+
+![](images/paste-1.png){fig-align="center" width="600"}
+
+As such, we try to introduce concepts **as late** as possible, only when the reader urgently needs them. As an example, we introduce vector calculus just before the section on Optimization (chapter 5), even though we could have introduced it as early as Chapter 2. In doing so, it might initially feel like some sense of continuity is lost; if you scan the index, you can't easily figure out which topics fall under the same subject.
+
+However, a common theme in our work is that learning mathematics for machine learning does not proceed linearly. We instead advance in a winding manner. As an analogy, imagine yourself climbing a spiralling staircase, surrounded on the outer edge by marble pillars ("linear algebra", "probability", etc). The staircase (this book) acts as a bridge between subjects. Along the way, we will pause to observe a few diagrams etched onto the staircase (topics within each subject), and then continue our ascent.
+
+Mechanically, we will establish precedence between topics by listing "prerequisite subsections" at the top of each subsection. We additionally order chapters in a rough "recommended reading" order, so that nothing is lost if they are read chronologically.
+
+With this approach, a learner need not sift through dozens of pages of unnecessary material in order to understand something they urgently need to learn. By following the chain of prerequisites, it should be possible to determine any necessary background for a particular topic. This approach is similar to that used by Wikipedia's math articles, but our focus is on simplicity, instead of comprehensively connecting topics.
+
+The only place where we break this pattern is the very first chapter, which establishes many grounding concepts that learners will need later. We strongly recommend reading this first and completely.
+
+## Applications first, Mechanics next, philosophy last
+A few mathematical subjects in this book (such as proof-writing and statistical inference) derived from philosophical notions. Some readers may not like philosophy, claiming it has no practical value. However, philosophy has an important place in the motivation for mathematics as a whole; we dedicate a later section to briefly introduce the most crucial concepts, before quickly moving ahead.
+
+In our writing, we will avoid using philosophical arguments to motivate concepts. We do this by maintaining a strict order: we will first endeavour to explain the *applications* of an approach, then the *mechanics* of the approach, leaving the *philosophical foundations* for last (if they are discussed at all). We believe that the nuanced philosophical arguments of a topic are unlikely to be appreciated until the core structures are clear. To explain by analogy: when shown a clock for the first time, you'd firstly want to learn how to read time, then learn how the clock functions at a mechanical level, and finally hear the arguments for and against the philosophical concept of time. 
+
+Another ordering - introducing philosophy first - is often employed by mathematical writers, but tends to leave learners confused for a long time; long enough that many lose interest entirely. Yet, learning the mechanics requires a hint of the underlying philosophy; in such cases, we will make non-rigorous arguments, by using intuition and analogy.
+
+If the above seems very abstract, it will come into stark contrast when we look at Frequentist vs Bayesian views of probability, for which there is presently no consensus. We will introduce the applications and mechanics of each (focusing on intuition for the mechanics), and make the philosophical arguments later.
+
+
+## "Why waste time say lot word, when few word do trick?" - Kevin Malone, The Office
+
+The loquacity endemic to treatises mathematical, enforces a burdensome cognitive load that fractures and diffuses the reader’s focus across a maze of dense verbiage; intertwining syntactic intricacies, theoretical abstractions, and semantic obscurities into a nearly inextricable tangle that renders comprehension a Sisyphean pursuit.
+
+Or, in other words: "Math textbooks make fairly straightforward ideas seem unnecessarily complex. Readers find this very hard to follow, and are unhappy". 
+
+We will try to avoid verbosity and complex sentences; the material is often complex enough as-is. To quote Jaynes (2003): "There are no linguistic tricks, and there is no ‘meta-language’ gobbledygook; only plain English. We think that this will convey our message clearly enough to anyone who seriously wants to understand it". 
+
+Some mathematical writers disagree with this view, and prefer to use excessively over-wrought and formal writing style. A typical justification for this is that the intended audience is advanced students, who will better appreciate the material, and to keep out less advanced students. There's a word for this practice: "gatekeeping". Particularly, it makes the outdated assumption that English proficiency increases with more technical schooling, despite the fact that a first-year graduate student in math and science has probably not taken English courses since high-school. 
+
+Making writing purposely difficult also reveals an Anglo-centric bias. The author of this book, who lives in a country with generally low English proficiency, was fortunate to have been educated in English from an early age. However, many of the author's colleagues do not share this same English proficiency. These colleagues are no less accomplished as AI researchers because of their grasp of English; in fact, it is laudable that they were able to progress so far without it, given the aforementioned textbook authors. As we now live in an age where language models can be used for writing assistance to improve clarity, anyone who does not write with clarity is either (a) lazy or (b) revealing their inherent biases. I can assure such authors, no student reading material has ever said: "Hmm, this explanation is nice but I wish it was *more* difficult to understand".
+
+
+## On complexity
+
+Another complaint is that using simpler English runs the risk of dumbing down the core ideas, losing the nuance which is extremely important for advanced understanding. This is the classic fallacy of correlation without causation: even though most simple explanations tackle simple ideas, it does not mean that a complex idea cannot be explained simply. Blaise Pascal (in 1657), expressed this best: "I have made this letter longer than usual because I have not had time to make it shorter."
+
+We take a computational view on nuance. That is, we attempt to tackle a complex idea by explaining it simply but multiple times, in different contexts, sometimes employing figures rather than words. We hope that one these explanations will lead to the "aha" moment that readers crave and writers dearly enjoy.

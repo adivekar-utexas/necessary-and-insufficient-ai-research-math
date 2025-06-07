@@ -1,0 +1,79 @@
+# How students should approach this book
+
+This section is aimed at people in late high-school or in undergraduate degrees, who have not yet entered the workforce (typically, this is the age 16-22, but people often revisit their education later in life). 
+
+The topics we'll cover in this book start from a high school level and go all the way up to a graduate level. As a student, you will most likely be reading this book alongside a lot of other material, and you probably do not have a lot of time to do everything. 
+
+We have thus condensed some basic life-hacks on how to get the most out of this book.
+
+## Why even study mathmatics?
+You are at a time when the rest of your life and career is still ahead of you. You don't know what you'll become, you may not even feel like you have a good idea of who you **are**. You have hopes and dreams, but you don't know how realistic each of these are, and therefore you don't know whether it's important to study mathematics or not...maybe you want to be an artist or a NASA astronaut or a swimmer or a chemistry PhD.
+
+So the question remains: is all this math really that important in **your life**?
+
+Let me be very clear. A strong math background is immensely helpful - necessary, even - to learn and practice machine learning effectively. 
+
+So, how does this book aid that goal? 
+
+Most students are introduced to the material in a rigid, step-by-step progression: high school calculus, then basic probability and statistics, followed by more advanced calculus, linear alegbra, probability and statistics in college. Following this traditional route, only near the end of their undergraduate degree does a learner have sufficient background to pick up machine learning. Most who gain an interest must choose between work and a graduate degree, while others are forced to learn on-the-fly when they are assigned an ML project at work.
+
+This book seeks to disrupt the status quo. It focuses on the math that machine learning textbooks sweep under the rug of "trivial background knowledge", which is often not trivial at all. It also places an emphasis on the connections between mathematical concepts. As a reader, your understanding will progress in spiral, rather than a straight line, with many sections dedicated to exploring the interconnections between probability, linear algebra and calculus that makes machine learning such an interesting field. The same concepts will also be explored repeatedly from different perspectives, each time deepening your understanding. 
+
+## Which majors should read this book?
+This book was written for anyone who wants to have an ironclad foundation in advanced probability and statistics.  
+However, certain prospective careers will use this knowledge more than others:
+- If you want to work in artificial intelligence as a scientist or research engineer, a deep mathematical knowledge in probability, statistics and linear algebra is a prerequisite to success. Calculus is needed mostly at an introductory level.
+- If you want to be any other kind of scientist, you should focus on probability and statistics, which are your bread and butter for statistical analysis. Get good enough at this to use popular tools like SAS and R. You can sometimes get away with using results blindly, but it benefits your experimental design to know why certain things are used.
+- If you want to be any other kind of "engineer": software engineer, machine learning engineer, hardware engineer, etc. then you do not need to learn math in this much detail, and might benefit the most from the chapter on Efficient implementation of ML algorithms. Often the difficult mathematical work will be done by other people and coded in reusable tools, so you will need to focus on learning to use these tools.
+- If you want to be a painter or athlete, the math you will need to learn is restrcited to doing your taxes. You do not need to read this book except out of interest. But life is long, and you may one day revisit your aspirations and find they require more mathematical maturity. If so, you may want to keep this book in mind.
+
+So, while machine learning is not specifically the focus of this book, we will often relate mathematical and machine learning concepts, or create links to real-world applications. This keeps the book interesting: it's often more exciting to learn the theory of bandit algorithms, for example, when you know that they are used to make sub-millisecond recommendations of the news articles you read online.
+
+
+## Being afriad of seeming stupid
+
+There will always be people around who know more than you. In undergraduate, these are your professors. If you are in the early part of your career, these are senior people you may see at work. 
+
+Let me tell you a hidden fact about experienced people: they are not more intelligent than you, they have just been around a lot longer. They are **experienced**. 
+
+Experience matters. An intelligent person who builds upon their experience, ends up learning any number of practical tricks and how to deal with ambiguous situations. A great test of an experienced person is how many mistakes they have made, and whether they avoid making them again. 
+
+Mathematics is a subject which relies heavily on experience. For example, look at a later section in this book and you might feel completely lost. Now look at the first few sections on set theory. Does it make more sense? "Yes, but it's easy", I hear you say. And I respond: no, they are both equally easy. The first one is just **familiar** to you, like an old friend. Learn and practice repeatedly, and you will eventully build this familiarity with any mathematical concept. If it seems like a mountain, remember that man has invented dynamite for a reason.
+
+## The importance of intuition, practice and memorization
+
+You might see a peer who is more mathematically adept than you, solving problems at blazing speed. If you question them for long enough, they eventually reveal that it is not becaus they are born geniuses, they have just put in a lot more time than you, either deliberately or out of personal interest. 
+
+The word "genius" is overrated: a higher amount of (percieved) intelligence is very quickly less useful than having a strong **intuition** about how everything works, which takes **practice** to develop, not idle thinking. Math is a written language and you can, over time, develop a "muscle memory" on how to use it without having to think deeply about every step. This comes from practicing problems, like you would practice a violin or other musical instruments. 
+
+You may be surprised to know are already someway along the path to gaining this intuition. For example, if I ask you what is 17 times 24, you might guess it is a few hundreds. You probably won't guess it is seven million. 
+How did you develop this fuzzy kind of thinking? By doing multiplication since kindergarden, is how. And you can develop a similar kind of intuition with any math concept, given enough time.
+
+Dumb, repititive practice is not the flavour of this book. Our approach echoes seeks to avoid the problems faced by [Ferdinand Eisenstein](https://en.wikipedia.org/wiki/Gotthold_Eisenstein):
+> During the first years [of elementary school] I acquired my education in the fundamentals: I still remember the torture of completing endless multiplication examples.  From this, you might conclude, erroneously, that I lacked mathematical ability, merely because I showed little inclination for calculating.  In fact the mechanical, always repetitive nature of the procedures annoyed me, and indeed, I am still disgusted with calculations lacking any purpose, while **if there was something new to discover, requiring thought and reasoning, I would spare no pains.**
+
+In every example we provide, we seek to provide new insights and understanding of the core from a different angle. It's worth breaking your head over some of the problems.
+
+However, intuition and practice is not the end-all. To be a mathematical practictioner, there is some amount of memorization needed. This should be done for the sake of *speed*: your research and applied work will progress much slower if you aren't able to recall, roughly, that correlation measures a linear relationship between input random variable X and the target Y. 
+
+As a rule of thumb, if you have to look up *some concepts* some of the time, that's totally okay; as a practitioner and researcher, your job is not like an exam, you do have enough time to look up the details. If you have to look up *most* concepts *most* of the time, your work will progress slowly, since this slowness impedes your thinking. It is worth investing time on committing some fundamentals to memory.
+
+To use the analogy of a computer, you should keep certain things cached in your mind permanently for quick recall, while other things can be put into your hard drive (long-term storage). You can then re-read the details to bring it back into your cache when required.
+
+
+## A practical recipe to maximize your learning, while minimizing time spent
+Young people are suprisingly more busy with important things than older people (late-twenties onwards). Many older people, once they reach about 25, decide it's time to sort out important things in their lives "once and for all": marriages, careers, education, houses, etc. In the subsequent 5 years, some degree of success is achieved. Along the way, these adults learn an important skill: prioritization, or learning whether something is important *immediately* vs *long-term*.
+
+Most young adults have not yet learned what is *really* important and what can be skipped; not because they are not smart, but simply because they have never had a pressing need to learn this. It is perhaps the most important skill you learn in life, at the level of "be kind to others and yourself" and "how to cook a passable meal in 20 minutes". 
+
+But, it's very hard to force youself to learn this, and you should not try until you need to. This is how we suggest you use this book to maximize your learning, while minimizing time spent:
+1. For each topic you want (or need) to learn, look at the relevant section and trace your way back to previous topics which need to be learnt by clicking on links, until you reach a point where you actually understand the material.
+2. Make a list of sections you must read in an excel table or on a piece of paper. Include any sections which you feel like you don't remember (each "section" is one webpage).
+3. Make an estimate: expect that you will need a day or two per section, but it might take a bit longer for sections which you are learning for the first time (say, 3-4 days). Come up with a rough estimate of how long you will take you to learn all the material.
+4. This part is very very important: add 50% to your final estimate, 80% if it's mostly new material. E.g. if your total estimated 10 days, blindly make it 15 days. This is a rule-of-thumb I have used time and again to help me learn important concepts, and also to do actual work at my job as an AI researcher. This is going to be the real amount of time it will take you. Trust me on this (or, alternatively, ask any adult who works in the tech industry if this is sound advice). 
+
+Point 4 is naturally a bit confusing: if you've analysed and come up with an estimate, shouldn't you trust it? The answer, surprisingly, is ***no***. 
+Let's say you estimate 10 sections to learn. What will inevitably end up happening is that one of the sections will take a *lot* longer than you anticipated, because you just don't "get it" the first time. You'll have to read other books, or online sources, to try and piece together the concepts in a way *you* can actually understad. Any section you must do this for, will require five times longer than the other sections (5-8 days, rather than 3-4). 
+
+As a result, 
+
