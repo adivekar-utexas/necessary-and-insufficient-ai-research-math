@@ -1,0 +1,24 @@
+# 2.1.1 Introduction to Vectors
+
+Recall the basic idea of vectors that we formulated in chapter 1, in Data in the Real World. We presented a real-life example of how vectors are used. While in this chapter, we present a more formal definition of vectors.
+
+Now, vectors have relatively different meanings in physics, math and CS. In physics, vectors can be thought of as an arrow having both magnitude and direction. In CS, vectors can be thought of as an array/ordered list of numbers. While in math, we present a more generalized definition of vectors.
+
+**Definition 2.1.1.1** (Vector). A vector is an ordered one-dimensional tensor which can be added together or multiplied by a scalar.
+
+Mathematically, a vector $\mathbf{v}$ $\in$ $\mathbb{R}^n$ is written as:
+\begin{bmatrix}
+v_1 \\
+v_2 \\
+\vdots \\
+v_n
+\end{bmatrix}
+where $v_1, v_2, \ldots, v_n$ are the components of the $n$-dimensional vector $\mathbf{v}$, and $\mathbb{R}^n$ represents the $n$-dimensional set of real numbers. Recall that we denote all vectors in lowercase bold letters, as said in chapter 1. Keep in mind that usually, when we think of vectors we think of them as a column matrix(a matrix with only one column), although sometimes, vectors are also used as row matrices(a matrix with only one row).
+
+---
+
+## Vectors as coordinate systems
+
+In Linear Algebra, vectors are often used in coordinate systems. Let's think about vectors as arrows in $2D$ graphs. The tail of the arrow is at the origin, where the $x$-axis and $y$-axis meet. From there, there is a line till the tip of the arrow, which is located where the elements of the 2-dimensional vector point to a coordinate of the graph. Note that vectors are not points, but are arrows from the origin to the point.
+
+Similarly, for 3D graphs, the tail of the arrow is at the origin. From there, there is a line till the tip of the arrow, which is located where the elements of the 3-dimensional vector point to a coordinate of the graph. We can also generalize this to n-dimensional spaces for n-dimensional vectors.

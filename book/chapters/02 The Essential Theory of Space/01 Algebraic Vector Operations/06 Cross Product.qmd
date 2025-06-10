@@ -1,0 +1,37 @@
+# 2.1.6 Cross Product
+
+The **cross product**, also called the outer product between vectors, is a fundamental operation in linear algebra. On performing this operation on two vectors, we get a matrix.
+
+While cross products can be defined for higher-order tensors, we focus on the basic case involving two vectors in this section. We get the cross product in the same way as dot product, except that we transpose the second vector $v$. The operation is $uv^{T}$.
+
+\
+
+**Definition 2.1.6** (Cross Product). Let $\mathbf{u}, \mathbf{v} \in \mathbb{R}^d$ be column vectors. Then the **cross product** (also called the **outer product**) of $\mathbf{u}$ and $\mathbf{v}$ is the matrix:
+$$
+\mathbf{u} \otimes \mathbf{v} = \mathbf{u} \mathbf{v}^T \in \mathbb{R}^{d \times d}
+$$
+That is, each entry of the resulting matrix is the product of a component from $\mathbf{u}$ and a component from $\mathbf{v}$:
+$$
+(\mathbf{u} \otimes \mathbf{v})_{ij} = u_i v_j
+$$
+\
+**Example 2.1.6**
+Let 
+$$
+\mathbf{u} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}, \quad 
+\mathbf{v} = \begin{bmatrix} 3 \\ 4 \end{bmatrix}
+$$
+
+Then,
+$$
+\mathbf{u} \otimes \mathbf{v} = \mathbf{u} \mathbf{v}^T = 
+\begin{bmatrix} 
+1 \cdot 3 & 1 \cdot 4 \\
+2 \cdot 3 & 2 \cdot 4
+\end{bmatrix}
+= 
+\begin{bmatrix}
+3 & 4 \\
+6 & 8
+\end{bmatrix} \in \mathbb{R}^{2 \times 2}
+$$

@@ -1,0 +1,52 @@
+# 2.1.4 Transpose of a Vector
+
+Before discussing about transpose, it is essential to learn about row and column vectors. While usually, we think of a vector as a column vector, vectors can also be represented as a row. Let us define these formally.
+
+\
+**Row Vector**: A row vector is a $1 \times n$ matrix written as a single row of $n$ elements. It has the form:
+$$
+\mathbf{r} = \begin{bmatrix} r_1 & r_2 & \cdots & r_n \end{bmatrix}
+\in \mathbb{R}^{1 \times n}
+$$
+
+\
+**Column Vector**: A column vector is an $n \times 1$ matrix written as a single column of $n$ elements. It has the form:
+$$
+\mathbf{c} = \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix}
+\in \mathbb{R}^{n \times 1}
+$$
+
+
+\
+**Example 2.1.4.1**
+$$
+\text{If } \mathbf{a} = \begin{bmatrix} 3 \\ -1 \end{bmatrix}, \quad \text{then } \mathbf{a}^T = \begin{bmatrix} 3 & -1 \end{bmatrix}
+$$
+
+
+**Example 2.1.4.2**
+$$
+\text{If } \mathbf{b} = \begin{bmatrix} 4 & 5 \end{bmatrix}, \quad \text{then } \mathbf{b}^T = \begin{bmatrix} 4 \\ 5 \end{bmatrix}
+$$
+
+\
+\
+
+Now, let us talk about the transpose a row or column vector. Remember, that whenever we talk about transpose, it simply means to flip the tensor.
+
+**Definition 2.1.4** (Vector Transpose). \ The **transpose** of a vector is an operation that flips a vector from a **column** to a **row**, or from a **row** to a **column**.
+
+If a vector $\mathbf{v} \in \mathbb{R}^n = \mathbb{R}^{n \times 1}$ is originally written as a **column vector**, then its transpose $\mathbf{v}^T$ becomes a **row vector**, and vice versa.
+
+\
+Let $\mathbf{v} \in \mathbb{R}^{n \times 1}$ be:
+$$
+\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}
+\quad \text{(a column vector)}
+$$
+
+Then the transpose $\mathbf{v}^T \in \mathbb{R}^{1 \times n}$ is:
+$$
+\mathbf{v}^T = \begin{bmatrix} v_1 & v_2 & \cdots & v_n \end{bmatrix}
+\quad \text{(a row vector)}
+$$
