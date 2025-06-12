@@ -1,0 +1,112 @@
+# Functions: Multivariate Scalar-Valued Functions
+
+Functions are not always defined on a single variable. Many real-world processes depend on multiple inputs. A **multivariate scalar-valued function** is one that accepts several real-valued inputs and returns a single real number — a single quantity summarizing many factors.
+
+---
+
+## 1. Formal Definition
+
+Let $f: \mathbb{R}^n \to \mathbb{R}$
+
+Here:
+- The input is a vector $x = (x_1, x_2, \dots, x_n)$
+- The output is a single scalar $f(x) \in \mathbb{R}$
+
+**Example:**  
+$$
+f(x_1, x_2) = x_1^2 + 3x_2^2 \quad \text{is a function from } \mathbb{R}^2 \to \mathbb{R}
+$$
+
+---
+
+## 2. Domain, Codomain, and Range
+
+- **Domain**: Typically $\mathbb{R}^n$
+- **Codomain**: $\mathbb{R}$
+- **Range**: A subset of $\mathbb{R}$ depending on the actual function
+
+> 🟡 **Insight**  
+> Though the function "lives" in higher dimensions, its output is always a single real number — hence the name *scalar-valued*.
+
+---
+
+## 3. Gradient
+
+The **gradient** of a scalar-valued function is a vector that contains all its partial derivatives:
+
+$$
+\nabla f(x) = \left( \frac{\partial f}{\partial x_1}, \dots, \frac{\partial f}{\partial x_n} \right)
+$$
+
+**Example:**  
+If $f(x, y) = x^2 + y^2$, then:
+
+$$
+\nabla f = (2x, 2y)
+$$
+
+![Gradient Vector Field](path/to/gradient_plot.png)
+
+> 🔵 **Why It Matters**  
+> The gradient points in the direction of greatest increase of the function.  
+> It plays a key role in optimization algorithms, especially in machine learning.
+
+---
+
+## 4. Level Sets and Contours
+
+A **level set** of a function is the set of all points that result in the same output value:
+
+$$
+L_\alpha = \{ x \in \mathbb{R}^n \mid f(x) = \alpha \}
+$$
+
+In $\mathbb{R}^2$, level sets appear as **contour lines** on a graph — these are curves of constant height on the surface.
+
+![Level Sets / Contours](path/to/contours_plot.png)
+
+> 🔍 Contour plots help visualize the "shape" of functions in 2D.
+
+---
+
+## 5. Hessian Matrix
+
+The **Hessian matrix** $H_f$ is a square matrix of all second-order partial derivatives:
+
+$$
+H_f(x) = \begin{bmatrix}
+\frac{\partial^2 f}{\partial x_1^2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial^2 f}{\partial x_n \partial x_1} & \cdots & \frac{\partial^2 f}{\partial x_n^2}
+\end{bmatrix}
+$$
+
+This matrix gives insight into the **curvature** of the function near a point — whether it curves upwards (convex), downwards (concave), or saddle-like.
+
+![Hessian Curvature Visual](path/to/hessian_curvature.png)
+
+> 📘 Positive definite Hessians imply convexity — a key property in optimization.
+
+---
+
+## 6. Summary Table
+
+> 🧾 **Summary of Key Ideas**
+
+| Concept       | Description                                                |
+|---------------|------------------------------------------------------------|
+| $f: \mathbb{R}^n \to \mathbb{R}$ | Function with $n$ inputs, one real output              |
+| Gradient      | Vector of partial derivatives $\in \mathbb{R}^n$           |
+| Hessian       | Matrix of second derivatives ($n \times n$)                |
+| Level Sets    | Curves/surfaces where $f(x)$ is constant                   |
+| Application   | Widely used in optimization, physics, and ML               |
+
+---
+
+> 🧠 **Thinking Like a Mathematician**  
+> When analyzing a multivariate function, consider:
+> - How does the function behave when one input varies?
+> - What does the gradient vector "point to"?
+> - Are the level sets symmetric, elliptical, or irregular?
+> - What does the Hessian reveal about curvature or optimization?
+
