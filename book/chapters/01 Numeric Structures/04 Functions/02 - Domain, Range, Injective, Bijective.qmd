@@ -1,0 +1,97 @@
+# Functions: Domain, Range, Injective, Bijective
+
+Functions are one of the most foundational objects in mathematics. They act as bridges between sets, transforming elements from one space into another. To fully understand a function, we must begin by understanding its domain, codomain, and range — and how these concepts shape injectivity, surjectivity, and bijectivity.
+
+## 1. Domain and Codomain
+
+Let $f: A \to B$ be a function.
+
+- **Domain** ($\text{dom}(f)$): the set $A$, which contains all inputs that the function accepts.
+- **Codomain** ($\text{cod}(f)$): the set $B$, which contains all potential outputs (not necessarily achieved).
+
+> 📦 **Definition**  
+> The function $f: A \to B$ assigns to each $x \in A$ a unique $y \in B$, written as $f(x) = y$.
+
+## 2. Range (Image)
+
+The **range** (or image) of a function $f$ is the actual set of values produced by $f$ when evaluated over all inputs:
+
+$$
+\text{Range}(f) = \{ f(x) \mid x \in A \} \subseteq B
+$$
+
+**Example:**  
+Let $f(x) = x^2$ with domain $A = \mathbb{R}$ and codomain $B = \mathbb{R}$. Then:
+
+$$
+\text{Range}(f) = \{ y \in \mathbb{R} \mid y \geq 0 \}
+$$
+
+> 🟡 **Insight**  
+> The range is always a subset of the codomain.  
+> The codomain is what the function is *allowed* to hit; the range is what it *actually* hits.
+
+## 3. Injective (One-to-One) Functions
+
+**Definition:** A function $f: A \to B$ is **injective** if different inputs map to different outputs. Formally:
+
+$$
+f(x_1) = f(x_2) \Rightarrow x_1 = x_2
+$$
+
+**Example:**  
+$f(x) = 2x + 3$ on domain $\mathbb{R}$ is injective — it never assigns the same output to two different inputs.
+
+![Injective Function](path/to/injective_function.png)
+
+> 🟢 **Graphical Clue**  
+> A function is injective if it passes the *horizontal line test* — no horizontal line cuts the graph more than once.
+
+## 4. Surjective (Onto) Functions
+
+**Definition:** A function $f: A \to B$ is **surjective** if every element of $B$ is hit by at least one element of $A$:
+
+$$
+\forall y \in B, \exists x \in A \text{ such that } f(x) = y
+$$
+
+**Example:**  
+$f(x) = x^3$ from $\mathbb{R} \to \mathbb{R}$ is surjective — every real number is reachable.
+
+![Surjective Function](path/to/surjective_function.png)
+
+## 5. Bijective Functions
+
+A function is **bijective** if it is both injective and surjective. That is:
+
+- Every input has a unique output (injective)
+- Every output is covered (surjective)
+
+**Example:**  
+$f(x) = x + 5$ from $\mathbb{R} \to \mathbb{R}$ is bijective.
+
+![Bijective Function](path/to/bijective_function.png)
+
+> 🔴 **Key Fact**  
+> Only bijective functions have inverses!  
+> If $f: A \to B$ is bijective, then there exists $f^{-1}: B \to A$ such that:
+> $$
+> f^{-1}(f(x)) = x \quad \text{and} \quad f(f^{-1}(y)) = y
+> $$
+
+## 6. Visual Summary (Textual Format)
+
+- **Injective**: No output is repeated
+- **Surjective**: Every codomain element is hit
+- **Bijective**: Perfect one-to-one mapping between domain and codomain
+
+## 7. Final Reflection
+
+> 🧠 **Thinking Like a Mathematician**  
+> When defining a function, always ask:
+> - What is its domain?
+> - What is its codomain?
+> - What is its range?
+> - Is it injective, surjective, or bijective?
+> 
+> These questions help you fully understand what a function is doing.
