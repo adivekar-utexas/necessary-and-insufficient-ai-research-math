@@ -1,18 +1,18 @@
-# Artificial Intelligence Math, From Scratch
+# Generative Artificial Intelligence Math From Scratch
 
-Mastering AI begins with mastering the math. **AI Math From Scratch** gives you the necessary foundation, with no jargon and no paywalls. 
+Mastering GenAI begins with mastering the math. **GenAI Math From Scratch** gives you the necessary foundation, with no jargon and no paywalls. 
 
 We begin at high-school level set theory and probability, then advance through linear algebra, calculus, real analysis, and beyond until you can read graduate-level papers with confidence.
 
 Think of the journey as a spiral staircase wrapped in sturdy pillars, just like the image below. Each turn you ascend links the pillars tighter, revealing how the pieces power NLP, computer vision, reinforcement learning, and emerging AI paradigms. On the way up you’ll also pick up modern tooling - NumPy, PyTorch, and parallel-programming patterns - so the math lives in real code, not just on your screen.
 
-Ready to level up? Start reading here → **[adivekar.quarto.pub/ai-math-from-scratch](https://adivekar.quarto.pub/ai-math-from-scratch)** 🚀
+Ready to level up? Start reading [here](https://adivekar.quarto.pub/ai-math-from-scratch) 🚀
 
 <img src="images/art-deco-spiral-staircase.png" width="800" height="800">
 
 ## Support This Project ⭐
 
-**Please help us by starring this repository!** Every GitHub star is a vote for open, inclusive AI education. 
+**Please help us by starring this repository!** Every GitHub star is a vote for open, inclusive GenAI education. 
 
 If our textbook helps you, inspires you, or simply sounds cool, please click the ⭐️ button at the top-right of the repo. 
 
@@ -44,8 +44,8 @@ If you are interested in contributing to the project, welcome! Please go through
 ### Step 1: Clone the repository
 ```bash
 cd ~
-git clone https://github.com/adivekar-utexas/ai-math-from-scratch.git
-cd ai-math-from-scratch/
+git clone https://github.com/adivekar-utexas/gen-ai-math-from-scratch.git
+cd gen-ai-math-from-scratch/
 ```
 
 ### Step 2: Setup dependencies
