@@ -1,8 +1,6 @@
 # 2.1.6 Cross Product
 
-The **cross product**, also called the outer product between vectors, is a fundamental operation in linear algebra. On performing this operation on two vectors, we get a matrix.
-
-While cross products can be defined for higher-order tensors, we focus on the basic case involving two vectors in this section. We get the cross product in the same way as dot product, except that we transpose the second vector $v$. The operation is $uv^{T}$.
+The **cross product**, also called the outer product between vectors, is a fundamental operation in linear algebra. Similar to dot products and most elementwise operations, we need both the vectors to be of the same length to perform this operation. On performing this operation on two vectors, we get a matrix.
 
 \
 

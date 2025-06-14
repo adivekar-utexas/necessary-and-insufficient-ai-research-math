@@ -1,14 +1,7 @@
 # 2.1.5 Dot Product
 
-Dot Product, also called the **inner product**, is a widely used operation in linear algebra. Instead of introducing dot products in the standard way like it is done in most linear algebra books, we present a clearer understanding of how dot products work.
+Dot Product, also called the **inner product**, is a widely used operation in linear algebra. Similar to elementwise operations, the dot product requires both vectors (usually column vectors) to be of the same length.
 
-Similar to elementwise operations, the dot product requires both vectors (usually column vectors) to be of the same length. Recall that to perform matrix multiplication on two matrices, the number of columns of the first matrix $u \in \mathbb{R}^{n \times 1}$ must be equal to the number of rows of the second matrix $v \in \mathbb{R}^{n \times 1}$. But this is not the case for the two column vectors $u$ and $v$. 
-
-Hence, we **transpose** the first vector (which is $u$ in this case) to make it a row vector. This way, the operation becomes $u^T v$. Multiplying a $1 \times n$ matrix with an $n \times 1$ matrix yields a $1 \times 1$ matrix, which is essentially a **scalar**. This is how we get the dot product operation.
-
-Now, let us present the standard definition used in most linear algebra books.
-
-\
 \
 
 **Definition 2.1.5** (Dot Product). \ The **dot product** of two vectors $\mathbf{u}, \mathbf{v} \in \mathbb{R}^n$ is the sum of the products of their corresponding elements. It is defined as:
