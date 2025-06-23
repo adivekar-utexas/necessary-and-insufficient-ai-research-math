@@ -1,12 +1,12 @@
 # Generative Artificial Intelligence Math From Scratch
 
-Author: Abhishek Divekar 
+Lead Author: Abhishek Divekar 
 
 ## Introduction
 
-Mastering GenAI begins with mastering the math. **GenAI Math From Scratch** gives you the necessary foundation you need, with no jargon and no paywalls. This free online book begins with high-school level set theory and probability, then advance through linear algebra, calculus, real analysis, and beyond until you can read graduate-level papers with confidence.
+Mastering GenAI begins with mastering the math. **"GenAI Math From Scratch"** provides you the necessary mathematical foundation you need to succeed, without paywalls. This free online book begins with high-school level set theory and probability, then advance through linear algebra, calculus, real analysis and beyond, until you can read graduate-level GenAI papers with confidence.
 
-Think of the journey as a spiral staircase wrapped around sturdy pillars, like in the image below. With each turn you ascend, the pillars interconnect more tightly, revealing how these mathematical foundations power NLP, computer vision, reinforcement learning, and emerging GenAI paradigms. Along the way, you'll also master modern tooling - NumPy, PyTorch, and parallel-programming patterns...math that lives in real code, not just symbols on your screen.
+Think of the journey as a spiral staircase wrapped around sturdy pillars, like in the image below. With each turn you ascend, the pillars expand outwards, revealing how these mathematical foundations power NLP, computer vision, reinforcement learning, and a wide space of emerging GenAI paradigms. Along the way, you'll also master modern tooling - NumPy, PyTorch, and parallel-programming patterns...math that lives in real code, not just symbols on your screen.
 
 Ready to level up? 🚀 Start reading here: https://adivekar.quarto.pub/gen-ai-math-from-scratch 
 
