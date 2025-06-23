@@ -1,20 +1,26 @@
 # Generative Artificial Intelligence Math From Scratch
 
-Mastering GenAI begins with mastering the math. **GenAI Math From Scratch** gives you the necessary foundation, with no jargon and no paywalls. 
+Author: Abhishek Divekar 
 
-We begin at high-school level set theory and probability, then advance through linear algebra, calculus, real analysis, and beyond until you can read graduate-level papers with confidence.
+## Introduction
 
-Think of the journey as a spiral staircase wrapped in sturdy pillars, just like the image below. Each turn you ascend links the pillars tighter, revealing how the pieces power NLP, computer vision, reinforcement learning, and emerging AI paradigms. On the way up you’ll also pick up modern tooling - NumPy, PyTorch, and parallel-programming patterns - so the math lives in real code, not just on your screen.
+Mastering GenAI begins with mastering the math. **GenAI Math From Scratch** gives you the necessary foundation you need, with no jargon and no paywalls. This free online book begins with high-school level set theory and probability, then advance through linear algebra, calculus, real analysis, and beyond until you can read graduate-level papers with confidence.
 
-Ready to level up? Start reading [here](https://adivekar.quarto.pub/ai-math-from-scratch) 🚀
+Think of the journey as a spiral staircase wrapped around sturdy pillars, like in the image below. With each turn you ascend, the pillars interconnect more tightly, revealing how these mathematical foundations power NLP, computer vision, reinforcement learning, and emerging GenAI paradigms. Along the way, you'll also master modern tooling - NumPy, PyTorch, and parallel-programming patterns...math that lives in real code, not just symbols on your screen.
+
+Ready to level up? 🚀 Start reading here: https://adivekar.quarto.pub/gen-ai-math-from-scratch 
 
 <img src="images/art-deco-spiral-staircase.png" width="800" height="800">
 
 ## Support This Project ⭐
 
-**Please help us by starring this repository!** Every GitHub star is a vote for open, inclusive GenAI education. 
+"GenAI Math From Scratch" was initially contributed by winners of the Indian AI Olympiad 2025. Since then, it has evolved into a community-driven resource dedicated to advancing rigorous GenAI education for both leaders and learners worldwide.
 
-If our textbook helps you, inspires you, or simply sounds cool, please click the ⭐️ button at the top-right of the repo. 
+**Please help us by starring this repository!** 
+
+If this textbook helps you, inspires you, or simply sounds interesting, please hit that ⭐️ button in the top-right corner. 
+
+Every star is a vote for open and inclusive GenAI education 🎉
 
 | What your star does | Why it matters |
 |---------------------|---------------|
