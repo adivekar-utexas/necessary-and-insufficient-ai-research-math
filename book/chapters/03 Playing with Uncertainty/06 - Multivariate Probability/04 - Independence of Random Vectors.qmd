@@ -1,0 +1,217 @@
+## ➤ Independence of Random Vectors
+
+We stated the independence of multiple r.v.s on earlier pages.  
+Let us now do the same using a random vector, which has the **notion of independence**:
+
+---
+
+### 1. Independence of Random Sub-vectors
+
+Let $X = (X_1, \dots, X_d)^T$ be a random vector. Partition it as:
+
+$$
+X \rightarrow \begin{bmatrix} X_A \\ X_B \end{bmatrix}, \quad \text{where } X_A = (X_1, \dots, X_{d-k})^T,\; X_B = (X_{d-k+1}, \dots, X_d)^T
+$$
+
+Then, **random vectors $X_A$ and $X_B$ are independent** iff their **joint distribution equals the product of their marginal distributions**, i.e.:
+
+$$
+p(X = x) = p_{X_A}(X_A = x_A) \cdot p_{X_B}(X_B = x_B)
+$$
+
+for all $x \in \mathbb{R}^d$, where $x = \begin{bmatrix} x_A \\ x_B \end{bmatrix}$.
+
+We denote this as:
+
+$$
+X_A \perp\!\!\!\perp X_B
+$$
+
+---
+
+### (a) If $X$ is a **discrete or continuous** random vector:
+
+Random vectors $X_A$ and $X_B$ are independent if their **joint CDF** equals the product of the marginal CDFs of $X_A$ and $X_B$, i.e.,
+
+$$
+F_X(x) = F_{X_1, \dots, X_{d-k}}(x_1, \dots, x_{d-k}) \cdot F_{X_{d-k+1}, \dots, X_d}(x_{d-k+1}, \dots, x_d)
+$$
+
+for all vectors $x \in \mathbb{R}^d$, where $x = \begin{bmatrix} x_A \\ x_B \end{bmatrix}$.
+
+---
+
+### (b) If $X$ is a **discrete random vector**:
+
+Random vectors $X_A$ and $X_B$ are independent if their **joint PMF** equals the product of their marginal PMFs:
+
+$$
+p_X(x) = p_{X_A}(X_A = x_A) \cdot p_{X_B}(X_B = x_B)
+$$
+
+i.e.,
+
+$$
+p_{X}(X = x) = p_{X_A}(X_A = x_A) \cdot p_{X_B}(X_B = x_B)
+$$
+
+for all $x \in \mathbb{R}^d$, with $x = \begin{bmatrix} x_A \\ x_B \end{bmatrix}$.
+
+---
+
+### 🔁 Equivalent Condition:
+
+$X_A \perp\!\!\!\perp X_B$ if the **conditional PMF** of $X_A$ given $X_B$ is equal to the marginal of $X_A$, and vice versa:
+
+$$
+p_{X_A \mid X_B = x_B}(X_A = x_A) = p_{X_A}(X_A = x_A) \quad \forall x \in \mathbb{R}^d
+$$
+
+and
+
+$$
+p_{X_B \mid X_A = x_A}(X_B = x_B) = p_{X_B}(X_B = x_B)
+$$
+
+### (c) If $X$ is a **continuous random vector**:
+
+Random vectors $X_A$ and $X_B$ are independent if their **joint pdf** equals the product of their marginal pdfs:
+
+$$
+f_X(x) = f_{X_A}(x_A) \cdot f_{X_B}(x_B)
+$$
+
+i.e.,
+
+$$
+f_X(x_1, \dots, x_d) = f_{X_1, \dots, X_{d-k}}(x_1, \dots, x_{d-k}) \cdot f_{X_{d-k+1}, \dots, X_d}(x_{d-k+1}, \dots, x_d)
+$$
+
+for all $x \in \mathbb{R}^d$, where $x = \begin{bmatrix} x_A \\ x_B \end{bmatrix}$.
+
+---
+
+### 🔁 Equivalently:
+
+$X_A \perp\!\!\!\perp X_B$ if the **conditional pdf** of $X_A$ (conditioned on $X_B$) is equal to the **marginal pdf** of $X_A$, and vice versa:
+
+$$
+f_{X_A \mid X_B = x_B}(X_A = x_A) = f_{X_A}(X_A = x_A) \quad \forall x \in \mathbb{R}^d
+$$
+
+and
+
+$$
+f_{X_B \mid X_A = x_A}(X_B = x_B) = f_{X_B}(X_B = x_B)
+$$
+
+---
+
+### 🧠 Conceptual Clarification:
+
+The independence of random vectors, as we saw here, is a bit different from independence of random variables.
+
+Here, it means that **every subset of r.v.s from $X_A$ is independent of every subset of r.v.s from $X_B$**.
+
+However, the r.v.s *within* $X_A$ might **not be independent of each other** (and same for $X_B$).  
+If they are, they are said to be **mutually independent**.
+
+
+## ✦ Mutual Independence (of r.v.s) in a Random Vector
+
+If $X = (X_1, \dots, X_d)^T$ is a random vector, then each of the variables $X_1, \dots, X_d$ is **mutually independent** if each $X_i$ is independent of all subsets of $\{X_1, \dots, X_{i-1}, X_{i+1}, \dots, X_d\}$.
+
+---
+
+### (a) If $X$ is a **continuous or discrete** random vector:
+
+$X_1, \dots, X_d$ are **mutually independent** if:
+
+#### Joint CDF condition:
+$$
+F_X(x) = F_{X_1}(x_1) \cdot F_{X_2}(x_2) \cdots F_{X_d}(x_d)
+$$
+
+#### Joint PMF condition (discrete case):
+$$
+p_X(x) = p_{X_1}(x_1) \cdot p_{X_2}(x_2) \cdots p_{X_d}(x_d)
+= \prod_{i=1}^d p(X_i = x_i)
+\quad \forall x \in \mathbb{R}^d
+$$
+
+> (product of marginal CDFs / PMFs)
+
+---
+
+### (b) If $X$ is a **discrete** random vector:
+
+$X_1, \dots, X_d$ are **mutually independent** if:
+
+#### Joint PMF condition:
+$$
+p_X(x) = p_{X_1}(x_1) \cdot \cdots \cdot p_{X_d}(x_d)
+= \prod_{i=1}^d p(X_i = x_i)
+\quad \forall x \in \mathbb{R}^d
+$$
+
+---
+
+### (c) If $X$ is a **continuous** random vector:
+
+$X_1, \dots, X_d$ are **mutually independent** if:
+
+#### Joint PDF condition:
+$$
+f_X(x) = f_{X_1}(x_1) \cdot \cdots \cdot f_{X_d}(x_d)
+= \prod_{i=1}^d f(X_i = x_i)
+\quad \forall x \in \mathbb{R}^d
+$$
+
+> (product of marginal PDFs)
+
+---
+
+## ➤ Conditional Independence of Random Vectors
+
+### 1. Conditional Mutual Independence (of r.v.s) in a Random Vector
+
+Let $X$ be a random vector, partitioned as:
+
+$$
+X \rightarrow \begin{bmatrix} X_A \\ X_B \end{bmatrix}, \quad \text{where } X_A = (X_1, \dots, X_{d-k})^T,\; X_B = (X_{d-k+1}, \dots, X_d)^T
+$$
+
+Then, the r.v.s of subvector $X_A$, i.e., $X_1, \dots, X_{d-k}$ are **conditionally mutually independent** if **each $X_i$ is conditionally independent of all subsets of $\{X_1, \dots, X_{i-1}, X_{i+1}, \dots, X_{d-k}\}$ conditioned on $X_B = x_B$**.
+
+---
+
+### (a) If $X_A$ and $X_B$ are **discrete or continuous** random vectors:
+
+$X_1, \dots, X_{d-k}$ are **conditionally independent (conditioned on $X_B = x_B$)** iff:
+
+$$
+F_{X_1, \dots, X_{d-k} \mid X_B = x_B}(x_A) = \frac{\mathbb{P}(X_A \leq x_A,\; X_B = x_B)}{f_{X_B}(X_B = x_B)}
+$$
+
+- For **discrete** $X_A$, $X_B$: numerator is a joint pmf, denominator a marginal pmf
+- For **continuous** $X_A$, $X_B$: numerator is a joint CDF, denominator a PDF
+
+---
+
+If this is true, then:
+
+$$
+\mathbb{P}(X_1 \leq x_1, \dots, X_{d-k} \leq x_{d-k} \mid X_{d-k+1} = x_{d-k+1}, \dots, X_d = x_d)
+= \prod_{i=1}^{d-k} \mathbb{P}(X_i \leq x_i \mid X_{d-k+1} = x_{d-k+1}, \dots, X_d = x_d)
+$$
+
+---
+
+✅ Then we have **conditional mutual independence**.
+
+
+---
+
+
+
+

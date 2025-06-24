@@ -1,0 +1,129 @@
+## 📘 Random Vectors (Multivariate Random Variables)
+
+So far we have been considering multiple r.v.s $X_1, X_2, \dots, X_d$ all as separate r.v.s. However, it is sometimes more convenient to consider them as one algebraic unit.
+
+A **random vector** (or a **multivariate random variable**) is one such possible unit. It is a $d$-dimensional vector of random variables $X_1, X_2, \dots, X_d$, where each r.v. lives on the same sample space $S$ and probability function $p(s)$ (which acts on outcomes $s \in S$). As each r.v. $X_i$ maps from $S$ to a real number, a random vector is a mapping from the sample space $S$ to a real vector in $\mathbb{R}^d$:
+
+$$
+X: S \rightarrow \mathbb{R}^d \quad \text{where} \quad X(s) = \begin{bmatrix} X_1(s) \\ X_2(s) \\ \vdots \\ X_d(s) \end{bmatrix}
+$$
+
+Each experimental run produces a realization of $X$, i.e., a vector of realized values $x = (x_1, x_2, \dots, x_d)^T \in \mathbb{R}^d$.
+
+> Note: that in general, being arranged as a vector does not tell us anything about the r.v.s $X_1, \dots, X_d$ (except that they share a sample space $S$ and a probability measure function $p$). In particular, r.v.s $X_i$ might be independent of each other, conditionally independent, or anything in between.
+
+---
+
+The **joint distribution** $p_X: \mathbb{R}^d \rightarrow [0, 1]$ is a probability function which assigns a probability value to every possible realization $x \in \mathbb{R}^d$. We denote the **joint distribution** of multivariate r.v. $X$ as $p_X(X)$ (or $\mathbb{P}(X_1, \dots, X_d)$), and **CDF** as:
+
+$$
+F_X(x) = \mathbb{P}(X_1 \leq x_1, \dots, X_d \leq x_d) = \mathbb{P}(X \leq x)
+$$
+
+where $x = (x_1, \dots, x_d)^T$ is a realization of multivariate r.v. $X = (X_1, \dots, X_d)^T$.
+
+---
+
+- **For discrete multivariate r.v.** $X$: $\text{pmf: } p_X(X = x) = \mathbb{P}(X_1 = x_1, \dots, X_d = x_d)$
+- **For continuous multivariate r.v.** $X$: $\text{pdf: } f_X(x) = f_{X_1, \dots, X_d}(x_1, \dots, x_d) = \frac{\partial^d}{\partial x_1 \partial x_2 \dots \partial x_d} \left[ F_X(x_1, \dots, x_d) \right]$
+
+
+## ➔ Operations on Random Vectors
+
+Similar to how we can algebraically manipulate random variables, we can manipulate a random vector $X = (X_1, X_2, \dots, X_d)^T$ using the principles of linear algebra, as though they were regular vectors.
+
+> The following applies to both discrete & continuous random vectors.
+
+---
+
+### ★ Expected Value of a Random Vector
+
+If $X = (X_1, X_2)^T, \; X: S \rightarrow \mathbb{R}^d$ is a random vector, then:
+
+$$
+\mathbb{E}(X) = 
+\begin{bmatrix}
+\mathbb{E}(X_1) \\
+\mathbb{E}(X_2)
+\end{bmatrix}
+= \mu_X \in \mathbb{R}^d
+$$
+
+$\mu_X$ is the **expected value of the random vector $X$**.
+
+After undergoing this transformation, $\mathbb{E}(X)$ is now a vector of real numbers (scalars), rather than a random variable (i.e., it no longer has a distribution associated with it).
+
+If $X, Y, Z$ are $d$-dimensional random vectors, then:
+
+$$
+\mathbb{E}(X + Y + Z) = \mathbb{E}(X) + \mathbb{E}(Y) + \mathbb{E}(Z)
+$$
+
+---
+
+### ➔ Affine Transform of a Random Vector
+
+We can produce a new random vector $Z: S \rightarrow \mathbb{R}^k$ by passing a vector $X = (X_1, \dots, X_d)^T$ through an **affine transform** (meaning we multiply it by a (fixed) matrix $A \in \mathbb{R}^{k \times d}$ and add a (fixed) vector $b \in \mathbb{R}^k$):
+
+$$
+Z = AX + b
+$$
+
+\[
+\begin{aligned}
+&\underbrace{Z}_{k \times 1} = 
+\underbrace{A}_{k \times d} 
+\cdot 
+\underbrace{X}_{d \times 1} 
++ 
+\underbrace{b}_{k \times 1}
+\end{aligned}
+\]
+
+- $Z$: new random vector  
+- $A$, $b$: fixed matrix and vector  
+
+
+### ➔ Expected Value of an Affine Transform
+
+Since $Z$ is also a random vector, we can continue to manipulate it algebraically.
+
+We can also use the **linearity of expectation** to establish the expected value of $Z$:
+
+$$
+\mathbb{E}(Z) = \mathbb{E}(AX + b) = A \cdot \mathbb{E}(X) + b
+$$
+
+\[
+\begin{aligned}
+&\underbrace{\mathbb{E}(Z)}_{k \times 1} = 
+\underbrace{A}_{k \times d} 
+\cdot 
+\underbrace{\mathbb{E}(X)}_{d \times 1} 
++ 
+\underbrace{b}_{k \times 1}
+\end{aligned}
+\]
+
+> Here $A$ and $b$ are high-dimensional constants.
+
+---
+
+### ➔ Orthogonality
+
+Multivariate r.v.s $X: S \rightarrow \mathbb{R}^d$ and $Z: S \rightarrow \mathbb{R}^l$ are **orthogonal** if:
+
+$$
+\mathbb{E}(X^T Z) = 0
+$$
+
+where:
+
+$$
+X^T Z = X_1 Z_1 + X_2 Z_2 + \dots + X_d Z_d
+$$
+
+
+
+
+

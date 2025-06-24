@@ -1,0 +1,142 @@
+## ➤ Conditional Distributions of Random Vectors
+
+Similar to the marginal distribution, we can obtain the **conditional CDF/PMF/PDF** from the joint distribution of a random vector $X = (X_1, \dots, X_d)^T$.
+
+(We will not mimic the case of univariate conditioning since it is not frequently used.)
+
+Instead, suppose we partition $X \Rightarrow (X_A \mid X_B)^T$ where:
+
+- $X_A : S \rightarrow \mathbb{R}^k$  
+- $X_B : S \rightarrow \mathbb{R}^{d-k}$
+
+Then, we can **condition $X_A$ on a realization of** the random vector $X_B$, which we will denote $x_B \in \mathbb{R}^{d-k}$.
+
+Consequently, to obtain the **conditional distribution** of $X_A$ conditioned on $X_B = x_B$ (at a realized value $x_B$):
+
+---
+
+### (a) $X_A$ and $X_B$ are **discrete** random vectors (Conditional PMF):
+
+The **conditional PMF of $X_A$** is:
+
+$$
+p_{X_A \mid X_B}(x_A \mid x_B) = \frac{p_X(x_A, x_B)}{p_{X_B}(x_B)}
+$$
+
+or in expanded form:
+
+$$
+= \frac{p_{X_1, \dots, X_d}(x_1, \dots, x_k, x_{k+1}, \dots, x_d)}{p_{X_{k+1}, \dots, X_d}(x_{k+1}, \dots, x_d)}
+$$
+
+where:
+- $p_X(x)$ is the joint pmf of $X$ at $x = (x_1, \dots, x_d)^T$
+- $p_{X_B}(x_B)$ is the marginal pmf of $X_B$ (i.e., we have summed out $X_A$ in the marginalization)
+
+---
+
+### (b) $X_A$ and $X_B$ are **continuous** random vectors (Conditional PDF):
+
+Here we have an issue: the **PDF of $X_B$**, i.e., $f_{X_B}$, is zero at any realized value $x_B$. That is:
+
+$$
+\mathbb{P}(X_B = x_B) = 0 \quad \Rightarrow \quad f_{X_B}(x_B) = 0
+$$
+
+And thus, our numerator and denominator are both zero if we try to emulate the steps we did to calculate the conditional pmf.
+
+### ➤ Conditional PDF of Random Vectors (continued)
+
+Instead, we perform a trick similar to what we do to calculate the conditional PDF in the **univariate** case. Instead of conditioning on the event $X_B = x_B$ (i.e., the conjunction $X_{d-k+1} = x_{d-k+1}, \dots, X_d = x_d$), we condition on the event that each r.v. $X_{B_i}$ lies in a small interval $\epsilon_i > 0$ from the corresponding realized value $x_{B_i}$. That is:
+
+$$
+x_{d-k+1} - \epsilon < X_{d-k+1} < x_{d-k+1} + \epsilon, \dots, X_d \in (x_d - \epsilon, x_d + \epsilon)
+$$
+
+Such events will generally have non-zero probability and hence can be conditioned on. We can then take the limit of each $\epsilon_i \to 0$ and use L'Hôpital's rule.
+
+---
+
+### ⭐ Conditional PDF of $X_A$ conditioned on $X_B = x_B$:
+
+$$
+f_{X_A \mid X_B = x_B}(x_A) = \frac{f_X(x)}{f_{X_B}(x_B)}
+$$
+
+That is,
+
+$$
+f_{X_1, \dots, X_k \mid X_{k+1}, \dots, X_d}(x_1, \dots, x_k \mid x_{k+1}, \dots, x_d)
+= \frac{f_{X_1, \dots, X_d}(x_1, \dots, x_k, x_{k+1}, \dots, x_d)}{f_{X_{k+1}, \dots, X_d}(x_{k+1}, \dots, x_d)}
+$$
+
+- where $f_X(x)$ is the joint PDF of $X$ at $x = (x_1, \dots, x_d)^T$
+- and $f_{X_B}(x_B)$ is the marginal PDF of $X_B$ at $x_B = (x_{k+1}, \dots, x_d)^T$
+
+> Note that while the probabilities $\mathbb{P}(X = x)$ and $\mathbb{P}(X_B = x_B)$ are both zero, the values of $f_X(x)$ and $f_{X_B}(x_B)$ are both greater than zero (as they are values of a joint pdf).
+
+---
+
+### 📌 Note: We also define the conditional CDF as:
+
+$$
+F_{X_A \mid X_B = x_B}(x_A) = \mathbb{P}(X_A \leq x_A \mid X_B = x_B)
+$$
+
+and
+
+$$
+f_{X_A \mid X_B = x_B}(x_A) = \frac{\partial^k}{\partial x_1 \cdots \partial x_k} F_{X_A \mid X_B = x_B}(x_A \mid x_B)
+$$
+
+
+
+> This quantity is different depending on the nature of $X$.
+
+---
+
+### (i) $X_A$ and $X_B$ are **discrete** random vectors:
+
+$$
+F_{X_A \mid X_B = x_B}(x_A) = \mathbb{P}(X_A \leq x_A \mid X_B = x_B) = \frac{\mathbb{P}(X_A \leq x_A,\; X_B = x_B)}{\mathbb{P}(X_B = x_B)}
+$$
+
+- (Probability calculated from **joint pmf**)
+
+That is:
+
+$$
+= \frac{p(X_1 \leq x_1,\; \dots,\; X_k \leq x_k,\; X_{k+1} = x_{k+1},\; \dots,\; X_d = x_d)}{p(X_{k+1} = x_{k+1},\; \dots,\; X_d = x_d)}
+$$
+
+- (Probability calculated from **marginal pmf** of $X_B$ by marginalizing out $X_A$)
+
+---
+
+### (ii) $X_A$, $X_B$ are **continuous** random vectors:
+
+$$
+F_{X_A \mid X_B = x_B}(x_A) = \frac{\int_{-\infty}^{x_1} \cdots \int_{-\infty}^{x_k} f_X(x_A, x_B) \, dx_1 \dots dx_k}{f_{X_B}(x_B)}
+$$
+
+- (Probability calculated from **joint pdf**)
+
+- Denominator is the value of **marginal pdf** of $X_B$, not a probability.
+
+---
+
+### 📝 Note:
+
+Here, $X_B = x_B$ is an event.  
+We can also condition on a **different event involving $X_B$**.
+
+$X_A \leq x_A$ is also an event — meaning:
+
+$$
+\{X_1 \leq x_1,\; X_2 \leq x_2,\; \dots,\; X_{d-k} \leq x_{d-k} \}
+$$
+
+---
+
+
+

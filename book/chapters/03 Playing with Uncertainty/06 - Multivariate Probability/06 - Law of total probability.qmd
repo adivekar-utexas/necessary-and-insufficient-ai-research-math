@@ -1,0 +1,99 @@
+### Law of Total Probability for Univariate & Multivariate r.v.s
+
+Recall that the univariate LOTP states that, given  
+disjoint partitions of the sample space $S_1, S_2, \ldots, S_n$  
+such that $S = \bigcup_i S_i$ and $S_i \cap S_j = \emptyset$ if $i \neq j$, the  
+LOTP states that for any event $A \subseteq S$:
+
+$$
+P(A) = \sum_{i=1}^{n} P(S_i) \cdot P(A \mid S_i) = \sum_{i=1}^{n} P(A \cap S_i)
+$$
+
+where we must have that $P(S_i) > 0$.
+
+---
+
+### (a) Univariate
+
+The above extends readily to the case where we  
+condition on a **discrete** univariate r.v. $X$:
+
+$$
+P(A) = \sum_{x \in \mathcal{R}_X} P(X = x) \cdot P(A \mid X = x) = \sum_{x \in \mathcal{R}_X} P(A \cap \{X = x\})
+$$
+
+where $\mathcal{R}_X = \text{Range}(X)$.
+
+If we let $A$ be the event that $Y \in C$, where $C \subseteq \mathbb{R}$  
+and $Y$ is a r.v., then:
+
+$$
+P(Y \in C) = \sum_{x \in \mathcal{R}_X} P(Y \in C \mid X = x) \cdot P(X = x)
+$$
+
+---
+
+### (b) In the case of conditioning on a **continuous** univariate r.v.,
+
+The probability $P(A \mid X = x)$ is ill-defined,  
+since the probability of a continuous r.v.  
+at a point-value like $x \in \mathbb{R}$ is zero.  
+
+In this case, however, we can adapt to use the **pdf**:
+
+$$
+P(A) = \int_{-\infty}^{\infty} P(A \mid X = x) \cdot f_X(x) \, dx
+$$
+
+If we let $A$ be the event that...
+
+
+### (ii) Multivariate
+
+Suppose we have a random vector $X = (X_1, \ldots, X_d)^\top$,  
+which we partition as $X \rightarrow \begin{pmatrix} X_A \\ X_B \end{pmatrix}$,  
+where:  
+- $X_A = (X_1, \ldots, X_{d-k})^\top$ (of dimension $d-k$)  
+- $X_B = (X_{d-k+1}, \ldots, X_d)^\top$ (of dimension $k$)
+
+---
+
+#### (a) If $X$ is a **discrete** random vector
+
+Then, by the Law of Total Probability, the **marginal pmf** of $X_A$ is:
+
+$$
+p(X_A = x_A) = \sum_{x_{d-k+1} \in \mathcal{R}_{d-k+1}} \cdots \sum_{x_d \in \mathcal{R}_d} p_X(x)
+$$
+
+(using the full joint)
+
+$$
+= \sum_{x_{d-k+1} \in \mathcal{R}_{d-k+1}} \cdots \sum_{x_d \in \mathcal{R}_d} p_{X_B}(X_B = x_B) \cdot p(X_A = x_A \mid X_B = x_B)
+$$
+
+where $\mathcal{R}_i = \text{Range}(X_i)$.
+
+We can then use the formulas for marginal & conditional joint pmfs.
+
+---
+
+#### (b) If $X$ is a **continuous** random vector
+
+Then by the Law of Total Probability, the **marginal pdf** of $X_A$ is:
+
+$$
+f(X_A = x_A) = \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} f_X(x) \, dx_{d-k+1} \cdots dx_d
+$$
+
+(using full joint)
+
+$$
+= \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} f_{X_B}(X_B = x_B) \cdot f(X_A = x_A \mid X_B = x_B) \, dx_{d-k+1} \cdots dx_d
+$$
+
+We can then use the formulas for marginal & conditional joint pdfs.
+
+---
+
+

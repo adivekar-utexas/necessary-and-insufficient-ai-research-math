@@ -1,0 +1,264 @@
+## ➔ Joint Distributions of Random Vectors
+
+Recall that by definition, a random vector $X = (X_1, \dots, X_d)$ is a collection of r.v.s:
+
+$$
+X_i : S \rightarrow \mathbb{R}, \quad X: S \rightarrow \mathbb{R}^d
+$$
+
+each of which maps from the **same sample space** $S$ to the **real line**. They also use the same **probability measure** $p(s)$ which assigns probability values to each outcome $s \in S$.
+
+We can thus imagine that the random vector is a mapping from $S$ to $\mathbb{R}^d$, i.e.,
+
+$$
+X: S \rightarrow \mathbb{R}^d \quad \text{where} \quad X(s) = 
+\begin{bmatrix}
+X_1(s) \\
+X_2(s) \\
+\vdots \\
+X_d(s)
+\end{bmatrix} \in \mathbb{R}^d, \quad \forall s \in S
+$$
+
+i.e., same point in $\mathbb{R}^d$ space.
+
+---
+
+Now just like a random variable must have its own distribution, so must a **random vector**. Thus:
+
+$$
+x = (x_1, \dots, x_d)
+$$
+
+which are different realizations of $X = (X_1, \dots, X_d)$ are assigned different probability values by the function:
+
+$$
+p_X : \mathbb{R}^d \rightarrow [0,1]
+$$
+
+---
+
+### ➤ Just like a r.v., a random vector may be discrete or continuous:
+
+1. $X: S \rightarrow \mathbb{R}^d$ is **discrete** if there exists a finite countable set $R_X$ such that:
+
+$$
+p(X \in R_X) = 1 \quad \forall x \in \mathbb{R}^d
+$$
+
+This is effectively the range of discrete random vector $X$.
+
+2. $X: S \rightarrow \mathbb{R}^d$ is **continuous** if:
+
+$$
+p(X = x) = 0 \quad \forall x \in \mathbb{R}^d
+$$
+
+i.e., it has zero probability at any realized point $x \in \mathbb{R}^d$.
+
+---
+
+## ➔ Joint PMF, PDF, and CDF of Random Vectors
+
+Armed with the notion of a discrete & continuous random vector, we can define the **joint pmf**, **joint pdf**, and **joint cdf**. These are definitions seen before in other sections.
+
+---
+
+### (i) If random vector $X: S \rightarrow \mathbb{R}^d$ is discrete or continuous:
+
+The **joint CDF** of $X = (X_1, X_2, \dots, X_d)$ is:
+
+$$
+F_X(x) = F_{X_1, X_2, \dots, X_d}(x_1, x_2, \dots, x_d) = \mathbb{P}(X_1 \leq x_1, \dots, X_d \leq x_d)
+$$
+
+- Joint CDF is monotonically non-decreasing (i.e., for random vectors $a \leq b \Leftrightarrow a_i \leq b_i \ \forall i$, then $F_X(a) \leq F_X(b)$).
+- Joint CDF is non-negative and limit towards $+\infty$ is 1 (while $-\infty$ is 0):
+
+$$
+\lim_{x_1 \to \infty} \cdots \lim_{x_d \to \infty} F_X(x_1, \dots, x_d) = 1
+$$
+
+$$
+\lim_{x_1 \to -\infty} \cdots \lim_{x_d \to -\infty} F_X(x_1, \dots, x_d) = 0
+$$
+
+---
+
+### (ii) If random vector $X: S \rightarrow \mathbb{R}^d$ is **discrete**:
+
+The **joint pmf** of $X = (X_1, \dots, X_d)$ is:
+
+$$
+p_X(x_1, \dots, x_d) = \mathbb{P}(X_1 = x_1, \dots, X_d = x_d)
+$$
+
+- Joint pmf is non-negative:
+
+$$
+\sum_{x \in R_X} p_X(x) = 1
+$$
+
+- As with univariate case, the joint pmf is essentially a lookup table for probabilities:
+
+$$
+\text{For } C \subseteq \mathbb{R}^d,\quad \mathbb{P}(X \in C) = \sum_{x \in C \cap R_X} p_X(x)
+$$
+
+---
+
+### (iii) If random vector $X: S \rightarrow \mathbb{R}^d$ is **continuous**:
+
+The **joint pdf** of $X = (X_1, \dots, X_d)$ is:
+
+$$
+f_X(x_1, \dots, x_d) = \frac{\partial^d}{\partial x_1 \dots \partial x_d} F_X(x_1, \dots, x_d)
+$$
+
+- $f_X(x) = 0$ if the derivative does not exist.
+- Joint pdf is non-negative and integrates to 1:
+
+$$
+\int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} f_X(x) \, dx_1 \, dx_2 \dots dx_d = 1
+$$
+
+
+- As with the univariate case, for a continuous random vector, we get the probability of values across a subset $C \subseteq \mathbb{R}^d$ by integrating over that set:
+
+$$
+\mathbb{P}(X \in C) = \int_C f_X(x_1, \dots, x_d) \, dx_1 \, dx_2 \dots dx_d
+$$
+
+- e.g., if $C = \{ x \in \mathbb{R}^2 \mid 1 < x_1 < 2,\; 1 < x_2 < 2 \}$, then:
+
+$$
+\mathbb{P}(X \in C) = \int_1^2 \int_1^2 f_{X_1, X_2}(x_1, x_2) \, dx_1 \, dx_2
+$$
+
+---
+
+- As with univariate integration from $-\infty$ to $\infty$, this gives:
+
+$$
+\mathbb{E}(X) = \mathbb{E}_{X_1, \dots, X_d}(x) = \int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} x \cdot f_X(x_1, \dots, x_d) \, dx_1 \dots dx_d
+$$
+
+
+---
+
+
+## ✯ Summary of Results for Distributions
+### ➔ Marginal Distributions of a Random Vector
+
+Earlier we saw the marginal pmf of a set of discrete r.v.s, which we obtained by *summing out* or marginalizing some subset of the r.v.s $X_1, \dots, X_d$.
+
+In the notation of random vectors, let $X = (X_1, \dots, X_d)^T$ be a random vector. We can use the (multivariate) probability distribution of $X$ (pmf/pdf, and CDF) to obtain univariate distributions of $X_i$, or more generally, a distribution on some subset of $X_1, \dots, X_d$. Such distributions are called **marginal distributions**.
+
+---
+
+### ➤ To obtain univariate marginal distributions:
+
+#### (1) If $X$ is a discrete or continuous random vector:
+
+The **marginal CDF** of $X_i$ is:
+
+$$
+F_{X_i}(x) = \lim_{x_1 \to \infty} \cdots \lim_{x_{i-1} \to \infty} \lim_{x_{i+1} \to \infty} \cdots \lim_{x_d \to \infty} F_X(x)
+$$
+
+where $F_X(x) = F_{X_1, \dots, X_d}(x_1, \dots, x_d)$ is the joint CDF of $X$ at $x = (x_1, \dots, x_d)^T$.
+
+---
+
+#### (2) If $X$ is a **discrete random vector**:
+
+The **marginal pmf** of $X_i$ is:
+
+$$
+p_{X_i}(x_i) = \sum_{x_1 \in R_1} \cdots \sum_{x_{i-1} \in R_{i-1}} \sum_{x_{i+1} \in R_{i+1}} \cdots \sum_{x_d \in R_d} p_X(x)
+$$
+
+where:
+- $p_X(x) = p_{X_1, \dots, X_d}(x_1, \dots, x_d)$ is the joint pmf of $X$
+- $R_i := \text{Range}(X_i)$
+
+---
+
+#### (3) If $X$ is a **continuous random vector**:
+
+The **marginal pdf** of $X_i$ is:
+
+$$
+f_{X_i}(x_i) = \int \cdots \int f_X(x) \, dx_1 \cdots dx_{i-1} \, dx_{i+1} \cdots dx_d
+$$
+
+where:
+- $f_X(x) = f_{X_1, \dots, X_d}(x_1, \dots, x_d)$ is the **joint pdf** of $X$ at $x = (x_1, \dots, x_d)^T$
+
+
+---
+
+## ➤ To obtain higher-order marginals (joint marginals):
+
+Suppose from our random vector $X = (X_1, \dots, X_d)$, we select a subset of $k$ r.v.s which we want to retain, and marginalize out the rest, leaving a distribution over the remaining $(d - k)$ r.v.s.
+
+WLOG, let these be the last $k$ r.v.s: $X_{d-k+1}, \dots, X_d$
+
+Let us split our vector $X$ into two partitions:
+
+$$
+X = \begin{bmatrix}
+X_A \\
+X_B
+\end{bmatrix}
+$$
+
+We want to retain r.v.s in the vector $X_A = (X_1, X_2, \dots, X_k)^T$ and marginalize out those in $X_B = (X_{k+1}, \dots, X_d)^T$.
+
+We do this in a similar way as we did with the univariate marginals, only with fewer limits/sums/integrals over the joint CDF/PMF/PDF.
+
+We will not reproduce the equations here since they are very similar to the ones on the previous page. Instead, we give one example:
+
+Let $d = 6$ and we want to marginalize to $k = 3$ r.v.s:
+
+Then:  
+$X = (X_1, X_2, X_3, X_4, X_5, X_6)^T$  
+$X_A = (X_1, X_2, X_3)^T$,  
+$X_B = (X_4, X_5, X_6)^T$
+
+---
+
+### (a) If $X$ is discrete or continuous:
+
+The **marginal CDF** of $X_A$ is:
+
+$$
+F_{X_A}(x_A) = F_{X_1, X_2, X_3}(x_1, x_2, x_3) = \lim_{x_4 \to \infty} \lim_{x_5 \to \infty} \lim_{x_6 \to \infty} F_X(x)
+$$
+
+---
+
+### (b) If $X$ is a **discrete** random vector:
+
+The **marginal PMF** of $X_A$ is:
+
+$$
+p_{X_A}(x_A) = p_{X_1, X_2, X_3}(x_1, x_2, x_3) = \sum_{x_4 \in R_4} \sum_{x_5 \in R_5} \sum_{x_6 \in R_6} p_X(x_1, x_2, x_3, x_4, x_5, x_6)
+$$
+
+---
+
+### (c) If $X$ is a **continuous** random vector:
+
+The **marginal PDF** of $X_A$ is:
+
+$$
+f_{X_A}(x_A) = f_{X_1, X_2, X_3}(x_1, x_2, x_3) = \int \int \int f_X(x_1, x_2, x_3, x_4, x_5, x_6) \, dx_4 \, dx_5 \, dx_6
+$$
+
+
+
+
+
+
+
