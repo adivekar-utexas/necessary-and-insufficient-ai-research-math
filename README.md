@@ -8,7 +8,7 @@ Mastering AI begins with mastering the math. **"AI Math From Scratch"** provides
 
 Think of the journey as a spiral staircase wrapped around sturdy pillars, like in the image below. With each turn you ascend, the pillars expand outwards, revealing how these mathematical foundations power NLP, computer vision, reinforcement learning, and a wide space of emerging AI paradigms. Along the way, you'll also master modern tooling - NumPy, PyTorch, and parallel-programming patterns...math that lives in real code, not just symbols on your screen.
 
-Ready to level up? 🚀 Start reading here: https://adivekar.quarto.pub/gen-ai-math-from-scratch 
+Ready to level up? 🚀 Start reading here: https://adivekar.quarto.pub/ai-math-from-scratch 
 
 <img src="images/art-deco-spiral-staircase.png" width="800" height="800">
 
