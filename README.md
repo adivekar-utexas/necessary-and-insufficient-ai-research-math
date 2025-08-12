@@ -1,12 +1,12 @@
-# Generative Artificial Intelligence Math From Scratch
+# Artificial Intelligence Math From Scratch
 
 Lead Author: Abhishek Divekar 
 
 ## Introduction
 
-Mastering GenAI begins with mastering the math. **"GenAI Math From Scratch"** provides you the necessary mathematical foundation you need to succeed, without paywalls. This free online book begins with high-school level set theory and probability, then advance through linear algebra, calculus, real analysis and beyond, until you can read graduate-level GenAI papers with confidence.
+Mastering AI begins with mastering the math. **"AI Math From Scratch"** provides you the necessary mathematical foundation you need to succeed, without paywalls. This free online book begins with high-school level set theory and probability, then advance through linear algebra, calculus, real analysis and beyond, until you can read graduate-level AI papers with confidence.
 
-Think of the journey as a spiral staircase wrapped around sturdy pillars, like in the image below. With each turn you ascend, the pillars expand outwards, revealing how these mathematical foundations power NLP, computer vision, reinforcement learning, and a wide space of emerging GenAI paradigms. Along the way, you'll also master modern tooling - NumPy, PyTorch, and parallel-programming patterns...math that lives in real code, not just symbols on your screen.
+Think of the journey as a spiral staircase wrapped around sturdy pillars, like in the image below. With each turn you ascend, the pillars expand outwards, revealing how these mathematical foundations power NLP, computer vision, reinforcement learning, and a wide space of emerging AI paradigms. Along the way, you'll also master modern tooling - NumPy, PyTorch, and parallel-programming patterns...math that lives in real code, not just symbols on your screen.
 
 Ready to level up? 🚀 Start reading here: https://adivekar.quarto.pub/gen-ai-math-from-scratch 
 
@@ -14,13 +14,13 @@ Ready to level up? 🚀 Start reading here: https://adivekar.quarto.pub/gen-ai-m
 
 ## Support This Project ⭐
 
-"GenAI Math From Scratch" was initially contributed by winners of the Indian AI Olympiad 2025. Since then, it has evolved into a community-driven resource dedicated to advancing rigorous GenAI education for both leaders and learners worldwide.
+"AI Math From Scratch" was initially contributed by winners of the Indian AI Olympiad 2025. Since then, it has evolved into a community-driven resource dedicated to advancing rigorous AI education for both leaders and learners worldwide.
 
 **Please help us by starring this repository!** 
 
 If this textbook helps you, inspires you, or simply sounds interesting, please hit that ⭐️ button in the top-right corner. 
 
-Every star is a vote for open and inclusive GenAI education 🎉
+Every star is a vote for open and inclusive AI education 🎉
 
 | What your star does | Why it matters |
 |---------------------|---------------|
