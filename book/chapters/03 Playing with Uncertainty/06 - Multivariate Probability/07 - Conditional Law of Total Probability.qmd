@@ -1,0 +1,55 @@
+
+### Conditional Law of Total Probability (LOTP) for Random Vectors
+
+We can extend the **Multivariate LOTP** defined on the previous page  
+to a **conditional Multivariate LOTP**.
+
+If we have a random vector $X = (X_1, \ldots, X_d)$, partitioned as:
+
+$$
+X = \begin{pmatrix} X_A \\ X_B \end{pmatrix} \quad \text{($d-k$ r.v.s and $k$ r.v.s)}
+$$
+
+then, if we condition the joint distribution of $X$  
+on a random vector $Z = (Z_1, \ldots, Z_m)$ with realization $Z = z \in \mathbb{R}^m$, we get:
+
+---
+
+### (a) If $X$ and $Z$ are **discrete** random vectors:
+
+The conditional Multivariate LOTP states that the  
+**conditional marginal pmf** of $X_A$ (conditioned on $Z = z$) is:
+
+$$
+p(X_A = x_A \mid Z = z) = \sum_{x_{d-k+1} \in \mathcal{R}_{d-k+1}} \cdots \sum_{x_d \in \mathcal{R}_d} p_X(x \mid Z = z)
+$$
+
+(using $k$ summations)
+
+$$
+= \sum_{x_{d-k+1} \in \mathcal{R}_{d-k+1}} \cdots \sum_{x_d \in \mathcal{R}_d} p_{X_B}(X_B = x_B \mid Z = z) \cdot p(X_A = x_A \mid X_B = x_B, Z = z)
+$$
+
+We can then use **Bayes' Rule** & the formulas for conditional  
+joint pmfs to calculate this.
+
+---
+
+### (b) If $X$ and $Z$ are **continuous** random vectors:
+
+The conditional Multivariate LOTP states that the  
+**conditional marginal pdf** of $X_A$ (conditioned on $Z = z$) is:
+
+$$
+f(X_A = x_A \mid Z = z) = \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} f_X(x \mid Z = z) \, dx_{d-k+1} \cdots dx_d
+$$
+
+(using $k$ integrations)
+
+$$
+= \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} f_{X_B}(X_B = x_B \mid Z = z) \cdot f(X_A = x_A \mid X_B = x_B, Z = z) \, dx_{d-k+1} \cdots dx_d
+$$
+
+We can then use **Bayes' Rule** & formulas for conditional  
+joint pdfs to calculate this.
+

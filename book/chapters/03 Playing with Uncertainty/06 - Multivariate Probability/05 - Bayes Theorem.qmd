@@ -1,0 +1,93 @@
+### Bayes' Theorem for Random Vectors
+
+The conditional cdf, pmf, or pdf for random vectors  
+leads us to a highly generalized form of Bayes' Theorem.  
+Recall that for events $A, B$, Bayes' Rule states that:
+
+$$
+P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} \quad \text{and} \quad P(A \cap B) = P(A|B) \cdot P(B) = P(B|A) \cdot P(A)
+$$
+
+Bayes' Rule only allows us to condition on a single r.v.  
+at a time. Let us consider the random vector $X = (X_1, \ldots, X_d)^\top$.  
+Thus, by Bayes' Rule:
+
+---
+
+**(a) If $X$ is discrete:**
+
+$$
+p_X(x) = p_{X_1, \ldots, X_d}(X_1 = x_1, \ldots, X_d = x_d) \quad \text{(joint)}
+$$
+
+$$
+= P_{X_1, \ldots, X_{i-1}, X_{i+1}, \ldots, X_d}(X_1 = x_1, \ldots, X_{i-1} = x_{i-1}, X_{i+1} = x_{i+1}, \ldots, X_d = x_d)
+$$
+
+$$
+\cdot P(X_i = x_i \mid X_1 = x_1, \ldots, X_{i-1} = x_{i-1}, X_{i+1} = x_{i+1}, \ldots, X_d = x_d)
+$$
+
+**e.g.**
+
+$$
+p_{X_1, X_2, X_3}(X_1 = x_1, X_2 = x_2, X_3 = x_3)
+= p(X_3 = x_3 \mid X_1 = x_1, X_2 = x_2) \cdot p(X_1 = x_1, X_2 = x_2)
+$$
+
+---
+
+**(b) If $X$ is continuous:**
+
+$$
+f_X(x) = f_{X_1, \ldots, X_d}(X_1 = x_1, \ldots, X_d = x_d) \quad \text{(joint)}
+$$
+
+$$
+= f_{X_1, \ldots, X_{i-1}, X_{i+1}, \ldots, X_d}(X_1 = x_1, \ldots, X_{i-1} = x_{i-1}, X_{i+1} = x_{i+1}, \ldots, X_d = x_d)
+$$
+
+$$
+\cdot f_{X_i \mid X_1, \ldots, X_{i-1}, X_{i+1}, \ldots, X_d}(X_i = x_i \mid X_1 = x_1, \ldots, X_{i-1} = x_{i-1}, X_{i+1} = x_{i+1}, \ldots, X_d = x_d)
+$$
+
+**e.g.**
+
+$$
+f_{X_1, X_2, X_3}(X_1 = x_1, X_2 = x_2, X_3 = x_3)  
+= f(X_1 = x_1, X_2 = x_2) \cdot f(X_3 = x_3 \mid X_1 = x_1, X_2 = x_2)
+$$
+
+
+---
+
+A corollary to this is that we can further  
+decompose the marginal terms $p(X_1 = x_1, X_2 = x_2, \ldots, X_d = x_d)$ and  
+$f(X_1 = x_1, X_2 = x_2, \ldots, X_d = x_d)$, however we wish.  
+
+Thus,
+
+### (a) If $X$ is discrete:
+
+$$
+p(X_1 = x_1, \ldots, X_d = x_d) = p(X_1 = x_1) \cdot p(X_2 = x_2 \mid X_1 = x_1) \cdot p(X_3 = x_3 \mid X_2 = x_2, X_1 = x_1) \cdots p(X_d = x_d \mid X_1 = x_1, \ldots, X_{d-1} = x_{d-1})
+$$
+
+---
+
+### (b) If $X$ is continuous:
+
+$$
+f(X_1 = x_1, \ldots, X_d = x_d) = f(X_1 = x_1) \cdot f(X_2 = x_2 \mid X_1 = x_1) \cdot f(X_3 = x_3 \mid X_1 = x_1, X_2 = x_2) \cdots f(X_d = x_d \mid X_1 = x_1, \ldots, X_{d-1} = x_{d-1})
+$$
+
+---
+
+Note that the above is just one possible order of decomposition.  
+There are $d!$ possible permutations.
+
+We calculate the conditionals and marginals as  
+described before (using summation/integration).
+
+---
+
