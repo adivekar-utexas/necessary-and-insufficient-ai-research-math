@@ -1,0 +1,142 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{tcolorbox}
+\usepackage{setspace}
+\usepackage{hyperref}
+\geometry{margin=1in}
+\setstretch{1.3}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=cyan
+}
+
+\title{Functions: Set-Valued Functions}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+Set-valued functions stretch the classical idea of a function. No longer must every input yield a unique output — instead, each input can yield an entire *set* of outputs. These functions embrace ambiguity, multitudes, and nondeterminism.
+
+---
+
+\section*{1. What is a Set-Valued Function?}
+
+A set-valued function (also called a \textbf{multifunction}) is a rule that assigns to every element $x \in X$ a subset $F(x) \subseteq Y$. That is:
+
+\[
+F: X \to \mathcal{P}(Y), \quad \text{where } \mathcal{P}(Y) \text{ is the power set of } Y
+\]
+
+This means each $x$ is mapped not to a single point, but to a \textit{set} of possible outcomes.
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!70!black, title=Example]
+Let $F(x) = \{ y \in \mathbb{R} \mid y^2 = x \}$.\\
+Then: \\
+$F(4) = \{-2, 2\}, \quad F(0) = \{0\}, \quad F(-1) = \emptyset$
+\end{tcolorbox}
+
+\noindent This function is not defined for $x < 0$, since no real number squared equals a negative.
+
+---
+
+\section*{2. Domain and Values}
+
+\begin{itemize}
+    \item \textbf{Domain:} Set of all $x \in X$ such that $F(x) \ne \emptyset$
+    \item \textbf{Value:} The output $F(x)$ is a subset of $Y$
+    \item \textbf{Graph:} The graph of $F$ is the set:
+    \[
+    \text{Graph}(F) = \{ (x, y) \in X \times Y \mid y \in F(x) \}
+    \]
+\end{itemize}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!70!black, title=Geometric Insight]
+The graph of a set-valued function is a \textit{region}, not a curve. It might look like vertical bands or clouds.
+\end{tcolorbox}
+
+---
+
+\section*{3. When Do These Appear?}
+
+Set-valued functions arise naturally across mathematics and its applications:
+
+\begin{itemize}
+    \item \textbf{Inverse of non-injective functions:} $f^{-1}(y)$ can have multiple values
+    \item \textbf{Optimization:} The set of optimal solutions is a set-valued output
+    \item \textbf{Differential inclusions:} Generalizations of ODEs using sets of derivatives
+    \item \textbf{Game theory:} Best response mappings are often multifunctions
+\end{itemize}
+
+---
+
+\section*{4. Special Types}
+
+\begin{itemize}
+    \item \textbf{Single-valued function:} $F(x)$ is always a singleton set $\{y\}$ — classical case
+    \item \textbf{Constant multifunction:} $F(x) = S$ for all $x$, where $S$ is a fixed set
+    \item \textbf{Convex-valued multifunction:} Each $F(x)$ is a convex set
+    \item \textbf{Upper/lower semi-continuous:} Generalizations of continuity for sets
+\end{itemize}
+
+\begin{tcolorbox}[colback=purple!5!white, colframe=purple!70!black, title=Example: Inverse Function]
+Let $f(x) = x^2$. Then:
+
+\[
+f^{-1}(4) = \{-2, 2\}, \quad f^{-1}(9) = \{-3, 3\}, \quad f^{-1}(0) = \{0\}
+\]
+
+This inverse $f^{-1}$ is not a function in the usual sense, but a set-valued function.
+\end{tcolorbox}
+
+---
+
+\section*{5. Visualization}
+
+We can visualize a set-valued function $F(x)$ over $\mathbb{R}$ like this:
+
+\begin{itemize}
+    \item If $F(x)$ is a single point $\{y\}$: plot a dot.
+    \item If $F(x)$ is an interval $[a, b]$: draw a vertical segment at $x$.
+    \item If $F(x) = \emptyset$: leave a gap or dot a hole.
+\end{itemize}
+
+\begin{tcolorbox}[colback=green!5!white, colframe=green!60!black, title=Metaphor]
+Think of $F(x)$ as a “cloud of possible futures” hovering over the point $x$.
+\end{tcolorbox}
+
+---
+
+\section*{6. Selection Function}
+
+A \textbf{selection} of $F$ is a function $f: X \to Y$ such that:
+
+\[
+f(x) \in F(x) \quad \text{for all } x \in X
+\]
+
+These are useful for extracting deterministic behaviors from uncertain systems.
+
+\begin{tcolorbox}[colback=cyan!5!white, colframe=cyan!80!black, title=Key Idea]
+Set-valued functions describe uncertainty. Selection functions are choices — one thread from a tapestry of options.
+\end{tcolorbox}
+
+---
+
+\section*{7. Summary}
+
+\begin{tcolorbox}[colback=gray!10!white, colframe=black, title=Summary]
+\begin{itemize}
+    \item $F: X \to \mathcal{P}(Y)$ assigns a set of outputs to each input
+    \item Graph is a subset of $X \times Y$, not just a curve
+    \item Arise in inverse functions, optimization, control theory, and game theory
+    \item Visualized as point clouds, vertical lines, or shaded bands
+    \item Selections are single-valued choices from the set
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}
