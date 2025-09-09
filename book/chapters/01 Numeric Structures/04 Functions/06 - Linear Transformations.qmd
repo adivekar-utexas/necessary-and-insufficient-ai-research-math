@@ -1,0 +1,217 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{tcolorbox}
+\usepackage{setspace}
+\usepackage{hyperref}
+\geometry{margin=1in}
+\setstretch{1.3}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=cyan
+}
+
+\title{Functions: Linear Transformations}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+Linear transformations are the heartbeats of linear algebra. They are the algebraic agents of geometry — capturing reflections, rotations, scalings, and projections — all through the language of matrices. They give structure to systems, transforming inputs while preserving the very algebra that governs vectors.
+
+---
+
+\section*{1. Definition}
+
+A function $T: \mathbb{R}^n \to \mathbb{R}^m$ is a \textbf{linear transformation} if it satisfies the following properties for all vectors $x, y \in \mathbb{R}^n$ and scalars $c \in \mathbb{R}$:
+
+\begin{itemize}
+    \item \textbf{Additivity:} $T(x + y) = T(x) + T(y)$
+    \item \textbf{Homogeneity (scalar multiplication):} $T(c x) = c T(x)$
+\end{itemize}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!70!black, title=Important Consequence]
+A linear transformation always maps the origin to itself:
+\[
+T(0) = 0
+\]
+\end{tcolorbox}
+
+---
+
+\section*{2. Matrix Representation}
+
+Every linear transformation $T$ from $\mathbb{R}^n$ to $\mathbb{R}^m$ can be written as:
+\[
+T(x) = A x
+\]
+where $A$ is an $m \times n$ matrix.
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!70!black, title=Example: Diagonal Scaling]
+Let $T: \mathbb{R}^2 \to \mathbb{R}^2$ with matrix
+\[
+A = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}
+\]
+Then for $x = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$:
+\[
+T(x) = A x = \begin{bmatrix} 2 \\ 3 \end{bmatrix}
+\]
+This stretches the $x$-axis by 2 and the $y$-axis by 3.
+\end{tcolorbox}
+
+---
+
+\section*{3. Geometric Interpretation}
+
+Linear transformations:
+
+\begin{itemize}
+    \item Map lines to lines (or to a single point)
+    \item Preserve the origin and linearity
+    \item Respect vector addition and scalar scaling
+\end{itemize}
+
+Common transformations include:
+
+\begin{itemize}
+    \item \textbf{Rotation:} Spins vectors around the origin
+    \item \textbf{Reflection:} Flips vectors across a line or plane
+    \item \textbf{Projection:} Drops vectors onto a subspace
+    \item \textbf{Shear:} Pushes parts of space in one direction
+\end{itemize}
+
+\begin{tcolorbox}[colback=green!5!white, colframe=green!50!black, title=Strategy]
+Apply $T$ to the standard basis vectors $e_1, e_2, ..., e_n$. Their images determine $T$'s effect on the whole space.
+\end{tcolorbox}
+
+---
+
+\section*{4. Linear vs Nonlinear}
+
+\textbf{Linear:}
+\[
+T(x + y) = T(x) + T(y), \quad T(c x) = c T(x)
+\]
+
+\textbf{Nonlinear:} Breaks one or both rules.
+
+\begin{tcolorbox}[colback=red!5!white, colframe=red!70!black, title=Counter-Example]
+Let $f(x) = x^2$. Then:
+\[
+f(1+2) = 9 \ne f(1) + f(2) = 1 + 4 = 5
+\]
+So $f$ is not linear.
+\end{tcolorbox}
+
+---
+
+\section*{5. Examples of Linear Transformations}
+
+\begin{itemize}
+    \item \textbf{Identity:} $T(x) = x$, matrix is $I$
+    \item \textbf{Scaling:} $T(x) = \lambda x$, matrix is $\lambda I$
+    \item \textbf{Rotation in $\mathbb{R}^2$:}
+    \[
+    R_\theta = \begin{bmatrix}
+    \cos\theta & -\sin\theta \\
+    \sin\theta & \cos\theta
+    \end{bmatrix}
+    \]
+    \item \textbf{Projection onto the $x$-axis:}
+    \[
+    A = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}
+    \]
+    \item \textbf{Shear along $x$-axis:}
+    \[
+    A = \begin{bmatrix} 1 & k \\ 0 & 1 \end{bmatrix}
+    \]
+\end{itemize}
+
+---
+
+\section*{6. Kernel and Image}
+
+Given $T: \mathbb{R}^n \to \mathbb{R}^m$:
+
+\begin{itemize}
+    \item \textbf{Kernel (Null Space):}
+    \[
+    \ker(T) = \{ x \in \mathbb{R}^n \mid T(x) = 0 \}
+    \]
+    \item \textbf{Image (Range):}
+    \[
+    \text{Im}(T) = \{ T(x) \mid x \in \mathbb{R}^n \} \subseteq \mathbb{R}^m
+    \]
+\end{itemize}
+
+\begin{tcolorbox}[colback=purple!5!white, colframe=purple!70!black, title=The Rank-Nullity Theorem]
+For $T: \mathbb{R}^n \to \mathbb{R}^m$,
+\[
+\dim(\ker T) + \dim(\text{Im } T) = n
+\]
+\end{tcolorbox}
+
+---
+
+\section*{7. Composition and Associativity}
+
+If $T_1(x) = A x$ and $T_2(x) = B x$, then:
+\[
+T_1(T_2(x)) = A(Bx) = (AB)x
+\]
+
+\begin{tcolorbox}[colback=cyan!5!white, colframe=cyan!70!black, title=Insight]
+Matrix multiplication is designed to preserve function composition — linear maps compose via matrix multiplication.
+\end{tcolorbox}
+
+---
+
+\section*{8. Determining Linearity}
+
+To check if a function $T$ is linear:
+
+\begin{enumerate}
+    \item Verify $T(0) = 0$
+    \item Test additivity and homogeneity
+    \item Confirm $T$ can be expressed as a matrix multiplication
+\end{enumerate}
+
+\begin{tcolorbox}[colback=orange!5!white, colframe=orange!70!black, title=Test It Yourself!]
+Is the function $T(x, y) = (x^2, y)$ linear?  
+\textit{Hint: Try testing additivity and scalar multiplication.}
+\end{tcolorbox}
+
+---
+
+\section*{9. Summary Table}
+
+\begin{tcolorbox}[colback=gray!10!white, colframe=black, title=Summary of Linear Transformations]
+\begin{itemize}
+    \item Preserves vector operations (add, scale)
+    \item Representable by matrices
+    \item Connects algebra with geometry
+    \item Central to systems of equations, graphics, physics, ML
+    \item Kernel $\to$ solutions of $Ax = 0$
+    \item Image $\to$ column space of $A$
+\end{itemize}
+\end{tcolorbox}
+
+---
+
+\section*{10. Bonus Application: Linear Layers in Neural Networks}
+
+In machine learning, each \textbf{dense (fully connected) layer} applies a linear transformation:
+\[
+T(x) = W x + b
+\]
+Here $W$ is a weight matrix, and $b$ is a bias vector. Ignoring $b$, the transformation is linear!
+
+\begin{tcolorbox}[colback=teal!5!white, colframe=teal!80!black, title=Deep Learning Angle]
+Linear transformations are the bones of neural nets.  
+The nonlinear parts (like ReLU or Sigmoid) add flesh — without them, you'd just be stacking lines.
+\end{tcolorbox}
+
+\end{document}
